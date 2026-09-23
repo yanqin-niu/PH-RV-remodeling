@@ -17,8 +17,8 @@
 #
 # Output:
 #   outputs/Fig2_outputs/
-#     - Figure2_final.pdf
-#     - Figure2_final.png
+#     - Figure2.pdf
+#     - Figure2.png
 #     - Figure2_source_data.xlsx
 #     - Fig2A_Shared_DEGs_GO_BP_dot.pdf
 #     - Fig2B_LVonly_DEGs_GO_BP_dot.pdf
@@ -214,26 +214,36 @@ make_cnet_terms_only <- function(obj, title, base_size = 10, show_n = 12) {
     )
   }
   
-  if ("node_label" %in% names(formals(enrichplot::cnetplot))) {
-    p <- enrichplot::cnetplot(
+  # Do not pass `circular` or `colorEdge` here. With some combinations of
+  # enrichplot and recent ggraph/igraph versions, these legacy arguments are
+  # forwarded to the layout function and trigger:
+  #   unused arguments (circular = FALSE, colorEdge = TRUE)
+  # The first call supports current enrichplot; the fallback supports older
+  # releases and then removes gene-label text layers.
+  p <- tryCatch(
+    enrichplot::cnetplot(
       obj,
       showCategory = show_n,
-      circular = FALSE,
-      colorEdge = TRUE,
       node_label = "category"
-    )
-  } else {
-    p0 <- enrichplot::cnetplot(
-      obj,
-      showCategory = show_n,
-      circular = FALSE,
-      colorEdge = TRUE
-    )
-    p0$layers <- Filter(function(ly) {
-      !inherits(ly$geom, "GeomText") && !inherits(ly$geom, "GeomLabel")
-    }, p0$layers)
-    p <- p0
-  }
+    ),
+    error = function(e_current) {
+      message(
+        "Current cnetplot node_label interface unavailable; ",
+        "using the legacy-compatible call."
+      )
+      p0 <- enrichplot::cnetplot(
+        obj,
+        showCategory = show_n
+      )
+      p0$layers <- Filter(function(ly) {
+        !inherits(ly$geom, "GeomText") &&
+          !inherits(ly$geom, "GeomLabel") &&
+          !inherits(ly$geom, "GeomTextRepel") &&
+          !inherits(ly$geom, "GeomLabelRepel")
+      }, p0$layers)
+      p0
+    }
+  )
   
   p +
     ggtitle(title) +
@@ -321,14 +331,14 @@ fig2 <- ((g2A | g2B) / (g2C | g2D)) +
   patchwork::plot_annotation(tag_levels = "A")
 
 ggsave(
-  file.path(out_dir, "Figure2_final.pdf"),
+  file.path(out_dir, "Figure2.pdf"),
   plot = fig2,
   width = fig2_w,
   height = fig2_h
 )
 
 ggsave(
-  file.path(out_dir, "Figure2_final.png"),
+  file.path(out_dir, "Figure2.png"),
   plot = fig2,
   width = fig2_w,
   height = fig2_h,

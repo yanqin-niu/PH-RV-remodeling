@@ -1,11 +1,14 @@
 # ================================================================
-# Figure 5 — GSE266139-anchored conserved RV remodeling signature
+# Figure 5 — Shared-derived conserved ventricular remodeling signature
 #   Final version: ONLY Fig5A bubble plot
 #
 # Selection rule:
-#   1) Gene must be significant in GSE266139_RV (anchor)
-#   2) Among the other 7 datasets, >= 5 must be significant
-#   3) Significant directions in the other 7 datasets must match anchor direction
+#   1) Gene must belong to the mutually exclusive Shared set from Figure 1
+#   2) Gene must be significant in GSE266139_RV (anchor)
+#   3) >=5 of the other 7 RV datasets must be significant in the
+#      anchor direction; GSE240921 is included in selection
+#   4) Thus, retained genes have 6/8, 7/8, or 8/8 support
+#      (anchor + >=5 of the 7 external datasets)
 #
 # Significance definition:
 #   - abs(log2FC) >= 1
@@ -80,7 +83,7 @@ if (!dir.exists(out_dir)) dir.create(out_dir, recursive = TRUE)
 # ------------------------------------------------
 alpha <- 0.05
 lfc_thr <- 1
-min_sig_other7 <- 5
+min_sig_other7 <- 5L
 anchor_dataset_name <- "GSE266139_RV (Rat_MCT)"
 
 fig_width  <- 8.8
@@ -119,6 +122,7 @@ file_133402 <- file.path(raw_dir, "GSE133402_Rat_RVandLV_HypoxiaNormoxia_Process
 file_240921 <- file.path(raw_dir, "GSE240921_processed-data-human.xlsx")
 file_prot   <- file.path(raw_dir, "44161_2022_113_MOESM3_ESM.xlsx")
 file_olink  <- file.path(raw_dir, "44161_2022_113_MOESM4_ESM.xlsx")
+file_fig1_source <- file.path(output_root, "Fig1_outputs", "Figure1_source_data.xlsx")
 
 stopifnot(
   file.exists(file_266139),
@@ -129,7 +133,8 @@ stopifnot(
   file.exists(file_133402),
   file.exists(file_240921),
   file.exists(file_prot),
-  file.exists(file_olink)
+  file.exists(file_olink),
+  file.exists(file_fig1_source)
 )
 
 olink_sheets <- c("Olink CTRL vs PAH", "Olink CTRL vs dRV PAH")
@@ -510,30 +515,100 @@ read_GSE186989 <- function(file) {
 }
 
 read_GSE240921 <- function(file) {
+  message("\n========== GSE240921 RAW-DATA DIAGNOSTIC ==========")
+  message("Input file: ", normalizePath(file, winslash = "/", mustWork = TRUE))
+  message("Workbook sheets: ", paste(readxl::excel_sheets(file), collapse = " | "))
+
   df <- readxl::read_excel(file, sheet = 2)
+  message("Sheet 2 dimensions (rows x columns): ", nrow(df), " x ", ncol(df))
+  message("First column name: ", names(df)[1])
+  message("Expression columns read from sheet 2:")
+  print(names(df)[-1])
   
   expr <- as.matrix(df[, -1, drop = FALSE])
   rownames(expr) <- as.character(df[[1]])
   mode(expr) <- "numeric"
   
   samp <- colnames(expr)
-  use_rv <- grepl("^RV-", samp)
-  if (sum(use_rv) >= 6) {
-    expr <- expr[, use_rv, drop = FALSE]
-    samp <- colnames(expr)
-  }
-  
-  group <- ifelse(grepl("Control|RV-Normal", samp, ignore.case = TRUE), "Ctrl",
-                  ifelse(grepl("Compensated|RV-Compen", samp, ignore.case = TRUE), "cRV",
-                         ifelse(grepl("Decompensated|RV-Failing", samp, ignore.case = TRUE), "dRV", NA_character_)))
+
+  # GSE240921 contains 40 human RV samples from two sequencing batches.
+  # Do NOT retain only columns beginning with "RV-": the first 15 columns
+  # (Control_*, Compensated_*, Decompensated_*) are also RV tissue.
+  # Primary clinical groups reported by GEO are n=13 normal, n=14
+  # compensated, and n=13 decompensated. RV-Failing_5 is clinically
+  # classified as compensated RV in the GEO sample metadata.
+  group <- dplyr::case_when(
+    grepl("^Control_|^RV-Normal_", samp, ignore.case = TRUE) ~ "Ctrl",
+    grepl("^Compensated_|^RV-Compen_", samp, ignore.case = TRUE) ~ "cRV",
+    samp == "RV-Failing_5" ~ "cRV",
+    grepl("^Decompensated_|^RV-Failing_", samp, ignore.case = TRUE) ~ "dRV",
+    TRUE ~ NA_character_
+  )
   if (any(is.na(group))) stop("GSE240921: unmatched sample names")
+  expected_group_n <- c(cRV = 14L, Ctrl = 13L, dRV = 13L)
+  observed_group_n <- table(factor(group, levels = names(expected_group_n)))
+  if (!identical(as.integer(observed_group_n), as.integer(expected_group_n))) {
+    stop(
+      "GSE240921: unexpected primary-group sample counts. Expected ",
+      "cRV=14, Ctrl=13, dRV=13; observed ",
+      paste(names(observed_group_n), as.integer(observed_group_n),
+            sep = "=", collapse = ", "), "."
+    )
+  }
+  message("All 40 human RV samples retained and assigned to primary clinical groups:")
+  print(data.frame(Sample = samp, Group = group, check.names = FALSE), row.names = FALSE)
+  message("Group counts:")
+  print(table(group, useNA = "ifany"))
+
+  finite_values <- as.numeric(expr[is.finite(expr)])
+  integer_fraction <- if (length(finite_values)) {
+    mean(abs(finite_values - round(finite_values)) < 1e-8)
+  } else {
+    NA_real_
+  }
+  message("Fraction of finite values that are integer-like: ",
+          format(integer_fraction, digits = 5))
+  if (length(finite_values)) {
+    message("Expression-value range: ",
+            paste(format(range(finite_values), digits = 6), collapse = " to "))
+  }
   
   rn <- rownames(expr)
   sy <- if (mean(grepl("^ENS", rn)) > 0.5) map_human_ensembl_to_symbol(rn) else rn
   expr_sym <- collapse_by_symbol(expr, sy)
+
+  if ("NPPA" %in% rownames(expr_sym)) {
+    message("NPPA values entering DESeq2:")
+    print(
+      data.frame(
+        Sample = colnames(expr_sym),
+        Group = group,
+        NPPA = as.numeric(expr_sym["NPPA", ]),
+        check.names = FALSE
+      ),
+      row.names = FALSE
+    )
+  } else {
+    message("WARNING: NPPA was not found after ID-to-symbol mapping/collapse.")
+    nppa_like <- unique(c(
+      grep("NPPA", rownames(expr), value = TRUE, ignore.case = TRUE),
+      grep("NPPA", sy, value = TRUE, ignore.case = TRUE)
+    ))
+    message("NPPA-like raw IDs/symbols: ", paste(nppa_like, collapse = " | "))
+  }
   
   deg <- run_deseq_simple(expr_sym, group, c("condition", "dRV", "Ctrl"), is_normalized = FALSE)
   deg$Dataset <- "GSE240921 (Human)"
+  message("Recomputed dRV vs Ctrl result for NPPA:")
+  print(
+    deg %>%
+      dplyr::filter(Gene == "NPPA") %>%
+      dplyr::select(Gene, log2FC, padj, Significant, Direction, Dataset) %>%
+      tibble::as_tibble(),
+    n = Inf
+  )
+  message("Expected Table S6 reference: log2FC = 4.19978138; padj = 0.0001986085")
+  message("====================================================\n")
   deg
 }
 
@@ -548,6 +623,24 @@ deg_240923_b1  <- read_GSE240923_batch1(file_240923)
 deg_240923_b2  <- read_GSE240923_batch2(file_240923)
 deg_186989     <- read_GSE186989(file_186989)
 deg_240921     <- read_GSE240921(file_240921)
+
+# Positive-control audit from the independently exported GSE240921 Table S6:
+# NPPA must be significantly upregulated in dRV vs Ctrl. Stop rather than
+# silently producing inconsistent Figure 5/S1 results if raw parsing changes.
+nppa_240921_check <- deg_240921 %>%
+  dplyr::filter(Gene == "NPPA")
+if (
+  nrow(nppa_240921_check) != 1L ||
+  !isTRUE(nppa_240921_check$Significant[1]) ||
+  nppa_240921_check$Direction[1] != "Up"
+) {
+  stop(
+    "GSE240921 raw-data audit failed: NPPA should be significantly upregulated ",
+    "in dRV vs Ctrl (Table S6 reference: log2FC about 4.20, padj about 1.99e-4). ",
+    "The diagnostic block printed immediately above identifies the exact file, ",
+    "sheet, grouping, NPPA values, and recomputed result. Do not bypass this audit."
+  )
+}
 
 display_df <- dplyr::bind_rows(
   deg_266139_rv,
@@ -570,11 +663,50 @@ other7_df <- dplyr::bind_rows(
   deg_240921
 )
 
+dataset_deg_audit <- display_df %>%
+  dplyr::group_by(Dataset) %>%
+  dplyr::summarise(
+    n_tested = sum(!is.na(padj)),
+    n_significant = sum(Significant, na.rm = TRUE),
+    n_up = sum(Significant & Direction == "Up", na.rm = TRUE),
+    n_down = sum(Significant & Direction == "Down", na.rm = TRUE),
+    .groups = "drop"
+  )
+
+message("Dataset-level DEG audit:")
+print(dataset_deg_audit, n = Inf)
+message("GSE240921 NPPA audit from raw-data reanalysis:")
+print(
+  deg_240921 %>%
+    dplyr::filter(Gene == "NPPA") %>%
+    dplyr::select(Gene, log2FC, padj, Significant, Direction, Dataset) %>%
+    tibble::as_tibble(),
+  n = Inf
+)
+
+# All seven external datasets, including GSE240921, are retained in
+# both the visualization and consensus selection.
+# All seven external RV datasets, including GSE240921, enter replication.
+other7_informative_df <- other7_df
+
+# Strictly restrict Figure 5 candidates to the mutually exclusive
+# Shared set exported by Figure 1.
+shared_sheet <- openxlsx::read.xlsx(file_fig1_source, sheet = "Shared_genes")
+shared_gene_col <- if ("Genename" %in% names(shared_sheet)) {
+  "Genename"
+} else if ("Gene" %in% names(shared_sheet)) {
+  "Gene"
+} else {
+  stop("Figure1 Shared_genes sheet has no Genename or Gene column")
+}
+shared_genes <- unique(TOUP(shared_sheet[[shared_gene_col]]))
+shared_genes <- shared_genes[!is.na(shared_genes) & shared_genes != ""]
+
 # ------------------------------------------------
 # 9. GSE266139-anchor selection
 # ------------------------------------------------
 anchor_sig <- deg_266139_rv %>%
-  dplyr::filter(Significant) %>%
+  dplyr::filter(Significant, Gene %in% shared_genes) %>%
   dplyr::select(
     Gene,
     anchor_log2FC = log2FC,
@@ -583,7 +715,7 @@ anchor_sig <- deg_266139_rv %>%
   ) %>%
   dplyr::distinct(Gene, .keep_all = TRUE)
 
-other7_support <- other7_df %>%
+other7_support <- other7_informative_df %>%
   dplyr::filter(Gene %in% anchor_sig$Gene) %>%
   dplyr::left_join(anchor_sig %>% dplyr::select(Gene, anchor_dir), by = "Gene") %>%
   dplyr::mutate(
@@ -603,6 +735,14 @@ consensus_genes <- anchor_sig %>%
     n_other7_sig_same = dplyr::coalesce(n_other7_sig_same, 0L),
     n_other7_up = dplyr::coalesce(n_other7_up, 0L),
     n_other7_down = dplyr::coalesce(n_other7_down, 0L),
+    n_informative_total = 1L + n_other7_sig_same,
+    support_class = dplyr::case_when(
+      n_informative_total == 8L ~ "8/8 support",
+      n_informative_total == 7L ~ "7/8 support",
+      n_informative_total == 6L ~ "6/8 support",
+      TRUE ~ "Below 6/8"
+    ),
+    support_label = paste0(Gene, " (", n_informative_total, "/8)"),
     ok = n_other7_sig_same >= min_sig_other7
   ) %>%
   dplyr::filter(ok) %>%
@@ -612,8 +752,15 @@ consensus_genes <- anchor_sig %>%
     Gene
   )
 
-cat("Final GSE266139-anchored genes: ", nrow(consensus_genes), "\n", sep = "")
-cat("Rule: anchor significant + >= ", min_sig_other7, "/7 other datasets significant in same direction\n", sep = "")
+cat("Final Shared-derived conserved genes: ", nrow(consensus_genes), "\n", sep = "")
+cat(
+  "Rule: Shared + anchor significant + >= ", min_sig_other7,
+  "/7 external datasets in the same direction (>=6/8 overall)\n",
+  sep = ""
+)
+cat("  8/8 genes: ", sum(consensus_genes$n_informative_total == 8L), "\n", sep = "")
+cat("  7/8 genes: ", sum(consensus_genes$n_informative_total == 7L), "\n", sep = "")
+cat("  6/8 genes: ", sum(consensus_genes$n_informative_total == 6L), "\n", sep = "")
 
 # ------------------------------------------------
 # 10. Plot table
@@ -631,6 +778,20 @@ dataset_order <- c(
   "GSE240923_batch2 (Rat_MCT)",
   "GSE186989 (Rat_SuHx)",
   "GSE240921 (Human)"
+)
+
+# The first column is the Shared-gene anchor, rather than an ordinary
+# independent validation cohort. Keep its data provenance explicit while
+# visually distinguishing Figure 5 from the non-anchored all-RV analysis.
+dataset_axis_labels <- c(
+  "GSE266139_RV (Rat_MCT)" = "Shared genes\n(GSE266139 RV anchor)",
+  "GSE133402_RV (Rat_Hyp)" = "GSE133402_RV (Rat_Hyp)",
+  "GSE198618 (Human)" = "GSE198618 (Human)",
+  "GSE242014 (Rat_PAB)" = "GSE242014 (Rat_PAB)",
+  "GSE240923_batch1 (Rat_MCT)" = "GSE240923_batch1 (Rat_MCT)",
+  "GSE240923_batch2 (Rat_MCT)" = "GSE240923_batch2 (Rat_MCT)",
+  "GSE186989 (Rat_SuHx)" = "GSE186989 (Rat_SuHx)",
+  "GSE240921 (Human)" = "GSE240921 (Human)"
 )
 
 # ------------------------------------------------
@@ -687,7 +848,9 @@ plot_long <- plot_long %>%
 gene_stats <- consensus_genes %>%
   dplyr::transmute(
     Gene,
+    support_label,
     n_support_other7 = n_other7_sig_same,
+    n_informative_total = n_informative_total,
     anchor_abs_lfc = abs(anchor_log2FC),
     anchor_dir = anchor_dir
   ) %>%
@@ -697,10 +860,18 @@ gene_stats <- consensus_genes %>%
     Gene
   )
 
-gene_order <- gene_stats$Gene
+gene_order <- gene_stats$support_label
 
 plot_long$Dataset <- factor(plot_long$Dataset, levels = dataset_order)
-plot_long$Gene <- factor(plot_long$Gene, levels = rev(gene_order))
+plot_long <- plot_long %>%
+  dplyr::left_join(
+    consensus_genes %>% dplyr::select(Gene, support_label, support_class),
+    by = "Gene"
+  )
+plot_long$support_label <- factor(
+  plot_long$support_label,
+  levels = rev(gene_order)
+)
 
 # ------------------------------------------------
 # 13. Fig5A — Bubble plot
@@ -712,33 +883,32 @@ shape_map <- c(
   "Protein + Olink + transcript" = 18
 )
 
-lfc_cap <- stats::quantile(abs(plot_long$log2FC), 0.9, na.rm = TRUE)
+lfc_cap <- as.numeric(stats::quantile(abs(plot_long$log2FC), 0.9, na.rm = TRUE))
+if (!is.finite(lfc_cap) || lfc_cap <= 0) lfc_cap <- lfc_thr
 plot_long <- plot_long %>%
-  dplyr::mutate(lfc_capd = pmin(abs(log2FC), as.numeric(lfc_cap)))
+  dplyr::mutate(lfc_capd = pmin(abs(log2FC), lfc_cap))
 
-pA <- ggplot2::ggplot(plot_long, ggplot2::aes(x = Dataset, y = Gene)) +
+pA <- ggplot2::ggplot(plot_long, ggplot2::aes(x = Dataset, y = support_label)) +
   ggplot2::geom_point(
     ggplot2::aes(size = lfc_capd, color = Direction, shape = support_cat),
     alpha = 0.95,
     stroke = 0
   ) +
   ggplot2::scale_color_manual(values = c("Up" = "red", "Down" = "blue")) +
+  ggplot2::scale_x_discrete(labels = dataset_axis_labels) +
   ggplot2::scale_shape_manual(values = shape_map, drop = TRUE) +
   ggplot2::scale_size_continuous(
     name = "|log2FC|",
     range = c(1.1, 3.2),
-    limits = c(0, as.numeric(lfc_cap)),
-    breaks = round(seq(0, as.numeric(lfc_cap), length.out = 3), 2)
+    limits = c(0, lfc_cap),
+    breaks = round(seq(0, lfc_cap, length.out = 3), 2)
   ) +
   ggplot2::labs(
     x = NULL,
     y = NULL,
     color = "Direction",
     shape = "External support",
-    title = paste0(
-      "GSE266139-anchored genes: >= ",
-      min_sig_other7, "/7 same-direction support"
-    )
+    title = "Shared-gene anchored conserved ventricular remodeling signature"
   ) +
   theme_bubble(base_size = 9) +
   ggplot2::theme(
@@ -755,7 +925,7 @@ pA <- ggplot2::ggplot(plot_long, ggplot2::aes(x = Dataset, y = Gene)) +
 ggplot2::ggsave(
   file.path(out_dir, "Figure5.pdf"),
   pA,
-  width = fig_width,
+  width = fig_width-2,
   height = fig_height,
   units = "in",
   limitsize = FALSE
@@ -801,8 +971,17 @@ openxlsx::writeData(wb, "Anchor_GSE266139_RV", deg_266139_rv)
 openxlsx::addWorksheet(wb, "Other7_df")
 openxlsx::writeData(wb, "Other7_df", other7_df)
 
+openxlsx::addWorksheet(wb, "Other7_informative")
+openxlsx::writeData(wb, "Other7_informative", other7_informative_df)
+
+openxlsx::addWorksheet(wb, "Shared_input_genes")
+openxlsx::writeData(wb, "Shared_input_genes", data.frame(Gene = shared_genes))
+
 openxlsx::addWorksheet(wb, "Display_df_8datasets")
 openxlsx::writeData(wb, "Display_df_8datasets", display_df)
+
+openxlsx::addWorksheet(wb, "Dataset_DEG_audit")
+openxlsx::writeData(wb, "Dataset_DEG_audit", dataset_deg_audit)
 
 openxlsx::addWorksheet(wb, "Consensus_genes")
 openxlsx::writeData(wb, "Consensus_genes", consensus_genes)
@@ -833,9 +1012,11 @@ openxlsx::writeData(
       lfc_thr,
       anchor_dataset_name,
       paste0(
-        "Gene must be significant in anchor (", anchor_dataset_name,
-        "), and in the other 7 datasets >= ", min_sig_other7,
-        " must be significant with the same direction as anchor"
+        "Gene must belong to Figure1 Shared genes, be significant in anchor (",
+        anchor_dataset_name,
+        "), and be significant in the same direction in >= ",
+        min_sig_other7,
+        "/7 external datasets; all eight datasets enter the analysis"
       ),
       fig_width,
       fig_height

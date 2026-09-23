@@ -28,6 +28,7 @@ suppressPackageStartupMessages({
   library(AnnotationDbi)
   library(org.Rn.eg.db)
   library(rstatix)
+  library(patchwork)
 })
 
 set.seed(123)
@@ -391,6 +392,32 @@ p3B <- plot_scores_faceted(
 
 ggsave(file.path(out_dir, "Fig3A_Batch1_SignatureScores.png"), p3A, width = fig_w, height = fig_h, dpi = 300)
 ggsave(file.path(out_dir, "Fig3B_Batch2_SignatureScores.png"), p3B, width = fig_w, height = fig_h, dpi = 300)
+
+## ----------------------------------------------------------
+## 8b) Compose and export the complete Figure 3
+## Change only these three values when revising the layout.
+## ----------------------------------------------------------
+fig3_width  <- 11.5
+fig3_height <- 7.2
+fig3 <- p3A / p3B +
+  patchwork::plot_layout(heights = c(1, 1)) +
+  patchwork::plot_annotation(tag_levels = "A")
+
+ggsave(
+  file.path(out_dir, "Figure3.pdf"),
+  fig3,
+  width = fig3_width,
+  height = fig3_height,
+  units = "in"
+)
+ggsave(
+  file.path(out_dir, "Figure3.png"),
+  fig3,
+  width = fig3_width,
+  height = fig3_height,
+  units = "in",
+  dpi = 300
+)
 
 ## ----------------------------------------------------------
 ## 9) 导出结果和基因列表

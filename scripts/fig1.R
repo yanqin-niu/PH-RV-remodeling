@@ -11,8 +11,8 @@
 #
 # Output:
 #   outputs/Fig1_outputs/
-#     - Figure1_final.pdf
-#     - Figure1_final.png
+#     - Figure1.pdf
+#     - Figure1.png
 #     - Figure1_source_data.xlsx
 #     - Fig1A_DEG_counts.pdf
 #     - Fig1B_correlation.pdf
@@ -266,8 +266,8 @@ deg_summary <- data.frame(
 )
 
 deg_long <- deg_summary %>%
-  mutate(Down = -Down) %>%
-  pivot_longer(cols = c("Up", "Down"), names_to = "Direction", values_to = "Count")
+  dplyr::mutate(Down = -Down) %>%
+  tidyr::pivot_longer(cols = c("Up", "Down"), names_to = "Direction", values_to = "Count")
 
 deg_long$Contrast <- factor(
   deg_long$Contrast,
@@ -289,20 +289,20 @@ pA <- ggplot(deg_long, aes(x = Contrast, y = Count, fill = Direction)) +
 
 # ---------- Merge LV/RV for shared structure ----------
 lv_tab <- res_LMvsLP %>%
-  select(Geneid, Genename, log2FoldChange, padj) %>%
-  rename(lfc_lv = log2FoldChange, padj_lv = padj, Genename_lv = Genename)
+  dplyr::select(Geneid, Genename, log2FoldChange, padj) %>%
+  dplyr::rename(lfc_lv = log2FoldChange, padj_lv = padj, Genename_lv = Genename)
 
 rv_tab <- res_RMvsRP %>%
-  select(Geneid, Genename, log2FoldChange, padj) %>%
-  rename(lfc_rv = log2FoldChange, padj_rv = padj, Genename_rv = Genename)
+  dplyr::select(Geneid, Genename, log2FoldChange, padj) %>%
+  dplyr::rename(lfc_rv = log2FoldChange, padj_rv = padj, Genename_rv = Genename)
 
-m <- full_join(lv_tab, rv_tab, by = "Geneid") %>%
-  mutate(
+m <- dplyr::full_join(lv_tab, rv_tab, by = "Geneid") %>%
+  dplyr::mutate(
     Genename = dplyr::coalesce(Genename_lv, Genename_rv),
     sig_lv = !is.na(padj_lv) & padj_lv < alpha & abs(lfc_lv) >= lfc_thr,
     sig_rv = !is.na(padj_rv) & padj_rv < alpha & abs(lfc_rv) >= lfc_thr,
     same_dir = !is.na(lfc_lv) & !is.na(lfc_rv) & sign(lfc_lv) == sign(lfc_rv),
-    set = case_when(
+    set = dplyr::case_when(
       sig_lv & sig_rv & same_dir  ~ "Shared",
       sig_lv & !sig_rv            ~ "LV-only",
       sig_rv & !sig_lv            ~ "RV-only",
@@ -317,7 +317,7 @@ m$set <- factor(m$set, levels = c("NS", "Shared", "LV-only", "RV-only", "Opposit
 # ---------- Panel B: Correlation scatter ----------
 # keep original display logic but compute correlation from observed values only
 cor_df <- m %>%
-  mutate(
+  dplyr::mutate(
     lfc_lv_plot = ifelse(is.na(lfc_lv), 0, lfc_lv),
     lfc_rv_plot = ifelse(is.na(lfc_rv), 0, lfc_rv)
   )
@@ -325,10 +325,10 @@ cor_df <- m %>%
 cor_val <- cor(m$lfc_lv, m$lfc_rv, use = "pairwise.complete.obs", method = "pearson")
 
 label_df <- cor_df %>%
-  filter(set != "NS") %>%
-  mutate(rank_score = abs(lfc_lv_plot) + abs(lfc_rv_plot)) %>%
-  arrange(desc(rank_score)) %>%
-  slice_head(n = 12)
+  dplyr::filter(set != "NS") %>%
+  dplyr::mutate(rank_score = abs(lfc_lv_plot) + abs(lfc_rv_plot)) %>%
+  dplyr::arrange(dplyr::desc(rank_score)) %>%
+  dplyr::slice_head(n = 12)
 
 pB <- ggplot(cor_df, aes(x = lfc_lv_plot, y = lfc_rv_plot, color = set)) +
   geom_hline(yintercept = 0, color = "grey70", linewidth = 0.4) +
@@ -366,9 +366,9 @@ pB <- ggplot(cor_df, aes(x = lfc_lv_plot, y = lfc_rv_plot, color = set)) +
 
 # ---------- Panel C: Set composition ----------
 set_counts <- m %>%
-  filter(set != "NS") %>%
-  count(set) %>%
-  mutate(set = factor(set, levels = c("LV-only", "RV-only", "Shared", "Opposite-dir")))
+  dplyr::filter(set != "NS") %>%
+  dplyr::count(set) %>%
+  dplyr::mutate(set = factor(set, levels = c("LV-only", "RV-only", "Shared", "Opposite-dir")))
 
 pC <- ggplot(set_counts, aes(x = set, y = n, fill = set)) +
   geom_col(width = 0.72, color = "black", linewidth = 0.2) +
@@ -387,13 +387,13 @@ pC <- ggplot(set_counts, aes(x = set, y = n, fill = set)) +
 
 # ---------- Panel D: Heatmap of top shared genes ----------
 shared_same <- m %>%
-  filter(set == "Shared") %>%
-  mutate(rank_score = abs(lfc_lv) + abs(lfc_rv)) %>%
-  arrange(desc(rank_score))
+  dplyr::filter(set == "Shared") %>%
+  dplyr::mutate(rank_score = abs(lfc_lv) + abs(lfc_rv)) %>%
+  dplyr::arrange(dplyr::desc(rank_score))
 
 top_shared_ids <- shared_same %>%
-  slice_head(n = n_heat) %>%
-  pull(Geneid) %>%
+  dplyr::slice_head(n = n_heat) %>%
+  dplyr::pull(Geneid) %>%
   unique()
 
 # vst for heatmap
@@ -435,6 +435,17 @@ ht <- pheatmap(
   silent = TRUE
 )
 
+# pheatmap has no reliable `fontface_row` argument across versions.
+# Modify only the row-name text grob so gene symbols are italicized,
+# while sample names and annotation labels remain unchanged.
+row_name_index <- which(ht$gtable$layout$name == "row_names")
+
+if (length(row_name_index) == 1L) {
+  ht$gtable$grobs[[row_name_index]]$gp$font <- 3
+} else {
+  warning("Could not identify the pheatmap row-name grob; gene labels were not italicized.")
+}
+
 pD <- ggplotify::as.ggplot(ht$gtable)
 
 # ---------- Compose Figure 1 ----------
@@ -447,8 +458,8 @@ fig1 <- (pA + pB) / (pC + pD) +
   )
 
 # ---------- Save figure ----------
-ggsave(file.path(outdir, "Figure1_final.pdf"), fig1, width = 13, height = 11)
-ggsave(file.path(outdir, "Figure1_final.png"), fig1, width = 13, height = 11, dpi = 300)
+ggsave(file.path(outdir, "Figure1.pdf"), fig1, width = 13, height = 11)
+ggsave(file.path(outdir, "Figure1.png"), fig1, width = 13, height = 11, dpi = 300)
 
 # ---------- Export source data ----------
 out_xlsx <- file.path(outdir, "Figure1_source_data.xlsx")
@@ -479,36 +490,36 @@ addWorksheet(wb, "RV_only_genes")
 writeData(
   wb, "RV_only_genes",
   m %>%
-    filter(set == "RV-only") %>%
-    select(Geneid, Genename, lfc_lv, padj_lv, lfc_rv, padj_rv, set) %>%
-    arrange(desc(abs(lfc_rv)), Genename)
+    dplyr::filter(set == "RV-only") %>%
+    dplyr::select(Geneid, Genename, lfc_lv, padj_lv, lfc_rv, padj_rv, set) %>%
+    dplyr::arrange(dplyr::desc(abs(lfc_rv)), Genename)
 )
 
 addWorksheet(wb, "LV_only_genes")
 writeData(
   wb, "LV_only_genes",
   m %>%
-    filter(set == "LV-only") %>%
-    select(Geneid, Genename, lfc_lv, padj_lv, lfc_rv, padj_rv, set) %>%
-    arrange(desc(abs(lfc_lv)), Genename)
+    dplyr::filter(set == "LV-only") %>%
+    dplyr::select(Geneid, Genename, lfc_lv, padj_lv, lfc_rv, padj_rv, set) %>%
+    dplyr::arrange(dplyr::desc(abs(lfc_lv)), Genename)
 )
 
 addWorksheet(wb, "Shared_genes")
 writeData(
   wb, "Shared_genes",
   m %>%
-    filter(set == "Shared") %>%
-    mutate(rank_score = abs(lfc_lv) + abs(lfc_rv)) %>%
-    select(Geneid, Genename, lfc_lv, padj_lv, lfc_rv, padj_rv, set, rank_score) %>%
-    arrange(desc(rank_score), Genename)
+    dplyr::filter(set == "Shared") %>%
+    dplyr::mutate(rank_score = abs(lfc_lv) + abs(lfc_rv)) %>%
+    dplyr::select(Geneid, Genename, lfc_lv, padj_lv, lfc_rv, padj_rv, set, rank_score) %>%
+    dplyr::arrange(dplyr::desc(rank_score), Genename)
 )
 
 addWorksheet(wb, "Top_shared_genes")
 writeData(
   wb, "Top_shared_genes",
   shared_same %>%
-    slice_head(n = n_heat) %>%
-    select(Geneid, Genename, lfc_lv, padj_lv, lfc_rv, padj_rv, rank_score)
+    dplyr::slice_head(n = n_heat) %>%
+    dplyr::select(Geneid, Genename, lfc_lv, padj_lv, lfc_rv, padj_rv, rank_score)
 )
 
 addWorksheet(wb, "Meta")
@@ -540,8 +551,8 @@ message("✅ Figure 1 finished. Outputs saved to: ", outdir)
 ggsave(
   file.path(outdir, "Fig1A_DEG_counts.pdf"),
   pA,
-  width = 3,
-  height = 3,
+  width = 3.5,
+  height = 3.5,
   units = "in"
 )
 
@@ -556,16 +567,16 @@ ggsave(
 ggsave(
   file.path(outdir, "Fig1C_set_composition.pdf"),
   pC,
-  width = 2.5,
-  height = 2.5,
+  width = 3,
+  height = 3.5,
   units = "in"
 )
 
 ggsave(
   file.path(outdir, "Fig1D_heatmap.pdf"),
   pD,
-  width = 7,
-  height = 3.5,
+  width = 5.5,
+  height = 3.2,
   units = "in"
 )
 
