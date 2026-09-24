@@ -1,30 +1,293 @@
-# Supplementary Figure S1 — effect-size-matched permutation analysis
-suppressPackageStartupMessages({library(patchwork)})
-.args<-commandArgs(trailingOnly=FALSE);.hit<-grep("^--file=",.args);.dir<-if(length(.hit))dirname(normalizePath(sub("^--file=","",.args[.hit[1]])))else if(requireNamespace("rstudioapi",quietly=TRUE)&&nzchar(rstudioapi::getActiveDocumentContext()$path))dirname(normalizePath(rstudioapi::getActiveDocumentContext()$path))else normalizePath(getwd())
-source(file.path(.dir,"00_common_helpers.R"))
-set.seed(20260921);B<-as.integer(Sys.getenv("N_PERMUTATIONS",Sys.getenv("N_RESAMPLING_ITERATIONS","10000")));project_dir<-find_project_dir(get_script_dir());out_dir<-file.path(project_dir,"outputs","FigS1_outputs");dir.create(out_dir,recursive=TRUE,showWarnings=FALSE)
-f5<-read_fig5_objects(project_dir);sets<-read_fig1_sets(project_dir);grid<-build_replication_grid(sets,f5$display,exclude_anchor=TRUE)
+# ================================================================
+# Supplementary Figure S1
+# Cross-ventricular behavior of threshold-defined LV-only and RV-only genes
+#
+# Purpose:
+#   Demonstrate that "LV-only" and "RV-only" denote significance in only
+#   one ventricle, rather than an absent or opposite effect in the other.
+#
+# Required upstream output:
+#   outputs/Fig1_outputs/Figure1_source_data.xlsx
+#
+# Outputs:
+#   outputs/FigS1_outputs/
+#     FigureS1.pdf / FigureS1.tiff
+#     FigS1A_only_gene_scatter.pdf
+#     FigS1B_counterpart_effect.pdf
+#     FigS1C_direction_proportion.pdf
+#     FigureS1_source_data.xlsx
+# ================================================================
 
-# Five discovery-|log2FC| strata are used. Comparator genes are sampled with replacement
-# within the same/nearest occupied stratum so every Shared gene has an effect-size-matched control.
-breaks<-unique(quantile(sets$discovery_abs_log2FC,probs=seq(0,1,.2),na.rm=TRUE));if(length(breaks)<3)breaks<-pretty(range(sets$discovery_abs_log2FC),n=5)
-sets<-sets%>%dplyr::mutate(bin=cut(discovery_abs_log2FC,breaks=breaks,include.lowest=TRUE,labels=FALSE))
-grid<-grid%>%dplyr::select(-discovery_abs_log2FC)%>%dplyr::left_join(sets%>%dplyr::select(Gene,Set,discovery_abs_log2FC,bin),by=c("Gene","Set"))
-shared<-grid%>%dplyr::filter(Set=="Shared")
-match_sample<-function(pool,target_bins){avail<-sort(unique(pool$bin[!is.na(pool$bin)]));idx<-vapply(target_bins,function(b){bb<-avail[which.min(abs(avail-b))];sample(which(pool$bin==bb),1)},integer(1));pool[idx,,drop=FALSE]}
-one_test<-function(ds,comp){s<-shared%>%dplyr::filter(Dataset==ds,measured);pool<-grid%>%dplyr::filter(Dataset==ds,Set==comp,measured);if(!nrow(s)||!nrow(pool))stop("No measured genes for ",ds," / ",comp);obs_s<-mean(s$same_direction,na.rm=TRUE);obs_c<-mean(pool$same_direction,na.rm=TRUE);null_c<-replicate(B,mean(match_sample(pool,s$bin)$same_direction,na.rm=TRUE));tibble::tibble(Dataset=ds,Comparator=comp,Shared_rate=obs_s,Comparator_rate=obs_c,Observed_difference=obs_s-obs_c,Null_mean_difference=mean(obs_s-null_c),P_one_sided=(1+sum((obs_s-null_c)<=0))/(B+1),Null=list(obs_s-null_c))}
-res<-dplyr::bind_rows(lapply(unique(grid$Dataset),function(ds)dplyr::bind_rows(one_test(ds,"LV-only"),one_test(ds,"RV-only"))))
-plot_res<-res%>%dplyr::mutate(label=paste0(Dataset,"\n",Comparator),Comparator=factor(Comparator,levels=c("LV-only","RV-only")))
-pA<-ggplot(plot_res,aes(Observed_difference,factor(label,levels=rev(unique(label))),color=Comparator))+geom_vline(xintercept=0,linetype=2,color="grey50")+geom_point(size=2.6)+scale_color_manual(values=set_cols[c("LV-only","RV-only")])+
- labs(title="A. Observed replication advantage of Shared genes",x="Shared rate - comparator rate",y=NULL,color=NULL)+theme_manuscript(9)+theme(legend.position="top")
-# Robust pooled null: average the dataset-specific matched differences at each draw.
-pooled<-res%>%dplyr::select(Dataset,Comparator,Null)%>%dplyr::mutate(draw=lapply(Null,seq_along))%>%tidyr::unnest(c(Null,draw))%>%dplyr::group_by(Comparator,draw)%>%dplyr::summarise(Difference=mean(Null),.groups="drop")
-obs_pool<-res%>%dplyr::group_by(Comparator)%>%dplyr::summarise(Observed=mean(Observed_difference),.groups="drop")
-pB<-ggplot(pooled,aes(Difference,fill=Comparator))+geom_density(alpha=.42,linewidth=.35)+geom_vline(data=obs_pool,aes(xintercept=Observed,color=Comparator),linewidth=.8)+facet_wrap(~Comparator,ncol=1,scales="free_y")+scale_fill_manual(values=set_cols[c("LV-only","RV-only")])+scale_color_manual(values=set_cols[c("LV-only","RV-only")])+
- labs(title="B. Matched null distributions",subtitle=paste0(B," permutations; vertical line = observed mean difference"),x="Mean matched difference across datasets",y="Density")+theme_manuscript(10)+theme(legend.position="none")
-fig<-pA|pB;ggsave(file.path(out_dir,"FigureS1.pdf"),fig,width=12,height=8);ggsave(file.path(out_dir,"FigureS1.tiff"),fig,width=12,height=8,dpi=600,compression="lzw")
-ggsave(file.path(out_dir,"FigS1A_observed_advantage.pdf"),pA,width=6.2,height=7.0)
-ggsave(file.path(out_dir,"FigS1B_matched_null.pdf"),pB,width=5.8,height=7.0)
-null_export<-res%>%dplyr::select(Dataset,Comparator,Null)%>%tidyr::unnest_longer(Null,values_to="Matched_difference")
-openxlsx::write.xlsx(list(Test_summary=res%>%dplyr::select(-Null),Matched_null=null_export,Discovery_sets=sets,Meta=data.frame(N_permutations=B,Matching="Five quantile strata of discovery absolute log2FC; nearest occupied stratum; sampling with replacement")),file.path(out_dir,"FigureS1_source_data.xlsx"),overwrite=TRUE)
-message("Figure S1 finished: ",out_dir)
+suppressPackageStartupMessages({
+  library(openxlsx)
+  library(dplyr)
+  library(tidyr)
+  library(ggplot2)
+  library(ggrepel)
+  library(patchwork)
+  library(tibble)
+})
+
+# ---------- 0. Relative project paths ----------
+get_script_dir <- function() {
+  args <- commandArgs(trailingOnly = FALSE)
+  hit <- grep("^--file=", args)
+  if (length(hit)) {
+    return(dirname(normalizePath(sub("^--file=", "", args[hit[1]]))))
+  }
+  if (requireNamespace("rstudioapi", quietly = TRUE)) {
+    ctx <- tryCatch(rstudioapi::getActiveDocumentContext(), error = function(e) NULL)
+    if (!is.null(ctx) && nzchar(ctx$path)) {
+      return(dirname(normalizePath(ctx$path)))
+    }
+  }
+  normalizePath(getwd())
+}
+
+find_project_dir <- function(script_dir = get_script_dir()) {
+  candidates <- unique(normalizePath(
+    c(file.path(script_dir, ".."), script_dir, file.path(script_dir, "../..")),
+    mustWork = FALSE
+  ))
+  ok <- vapply(
+    candidates,
+    function(x) dir.exists(file.path(x, "data", "raw")),
+    logical(1)
+  )
+  if (!any(ok)) {
+    stop("Cannot locate project root containing data/raw. Put this script in project/scripts.")
+  }
+  candidates[which(ok)[1]]
+}
+
+script_dir <- get_script_dir()
+project_dir <- find_project_dir(script_dir)
+fig1_source <- file.path(
+  project_dir, "outputs", "Fig1_outputs", "Figure1_source_data.xlsx"
+)
+out_dir <- file.path(project_dir, "outputs", "FigS1_outputs")
+dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
+
+if (!file.exists(fig1_source)) {
+  stop("Cannot find Figure 1 source data. Run Fig1.R first: ", fig1_source)
+}
+
+# ---------- 1. Parameters and style ----------
+alpha <- 0.05
+lfc_thr <- 1
+set_cols <- c("LV-only" = "#1F78B4", "RV-only" = "#33A02C")
+direction_cols <- c("Concordant" = "#D73027", "Discordant" = "#4575B4")
+
+theme_s1 <- function(base_size = 11) {
+  theme_bw(base_size = base_size) +
+    theme(
+      panel.grid = element_blank(),
+      axis.text = element_text(color = "black"),
+      axis.title = element_text(face = "bold", color = "black"),
+      plot.title = element_text(face = "bold", hjust = 0.5),
+      plot.subtitle = element_text(hjust = 0.5, color = "grey25"),
+      legend.title = element_text(face = "bold"),
+      legend.key = element_blank(),
+      plot.margin = margin(7, 8, 7, 7)
+    )
+}
+
+read_set <- function(sheet, set_name) {
+  x <- openxlsx::read.xlsx(fig1_source, sheet = sheet) %>% as_tibble()
+  gene_col <- intersect(c("Genename", "Gene", "SYMBOL", "GeneSymbol"), names(x))[1]
+  required <- c("lfc_lv", "padj_lv", "lfc_rv", "padj_rv")
+  if (is.na(gene_col) || any(!required %in% names(x))) {
+    stop("Unexpected columns in Figure 1 sheet: ", sheet)
+  }
+  x %>%
+    transmute(
+      Gene = toupper(trimws(as.character(.data[[gene_col]]))),
+      Set = set_name,
+      lfc_lv = suppressWarnings(as.numeric(lfc_lv)),
+      padj_lv = suppressWarnings(as.numeric(padj_lv)),
+      lfc_rv = suppressWarnings(as.numeric(lfc_rv)),
+      padj_rv = suppressWarnings(as.numeric(padj_rv))
+    ) %>%
+    filter(!is.na(Gene), Gene != "", is.finite(lfc_lv), is.finite(lfc_rv)) %>%
+    distinct(Gene, .keep_all = TRUE)
+}
+
+only_genes <- bind_rows(
+  read_set("LV_only_genes", "LV-only"),
+  read_set("RV_only_genes", "RV-only")
+) %>%
+  mutate(
+    Set = factor(Set, levels = c("LV-only", "RV-only")),
+    significant_log2FC = if_else(Set == "LV-only", lfc_lv, lfc_rv),
+    counterpart_log2FC = if_else(Set == "LV-only", lfc_rv, lfc_lv),
+    counterpart_padj = if_else(Set == "LV-only", padj_rv, padj_lv),
+    signed_counterpart_log2FC = counterpart_log2FC * sign(significant_log2FC),
+    counterpart_direction = if_else(
+      signed_counterpart_log2FC >= 0,
+      "Concordant", "Discordant"
+    ),
+    counterpart_meets_full_threshold =
+      !is.na(counterpart_padj) & counterpart_padj < alpha &
+      abs(counterpart_log2FC) >= lfc_thr
+  )
+
+# Internal audit: by definition, no "only" gene may cross the full threshold
+# in the other ventricle.
+if (any(only_genes$counterpart_meets_full_threshold, na.rm = TRUE)) {
+  stop("Set-definition audit failed: an only gene is significant in both ventricles.")
+}
+
+direction_summary <- only_genes %>%
+  count(Set, counterpart_direction, name = "n") %>%
+  group_by(Set) %>%
+  mutate(
+    total = sum(n),
+    proportion = n / total,
+    percent = 100 * proportion
+  ) %>%
+  ungroup()
+
+annotation_df <- direction_summary %>%
+  filter(counterpart_direction == "Concordant") %>%
+  transmute(
+    Set,
+    label = paste0(round(percent, 1), "% concordant")
+  )
+
+# Label a small number of the most reproducibly large concordant effects.
+label_df <- only_genes %>%
+  filter(counterpart_direction == "Concordant") %>%
+  mutate(label_score = abs(lfc_lv) + abs(lfc_rv)) %>%
+  group_by(Set) %>%
+  slice_max(label_score, n = 5, with_ties = FALSE) %>%
+  ungroup()
+
+# ---------- 2. Panel A: effect-size scatter restricted to only genes ----------
+pA <- ggplot(only_genes, aes(lfc_lv, lfc_rv, color = Set)) +
+  geom_hline(yintercept = 0, color = "grey70", linewidth = 0.35) +
+  geom_vline(xintercept = 0, color = "grey70", linewidth = 0.35) +
+  geom_hline(
+    yintercept = c(-lfc_thr, lfc_thr), linetype = "dashed",
+    color = "grey50", linewidth = 0.4
+  ) +
+  geom_vline(
+    xintercept = c(-lfc_thr, lfc_thr), linetype = "dashed",
+    color = "grey50", linewidth = 0.4
+  ) +
+  geom_abline(slope = 1, intercept = 0, linetype = "dotted", linewidth = 0.55) +
+  geom_point(size = 1.9, alpha = 0.72) +
+  ggrepel::geom_text_repel(
+    data = label_df,
+    aes(label = Gene),
+    size = 2.8,
+    color = "black",
+    box.padding = 0.25,
+    point.padding = 0.15,
+    max.overlaps = Inf,
+    show.legend = FALSE
+  ) +
+  scale_color_manual(values = set_cols, drop = FALSE) +
+  labs(
+    title = "A. Cross-ventricular effect sizes",
+    subtitle = "Dashed lines indicate |log2FC| = 1; dotted line indicates equal LV and RV effects",
+    x = "LV log2FC (MCT vs control)",
+    y = "RV log2FC (MCT vs control)",
+    color = NULL
+  ) +
+  theme_s1(10) +
+  theme(legend.position = "top")
+
+# ---------- 3. Panel B: counterpart effect aligned to discovery direction ----------
+pB <- ggplot(
+  only_genes,
+  aes(Set, signed_counterpart_log2FC, fill = Set)
+) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "grey45") +
+  geom_violin(width = 0.78, trim = FALSE, alpha = 0.42, color = NA) +
+  geom_boxplot(width = 0.18, outlier.shape = NA, fill = "white", linewidth = 0.4) +
+  geom_jitter(width = 0.12, size = 0.75, alpha = 0.30) +
+  geom_text(
+    data = annotation_df,
+    aes(x = Set, y = Inf, label = label),
+    inherit.aes = FALSE,
+    vjust = 1.4,
+    fontface = "bold",
+    size = 3.2
+  ) +
+  scale_fill_manual(values = set_cols, guide = "none") +
+  labs(
+    title = "B. Effect in the non-significant ventricle",
+    subtitle = "Positive values indicate the same direction as the significant ventricle",
+    x = NULL,
+    y = "Direction-aligned counterpart log2FC"
+  ) +
+  theme_s1(10)
+
+# ---------- 4. Panel C: direct direction summary ----------
+pC <- ggplot(
+  direction_summary,
+  aes(Set, proportion, fill = counterpart_direction)
+) +
+  geom_col(width = 0.66, color = "black", linewidth = 0.3) +
+  geom_text(
+    aes(label = if_else(percent >= 5, paste0(round(percent, 1), "%"), "")),
+    position = position_stack(vjust = 0.5),
+    color = "white",
+    fontface = "bold",
+    size = 3.2
+  ) +
+  scale_fill_manual(values = direction_cols, drop = FALSE) +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1), expand = c(0, 0)) +
+  labs(
+    title = "C. Direction in the non-significant ventricle",
+    x = NULL,
+    y = "Proportion of genes",
+    fill = NULL
+  ) +
+  theme_s1(10) +
+  theme(legend.position = "top")
+
+# ---------- 5. Combined figure and individual panels ----------
+fig_s1 <- (pA | (pB / pC)) +
+  patchwork::plot_layout(widths = c(1.35, 1))
+
+ggsave(
+  file.path(out_dir, "FigureS1.pdf"),
+  fig_s1, width = 11.0, height = 6.9, units = "in"
+)
+ggsave(
+  file.path(out_dir, "FigureS1.tiff"),
+  fig_s1, width = 11.0, height = 6.9, units = "in",
+  dpi = 600, compression = "lzw"
+)
+ggsave(
+  file.path(out_dir, "FigS1A_only_gene_scatter.pdf"),
+  pA, width = 6.0, height = 5.6, units = "in"
+)
+ggsave(
+  file.path(out_dir, "FigS1B_counterpart_effect.pdf"),
+  pB, width = 4.8, height = 3.4, units = "in"
+)
+ggsave(
+  file.path(out_dir, "FigS1C_direction_proportion.pdf"),
+  pC, width = 4.8, height = 3.4, units = "in"
+)
+
+openxlsx::write.xlsx(
+  list(
+    Only_gene_effects = only_genes,
+    Direction_summary = direction_summary,
+    Meta = data.frame(
+      item = c("LV-only definition", "RV-only definition", "Interpretation"),
+      value = c(
+        "padj < 0.05 and |log2FC| >= 1 in LV, but not the full threshold in RV",
+        "padj < 0.05 and |log2FC| >= 1 in RV, but not the full threshold in LV",
+        "Only denotes threshold-defined significance, not biological absence in the other ventricle"
+      )
+    )
+  ),
+  file.path(out_dir, "FigureS1_source_data.xlsx"),
+  overwrite = TRUE
+)
+
+message("Supplementary Figure S1 finished: ", out_dir)
