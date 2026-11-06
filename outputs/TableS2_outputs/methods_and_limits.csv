@@ -1,0 +1,10 @@
+﻿Item,Value
+Input,Current Figure5 results; curated reciprocal-unique RGD mapping for human queries. Existing DESeq2 fits unchanged.
+Selection,"Shared-anchor candidates fixed; significance FDR<0.05 and abs(log2FC)>=1 in discovery direction; missing tests unavailable, not nonsignificant. Fixed unit denominators used for selection; evaluable denominators also exported."
+Publication grouping,"GSE240921, GSE240923 and GSE242014 conservatively grouped as one publication-level unit; different species/models are NOT asserted to share animals. Other accessions separate."
+Model grouping,"Rat MCT, Hypoxia, SuHx and PAB each one unit; human evidence separately counted. Includes discovery MCT; descriptive breadth, not independent model replication."
+Aggregation,"any: at least one constituent cohort supports; all: every constituent cohort supports, unavailable constituents cannot provide support. Neither is a pooled-effect meta-analysis."
+Threshold,"ceil(75% * units) and floor(75% * units) both shown. With small denominators these differ materially; floor is a relaxed sensitivity, not equal stringency."
+Independence,"GSE240923 has 26 and 27 sample records, 53 distinct GSMs and no overlapping count-column IDs, including controls. Distinct donor/animal identity and absence of control reuse under aliases not independently established. No site assignment claimed."
+Audit coverage,"All expression input columns inventoried; GEO GSM crosswalk currently complete only for GSE240923. This is a documented identifier audit, not proof that no biological samples overlap across all studies."
+Source hashes,"{""outputs\\Fig5_outputs\\Figure5_source_data.xlsx"": ""7c4fe587dd91fa0448967e171f8d4b495f4fef1c1709c218044b92dca221d601"", ""data\\reference\\GSE240923_series_matrix.txt.gz"": ""5c4a32ca6add1e1519e491bccd219dd8b4072f35ca98a9ad41db51965643fabd""}"

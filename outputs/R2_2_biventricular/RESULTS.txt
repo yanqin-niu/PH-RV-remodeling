@@ -1,0 +1,34 @@
+                   Subset     N  Spearman Same_direction LV_DEG RV_DEG Both_DEG
+1 All expression-eligible 13876 0.5722614           9994    132    553       84
+2        Discovery Shared   102 0.8513551            100     14     47       14
+  Both_DEG_same_direction
+1                      84
+2                      14
+                  Class  N
+1  Both match discovery 99
+2          Mixed / zero  2
+3 Both oppose discovery  1
+
+TRUE <NA> 
+ 102    6 
+Interaction FDR <0.05: 69
+                   Item
+1                 Input
+2              Rounding
+3               Pairing
+4              Contrast
+5           Eligibility
+6             Threshold
+7           Interaction
+8             Inference
+9 Existing RV agreement
+                                                                                                                                                                                          Value
+1 Published Kallisto estimated gene counts; NOT integer raw read counts. No transcript effective lengths available. Rounded DESeq2 reanalysis follows existing pipeline; exploratory inference.
+2                                                                                                                                 Fraction noninteger before symbol collapse: 0.695505880354944
+3                                                                                  Six animal IDs each have LV and RV; original Methods: six rats, twelve RNA samples; Ctrl n=3 and Hypoxia n=3
+4                                                                                                                           Hypoxia / Normoxia in each chamber; positive = higher under hypoxia
+5                                                                                            baseMean >=5 in both separate-chamber models; finite effects in both; no significance preselection
+6                                                                                                                    padj <0.05 and absolute log2FC >=1; default independent filtering retained
+7                                                                                  ~Animal + RV + RVHyp; RVHyp = RV hypoxia effect minus LV hypoxia effect; animal absorbs exposure main effect
+8               Gene-level concordance summaries are descriptive; genes are not independent biological replicates. No binomial enrichment claim. Nonsignificant interaction is not equivalence.
+9                                                                                                                                       Maximum absolute log2FC deviation: 1.18556158223981e-08

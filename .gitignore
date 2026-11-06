@@ -1,0 +1,16 @@
+# R session and graphics scratch files
+.Rhistory
+.RData
+.RDataTmp
+Rplots.pdf
+
+# Python caches
+__pycache__/
+*.py[cod]
+
+# Office temporary/lock files
+~$*
+
+# OS metadata
+.DS_Store
+Thumbs.db

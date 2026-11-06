@@ -1,0 +1,21 @@
+Warning messages:
+1: package 'ggplot2' was built under R version 4.5.3 
+2: package 'patchwork' was built under R version 4.5.3 
+'select()' returned 1:many mapping between keys and columns
+PREFILTER GSE240921 SE15: 31043 -> 25894 features; 15 cohort columns; rowSums>=10
+Fitting SE15_Group
+converting counts to integer mode
+Fitting SE15_Sex_Group
+converting counts to integer mode
+PREFILTER GSE240921 PE25: 31043 -> 20450 features; 25 cohort columns; rowSums>=10
+Fitting PE25_Group
+converting counts to integer mode
+Fitting PE25_Sex_Group
+converting counts to integer mode
+PREFILTER GSE240921 all40 interaction: 31043 -> 27090 features; 40 cohort columns; rowSums>=10
+Fitting all40 batch-by-group interaction
+converting counts to integer mode
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  7908105 422.4   14476486 773.2 14476486 773.2
+Vcells 25781773 196.7   55044658 420.0 55044658 420.0
+Separate-batch analysis completed: E:\百度云同步盘\右心生信分析\PH-RV-remodeling\PH-RV-remodeling_new/outputs/FigS8_outputs

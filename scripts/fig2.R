@@ -507,6 +507,10 @@ writeData(
 addWorksheet(wb, "sessionInfo")
 writeData(wb, "sessionInfo", capture.output(sessionInfo()))
 
+# No universe argument is passed: report the actual GO-annotated default universe.
+background<-data.frame(ENTREZID=sort(unique(ego_shared@universe)))
+addWorksheet(wb,'GO_background');writeData(wb,'GO_background',background)
+addWorksheet(wb,'Background_method');writeData(wb,'Background_method',data.frame(Item=c('Universe','Scope','Limitation','N_background'),Value=c('No explicit universe argument; clusterProfiler GO BP-annotated rat Entrez IDs represented in the installed annotation','Default annotation background, not the discovery expressed/tested gene universe','Genes without GO BP annotation are absent. Enrichment may depend on background choice.',nrow(background))))
 saveWorkbook(
   wb,
   file.path(out_dir, "Figure2_source_data.xlsx"),

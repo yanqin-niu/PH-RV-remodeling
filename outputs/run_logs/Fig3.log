@@ -1,0 +1,13 @@
+Warning messages:
+1: package 'dplyr' was built under R version 4.5.3 
+2: package 'ggplot2' was built under R version 4.5.3 
+3: package 'ggpubr' was built under R version 4.5.3 
+4: package 'tidyr' was built under R version 4.5.3 
+5: package 'rstatix' was built under R version 4.5.1 
+6: package 'patchwork' was built under R version 4.5.3 
+'select()' returned 1:many mapping between keys and columns
+'select()' returned 1:many mapping between keys and columns
+[Figure1_source_data] LV-only=477, RV-only=52, Shared=108
+converting counts to integer mode
+converting counts to integer mode
+✅ Figure 3 finished. Outputs saved to: E:\百度云同步盘\右心生信分析\PH-RV-remodeling\PH-RV-remodeling_new/outputs/Fig3_outputs

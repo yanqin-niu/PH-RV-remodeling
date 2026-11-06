@@ -1,0 +1,54 @@
+﻿GSM,Count_column,Batch,Sex,Title,Center,Animal_overlap
+GSM7712156,CTRL-FP-RV01,1,M,Control RV (CTRL-FP-RV01),Not specified in series matrix,No shared sample IDs; alias-level animal reuse not established
+GSM7712157,CTRL-FP-RV04,1,M,Control RV (CTRL-FP-RV04),Not specified in series matrix,No shared sample IDs; alias-level animal reuse not established
+GSM7712158,CTRL-MCT62-RV21,1,M,Control RV (CTRL-MCT62-RV21),Not specified in series matrix,No shared sample IDs; alias-level animal reuse not established
+GSM7712159,CTRL-MCT62-RV22,1,M,Control RV (CTRL-MCT62-RV22),Not specified in series matrix,No shared sample IDs; alias-level animal reuse not established
+GSM7712160,CTRL-MCT69-RV20,1,M,Control RV (CTRL-MCT69-RV20),Not specified in series matrix,No shared sample IDs; alias-level animal reuse not established
+GSM7712161,CTRL-Su28-RV01,1,M,Control RV (CTRL-Su28-RV01),Not specified in series matrix,No shared sample IDs; alias-level animal reuse not established
+GSM7712162,CTRL-Su28-RV04,1,M,Control RV (CTRL-Su28-RV04),Not specified in series matrix,No shared sample IDs; alias-level animal reuse not established
+GSM7712163,CTRL-Su28-RV06,1,M,Control RV (CTRL-Su28-RV06),Not specified in series matrix,No shared sample IDs; alias-level animal reuse not established
+GSM7712164,CTRL-ARN-RV36,1,M,Control RV (CTRL-ARN-RV36),Not specified in series matrix,No shared sample IDs; alias-level animal reuse not established
+GSM7712165,CTRL-ARN-RV37,1,M,Control RV (CTRL-ARN-RV37),Not specified in series matrix,No shared sample IDs; alias-level animal reuse not established
+GSM7712166,COMP-FP-RV09,1,M,Compensated RV (COMP-FP-RV09),Not specified in series matrix,No shared sample IDs; alias-level animal reuse not established
+GSM7712167,COMP-FP-RV11,1,M,Compensated RV (COMP-FP-RV11),Not specified in series matrix,No shared sample IDs; alias-level animal reuse not established
+GSM7712168,COMP-FP-RV14,1,M,Compensated RV (COMP-FP-RV14),Not specified in series matrix,No shared sample IDs; alias-level animal reuse not established
+GSM7712169,COMP-MCT66-RV07,1,M,Compensated RV (COMP-MCT66-RV07),Not specified in series matrix,No shared sample IDs; alias-level animal reuse not established
+GSM7712170,COMP-ARN-RV08,1,M,Compensated RV (COMP-ARN-RV08),Not specified in series matrix,No shared sample IDs; alias-level animal reuse not established
+GSM7712171,COMP-ARN-RV02,1,M,Compensated RV (COMP-ARN-RV02),Not specified in series matrix,No shared sample IDs; alias-level animal reuse not established
+GSM7712172,COMP-ARN-RV03,1,M,Compensated RV (COMP-ARN-RV03),Not specified in series matrix,No shared sample IDs; alias-level animal reuse not established
+GSM7712173,DECOMP-FP-RV07,1,M,early decompensated (DECOMP-FP-RV07),Not specified in series matrix,No shared sample IDs; alias-level animal reuse not established
+GSM7712174,DECOMP-FP-RV22,1,M,early decompensated (DECOMP-FP-RV22),Not specified in series matrix,No shared sample IDs; alias-level animal reuse not established
+GSM7712175,DECOMP-FP-RV25,1,M,early decompensated (DECOMP-FP-RV25),Not specified in series matrix,No shared sample IDs; alias-level animal reuse not established
+GSM7712176,DECOMP-MCT69-RV04,1,M,late decompensated (DECOMP-MCT69-RV04),Not specified in series matrix,No shared sample IDs; alias-level animal reuse not established
+GSM7712177,DECOMP-MCT69-RV07,1,M,late decompensated (DECOMP-MCT69-RV07),Not specified in series matrix,No shared sample IDs; alias-level animal reuse not established
+GSM7712178,DECOMP-MCT69-RV09,1,M,late decompensated (DECOMP-MCT69-RV09),Not specified in series matrix,No shared sample IDs; alias-level animal reuse not established
+GSM7712179,DECOMP-MCT69-RV13,1,M,late decompensated (DECOMP-MCT69-RV13),Not specified in series matrix,No shared sample IDs; alias-level animal reuse not established
+GSM7712180,DECOMP-MCT69-RV14,1,M,late decompensated (DECOMP-MCT69-RV14),Not specified in series matrix,No shared sample IDs; alias-level animal reuse not established
+GSM7712181,DECOMP-MCT69-RV15,1,M,late decompensated (DECOMP-MCT69-RV15),Not specified in series matrix,No shared sample IDs; alias-level animal reuse not established
+GSM7712182,CTRL-f_1,2,F,control RV female (CTRL-f_1),Not specified in series matrix,No shared sample IDs; alias-level animal reuse not established
+GSM7712183,CTRL-f_2,2,F,control RV female (CTRL-f_2),Not specified in series matrix,No shared sample IDs; alias-level animal reuse not established
+GSM7712184,CTRL-f_3,2,F,control RV female (CTRL-f_3),Not specified in series matrix,No shared sample IDs; alias-level animal reuse not established
+GSM7712185,CTRL-f_4,2,F,control RV female (CTRL-f_4),Not specified in series matrix,No shared sample IDs; alias-level animal reuse not established
+GSM7712186,CTRL-m_1,2,M,control RV male (CTRL-m_1),Not specified in series matrix,No shared sample IDs; alias-level animal reuse not established
+GSM7712187,CTRL-m_2,2,M,control RV male (CTRL-m_2),Not specified in series matrix,No shared sample IDs; alias-level animal reuse not established
+GSM7712188,CTRL-m_3,2,M,control RV male (CTRL-m_3),Not specified in series matrix,No shared sample IDs; alias-level animal reuse not established
+GSM7712189,CTRL-m_4,2,M,control RV male (CTRL-m_4),Not specified in series matrix,No shared sample IDs; alias-level animal reuse not established
+GSM7712190,Comp-f_1,2,F,Compensated RV female (Comp-f_1),Not specified in series matrix,No shared sample IDs; alias-level animal reuse not established
+GSM7712191,Comp-f_2,2,F,Compensated RV female (Comp-f_2),Not specified in series matrix,No shared sample IDs; alias-level animal reuse not established
+GSM7712192,Comp-f_3,2,F,Compensated RV female (Comp-f_3),Not specified in series matrix,No shared sample IDs; alias-level animal reuse not established
+GSM7712193,Comp-f_5,2,F,Compensated RV female (Comp-f_5),Not specified in series matrix,No shared sample IDs; alias-level animal reuse not established
+GSM7712194,Comp-f_6,2,F,Compensated RV female (Comp-f_6),Not specified in series matrix,No shared sample IDs; alias-level animal reuse not established
+GSM7712195,Comp-f_7,2,F,Compensated RV female (Comp-f_7),Not specified in series matrix,No shared sample IDs; alias-level animal reuse not established
+GSM7712196,Comp-m_1,2,M,Compensated RV male (Comp-m_1),Not specified in series matrix,No shared sample IDs; alias-level animal reuse not established
+GSM7712197,Comp-m_2,2,M,Compensated RV male (Comp-m_2),Not specified in series matrix,No shared sample IDs; alias-level animal reuse not established
+GSM7712198,Comp-m_3,2,M,Compensated RV male (Comp-m_3),Not specified in series matrix,No shared sample IDs; alias-level animal reuse not established
+GSM7712199,Comp-m_4,2,M,Compensated RV male (Comp-m_4),Not specified in series matrix,No shared sample IDs; alias-level animal reuse not established
+GSM7712200,Comp-m_5,2,M,Compensated RV male (Comp-m_5),Not specified in series matrix,No shared sample IDs; alias-level animal reuse not established
+GSM7712201,Decomp-f_1,2,F,Decompensated RV female (Decomp-f_1),Not specified in series matrix,No shared sample IDs; alias-level animal reuse not established
+GSM7712202,Decomp-f_2,2,F,Decompensated RV female (Decomp-f_2),Not specified in series matrix,No shared sample IDs; alias-level animal reuse not established
+GSM7712203,Decomp-f_3,2,F,Decompensated RV female (Decomp-f_3),Not specified in series matrix,No shared sample IDs; alias-level animal reuse not established
+GSM7712204,Decomp-m_1,2,M,Decompensated RV male (Decomp-m_1),Not specified in series matrix,No shared sample IDs; alias-level animal reuse not established
+GSM7712205,Decomp-m_2,2,M,Decompensated RV male (Decomp-m_2),Not specified in series matrix,No shared sample IDs; alias-level animal reuse not established
+GSM7712206,Decomp-m_3,2,M,Decompensated RV male (Decomp-m_3),Not specified in series matrix,No shared sample IDs; alias-level animal reuse not established
+GSM7712207,Decomp-m_4,2,M,Decompensated RV male (Decomp-m_4),Not specified in series matrix,No shared sample IDs; alias-level animal reuse not established
+GSM7712208,Decomp-m_6,2,M,Decompensated RV male (Decomp-m_6),Not specified in series matrix,No shared sample IDs; alias-level animal reuse not established

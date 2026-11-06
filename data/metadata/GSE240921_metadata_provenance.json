@@ -1,0 +1,11 @@
+{
+  "count_workbook": "GSE240921_processed-data-human.xlsx",
+  "count_workbook_sha256": "a09bd465426c9c4bac112366d2f1de2680f8325f94c71023f97670c7a1b8180d",
+  "GEO_url": "https://ftp.ncbi.nlm.nih.gov/geo/series/GSE240nnn/GSE240921/matrix/GSE240921_series_matrix.txt.gz",
+  "GEO_sha256": "da0ae6614ef9f6178d43924aaeb74991e72c033e858a2a7a0b6bef6526e83ba9",
+  "group_and_sex": "Directly matched GEO primary annotations and sex for all 40; documented RV- prefix normalization for first 15 titles.",
+  "batch": "Operational technical batch PE25/SE15, supported by sample-level paired FASTQ versus explicitly single-end STAR records. Not inferred from expression clusters, donor country or clinical A/B labels.",
+  "paper": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11358157/; Methods and Figure3 describe two human sequencing batches with paired-/single-end layouts.",
+  "unavailable": "Sample-level age, ischemic time, cause of death and tissue-procurement details could not be reliably linked to all 40 expression samples. GEO provides sex. Sequencing layout was recovered separately from the per-sample FASTQ/STAR records.",
+  "scope": "Supports the primary Batch+Sex+Group reanalysis and Figure S8 batch-stratum sensitivity. No SVA/RUV or adjustment for unavailable clinical covariates is claimed."
+}

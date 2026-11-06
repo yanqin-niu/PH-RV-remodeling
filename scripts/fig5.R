@@ -70,6 +70,7 @@ get_script_dir <- function() {
 }
 
 script_dir  <- get_script_dir()
+source(file.path(script_dir,'12_count_filter_helpers.R'))
 project_dir <- normalizePath(file.path(script_dir, ".."))
 raw_dir     <- file.path(project_dir, "data", "raw")
 output_root <- file.path(project_dir, "outputs")
@@ -154,14 +155,14 @@ clean_sym <- function(x) {
 safe_round_counts <- function(mat) {
   mat <- as.matrix(mat)
   mode(mat) <- "numeric"
-  mat[!is.finite(mat)] <- 0
+  if (any(!is.finite(mat)) || any(mat < 0)) stop("Counts must be finite and nonnegative; invalid values cannot be replaced by zero.")
   round(mat, 0)
 }
 
 add_sig_col <- function(df, alpha = 0.05, lfc_thr = 1) {
   df %>%
     dplyr::mutate(
-      Significant = !is.na(padj) & padj < alpha & abs(log2FC) >= lfc_thr,
+      Significant = is.finite(padj) & padj >= 0 & padj < alpha & is.finite(log2FC) & abs(log2FC) >= lfc_thr,
       Direction = dplyr::case_when(
         Significant & log2FC > 0  ~ "Up",
         Significant & log2FC < 0  ~ "Down",
@@ -201,8 +202,7 @@ collapse_by_symbol <- function(mat, symbols) {
   rownames(mat2) <- symbols2
   
   if (anyDuplicated(rownames(mat2))) {
-    mat2 <- rowsum(mat2, group = rownames(mat2)) /
-      as.vector(table(rownames(mat2)))
+    mat2 <- rowsum(mat2, group = rownames(mat2))
   }
   mat2
 }
@@ -212,8 +212,8 @@ run_deseq_simple <- function(counts, groups, contrast_vec, is_normalized = FALSE
   rownames(coldata) <- colnames(counts)
   
   cmat <- counts
-  if (is_normalized) cmat <- round(cmat, 0)
-  cmat <- safe_round_counts(cmat)
+  if (is_normalized) warning("Normalized counts supplied to DESeq2: exploratory approximation; obtain raw counts for confirmatory inference.")
+  cmat <- prefilter_counts(safe_round_counts(cmat),paste(contrast_vec,collapse=" / "))
   
   dds <- DESeq2::DESeqDataSetFromMatrix(
     countData = cmat,
@@ -225,12 +225,13 @@ run_deseq_simple <- function(counts, groups, contrast_vec, is_normalized = FALSE
   res <- DESeq2::results(dds, contrast = contrast_vec)
   df <- as.data.frame(res)
   df$Gene <- rownames(df)
-  df <- df[!is.na(df$padj), , drop = FALSE]
+  df <- df
   
   df %>%
     dplyr::transmute(
       Gene = TOUP(Gene),
       log2FC = log2FoldChange,
+      lfcSE = lfcSE,
       padj = padj
     ) %>%
     add_sig_col(alpha = alpha, lfc_thr = lfc_thr)
@@ -298,7 +299,7 @@ read_rv_266139 <- function(file) {
   stopifnot(!any(is.na(group)))
   
   keep <- rowSums(expr_mat) >= 10
-  expr_mat <- expr_mat[keep, , drop = FALSE]
+  expr_mat <- prefilter_counts(expr_mat[keep, , drop = FALSE],"GSE266139 all20")
   gene_annot <- gene_annot[match(rownames(expr_mat), gene_annot$Geneid), , drop = FALSE]
   
   coldata <- data.frame(condition = factor(group))
@@ -314,13 +315,14 @@ read_rv_266139 <- function(file) {
   res <- DESeq2::results(dds, contrast = c("condition", "RM", "RP"))
   df <- as.data.frame(res)
   df$Geneid <- rownames(df)
-  df <- df[!is.na(df$padj), , drop = FALSE]
+  df <- df
   df <- dplyr::left_join(df, gene_annot, by = "Geneid")
   
   df %>%
     dplyr::transmute(
       Gene = Genename,
       log2FC = log2FoldChange,
+      lfcSE = lfcSE,
       padj = padj,
       Dataset = anchor_dataset_name
     ) %>%
@@ -360,7 +362,7 @@ read_rv_133402 <- function(file) {
   
   rn <- rownames(count_mat)
   sy <- if (mean(grepl("^ENS", rn)) > 0.5) map_rat_ensembl_to_symbol(rn) else rn
-  mat_sym <- collapse_by_symbol(count_mat, sy)
+  mat_sym <- prefilter_counts(safe_round_counts(collapse_by_symbol(count_mat, sy)),"GSE133402 all12")
   
   group <- ifelse(grepl("RMCH", colnames(mat_sym), ignore.case = TRUE), "Hypoxia",
                   ifelse(grepl("RMNT", colnames(mat_sym), ignore.case = TRUE), "Ctrl", NA_character_))
@@ -478,7 +480,7 @@ read_GSE240923_batch2 <- function(file) {
   rownames(coldata) <- colnames(mat_sym)
   
   dds <- DESeq2::DESeqDataSetFromMatrix(
-    countData = safe_round_counts(mat_sym),
+    countData = prefilter_counts(safe_round_counts(mat_sym),"GSE240923 batch2"),
     colData = coldata,
     design = ~ Sex + Group
   )
@@ -487,10 +489,11 @@ read_GSE240923_batch2 <- function(file) {
   res <- DESeq2::results(dds, contrast = c("Group", "dRV", "Ctrl"))
   deg <- as.data.frame(res)
   deg$Gene <- rownames(deg)
-  deg <- deg[!is.na(deg$padj), , drop = FALSE] %>%
+  deg <- deg %>%
     dplyr::transmute(
       Gene = TOUP(Gene),
       log2FC = log2FoldChange,
+      lfcSE = lfcSE,
       padj = padj
     ) %>%
     add_sig_col(alpha = alpha, lfc_thr = lfc_thr)
@@ -499,18 +502,43 @@ read_GSE240923_batch2 <- function(file) {
   deg
 }
 
+signed_fc_to_log2 <- function(x) {
+  x <- as.numeric(x)
+  if (any(!is.finite(x) | abs(x) < 1)) stop("Invalid signed fold change: expected finite |FC| >= 1")
+  sign(x) * log2(abs(x))
+}
+
 read_GSE186989 <- function(file) {
   df <- readxl::read_excel(file, sheet = 1)
-  deg <- df %>%
-    dplyr::transmute(
-      Gene = TOUP(`Feature ID`),
-      log2FC = as.numeric(`EDGE test: CTRL vs SU/HX, tagwise dispersions - Fold change`),
-      padj   = as.numeric(`EDGE test: CTRL vs SU/HX, tagwise dispersions - FDR p-value correction`)
-    ) %>%
-    dplyr::filter(!is.na(Gene), Gene != "", !is.na(log2FC), !is.na(padj)) %>%
-    add_sig_col(alpha = alpha, lfc_thr = lfc_thr)
-  
-  deg$Dataset <- "GSE186989 (Rat_SuHx)"
+  # CLC Total gene reads: unnormalized gene-level assigned-read counts,
+  # including uniquely mapped and assigned multimapping reads. Not RPKM/normalized means.
+  cols <- grep("^(CTRL|SU/HX) - .* - Total gene reads$", names(df), value = TRUE)
+  if(length(cols)!=8L) stop("GSE186989: expected four CTRL and four SU/HX raw-count columns")
+  samples <- sub(" - Total gene reads$", "", sub("^[^-]+ - ", "", cols))
+  group <- ifelse(grepl("^CTRL - ",cols),"Ctrl","SuHx")
+  if(any(table(group)!=4L)) stop("Unexpected GSE186989 group sizes")
+  mat <- as.matrix(as.data.frame(df[,cols]));storage.mode(mat)<-"numeric"
+  if(any(!is.finite(mat)) || any(mat<0) || any(abs(mat-round(mat))>1e-8)) stop("Invalid raw read counts")
+  ids <- as.character(df[["CTRL - CTRL_1 - Gene ID"]])
+  if(anyNA(ids) || anyDuplicated(ids)) stop("Missing/duplicated GSE186989 stable gene IDs; resolve before modeling")
+  symbols <- TOUP(df[["Feature ID"]])
+  keep <- !is.na(symbols) & nzchar(symbols)
+  mat <- mat[keep,,drop=FALSE];symbols<-symbols[keep]
+  rownames(mat)<-symbols;colnames(mat)<-samples
+  mat <- rowsum(mat,group=rownames(mat),reorder=FALSE)
+  coldata <- data.frame(condition=factor(group,levels=c("Ctrl","SuHx")),row.names=samples)
+  dds <- DESeq2::DESeqDataSetFromMatrix(countData=prefilter_counts(round(mat),"GSE186989"),colData=coldata,design=~condition)
+  dds <- DESeq2::DESeq(dds,quiet=TRUE)
+  res <- as.data.frame(DESeq2::results(dds,contrast=c("condition","SuHx","Ctrl")))
+  res$Gene<-rownames(res)
+  write.csv(data.frame(Sample=samples,Group=group,Source_column=cols),
+            file.path(out_dir,"GSE186989_DESeq2_samples.csv"),row.names=FALSE)
+  write.csv(res,file.path(out_dir,"GSE186989_DESeq2_full_results.csv"),row.names=FALSE)
+  write.csv(data.frame(Gene=rownames(mat),mat,check.names=FALSE),
+            file.path(out_dir,"GSE186989_raw_gene_counts.csv"),row.names=FALSE)
+  deg <- res %>% dplyr::transmute(Gene=Gene,log2FC=log2FoldChange,lfcSE=lfcSE,padj=padj) %>%
+    add_sig_col(alpha=alpha,lfc_thr=lfc_thr)
+  deg$Dataset<-"GSE186989 (Rat_SuHx)"
   deg
 }
 
@@ -597,7 +625,10 @@ read_GSE240921 <- function(file) {
     message("NPPA-like raw IDs/symbols: ", paste(nppa_like, collapse = " | "))
   }
   
-  deg <- run_deseq_simple(expr_sym, group, c("condition", "dRV", "Ctrl"), is_normalized = FALSE)
+  source(file.path(script_dir,'18_human_batch_helpers.R'))
+  md<-human240921_metadata(colnames(expr_sym),project_dir)
+  stopifnot(identical(as.character(md$Group),group))
+  deg <- fit_human240921(expr_sym,project_dir,out_dir) %>% add_sig_col(alpha=alpha,lfc_thr=lfc_thr)
   deg$Dataset <- "GSE240921 (Human)"
   message("Recomputed dRV vs Ctrl result for NPPA:")
   print(
@@ -607,7 +638,7 @@ read_GSE240921 <- function(file) {
       tibble::as_tibble(),
     n = Inf
   )
-  message("Expected Table S6 reference: log2FC = 4.19978138; padj = 0.0001986085")
+  message("Batch+Sex+Group model; published source-study estimate is not a numerical equality target.")
   message("====================================================\n")
   deg
 }
@@ -663,6 +694,12 @@ other7_df <- dplyr::bind_rows(
   deg_240921
 )
 
+source(file.path(script_dir,'11_orthology_helpers.R'))
+native_display_df <- display_df
+native_display_df$NativeGene <- native_display_df$Gene
+display_df <- harmonize_native_results(native_display_df,project_dir)
+other7_df <- display_df %>% dplyr::filter(Dataset!=anchor_dataset_name)
+
 dataset_deg_audit <- display_df %>%
   dplyr::group_by(Dataset) %>%
   dplyr::summarise(
@@ -686,7 +723,7 @@ print(
 
 # All seven external datasets, including GSE240921, are retained in
 # both the visualization and consensus selection.
-# All seven external RV datasets, including GSE240921, enter replication.
+# All seven external RV datasets contribute to panel derivation; they are not independent fixed-panel validation cohorts.
 other7_informative_df <- other7_df
 
 # Strictly restrict Figure 5 candidates to the mutually exclusive
@@ -797,47 +834,9 @@ dataset_axis_labels <- c(
 # ------------------------------------------------
 # 11. Protein / Olink support
 # ------------------------------------------------
-prot_df_raw <- readxl::read_excel(file_prot, sheet = "dRV vs CTRL", col_names = TRUE)
-prot_sig_genes <- prot_df_raw %>%
-  dplyr::transmute(
-    Gene = TOUP(split_first(.data[["Gene.names"]])),
-    Status = tolower(trimws(as.character(.data[["Sign_zscore_qval_Limma"]])))
-  ) %>%
-  dplyr::filter(!is.na(Gene), Gene != "", Status %in% c("up", "down")) %>%
-  dplyr::distinct(Gene) %>%
-  dplyr::pull(Gene)
-
-prefer_overlap <- consensus_genes$Gene
-
-.read_olink_one <- function(sh) {
-  df <- readxl::read_excel(file_olink, sheet = sh, col_names = TRUE)
-  gcol <- .pick_gene_col(df, prefer_overlap = prefer_overlap)
-  lastc <- tail(colnames(df), 1)
-  
-  df %>%
-    dplyr::transmute(
-      Gene = TOUP(trimws(as.character(.data[[gcol]]))),
-      status = TOUP(trimws(as.character(.data[[lastc]])))
-    ) %>%
-    dplyr::filter(!is.na(Gene), Gene != "", status == "SIGNIFICANT") %>%
-    dplyr::distinct(Gene)
-}
-
-olink_sig_genes <- dplyr::bind_rows(lapply(olink_sheets, .read_olink_one)) %>%
-  dplyr::distinct(Gene) %>%
-  dplyr::pull(Gene)
-
-annot_support <- tibble::tibble(Gene = consensus_genes$Gene) %>%
-  dplyr::mutate(
-    in_prot = Gene %in% prot_sig_genes,
-    in_olink = Gene %in% olink_sig_genes,
-    support_cat = dplyr::case_when(
-      in_prot & in_olink ~ "Protein + Olink + transcript",
-      in_prot & !in_olink ~ "Protein + transcript",
-      !in_prot & in_olink ~ "Olink + transcript",
-      TRUE ~ "Transcript only"
-    )
-  )
+source(file.path(script_dir,'16_protein_support_helpers.R'))
+protein_audit <- audit_protein_support(consensus_genes,'anchor_dir',project_dir,out_dir)
+annot_support <- protein_audit$Annotation
 
 plot_long <- plot_long %>%
   dplyr::left_join(annot_support, by = "Gene")
@@ -901,7 +900,8 @@ pA <- ggplot2::ggplot(plot_long, ggplot2::aes(x = Dataset, y = support_label)) +
     name = "|log2FC|",
     range = c(1.1, 3.2),
     limits = c(0, lfc_cap),
-    breaks = round(seq(0, lfc_cap, length.out = 3), 2)
+    breaks = seq(0, lfc_cap, length.out = 3),
+    labels = scales::label_number(accuracy = 0.01)
   ) +
   ggplot2::labs(
     x = NULL,
@@ -965,6 +965,8 @@ ggplot2::ggsave(
 # ------------------------------------------------
 wb <- openxlsx::createWorkbook()
 
+openxlsx::addWorksheet(wb,'Native_results')
+openxlsx::writeData(wb,'Native_results',native_display_df)
 openxlsx::addWorksheet(wb, "Anchor_GSE266139_RV")
 openxlsx::writeData(wb, "Anchor_GSE266139_RV", deg_266139_rv)
 
@@ -990,10 +992,10 @@ openxlsx::addWorksheet(wb, "Fig5A_long")
 openxlsx::writeData(wb, "Fig5A_long", plot_long)
 
 openxlsx::addWorksheet(wb, "Protein_support")
-openxlsx::writeData(wb, "Protein_support", data.frame(Gene = prot_sig_genes))
+openxlsx::writeData(wb, "Protein_support", subset(protein_audit$Gene_contrast,Modality=='Tissue'))
 
 openxlsx::addWorksheet(wb, "Olink_support")
-openxlsx::writeData(wb, "Olink_support", data.frame(Gene = olink_sig_genes))
+openxlsx::writeData(wb, "Olink_support", subset(protein_audit$Gene_contrast,Modality=='Olink'))
 
 openxlsx::addWorksheet(wb, "Meta")
 openxlsx::writeData(
@@ -1027,6 +1029,29 @@ openxlsx::writeData(
 openxlsx::addWorksheet(wb, "sessionInfo")
 openxlsx::writeData(wb, "sessionInfo", capture.output(sessionInfo()))
 
+# Descriptive human support; does not alter selection or plotted gene order.
+source(file.path(script_dir, "07_human_support_helpers.R"))
+human_audit <- audit_human_support(consensus_genes, native_display_df, "anchor_dir",
+  file.path(project_dir, "data", "reference", "ORTHOLOGS_RAT.txt"))
+for (nm in names(human_audit)) {
+  sheet <- paste0("Human_support_", nm)
+  openxlsx::addWorksheet(wb, sheet)
+  openxlsx::writeData(wb, sheet, human_audit[[nm]])
+}
+
+
+source(file.path(script_dir,'00_common_helpers.R'))
+sets_for_audit<-read_fig1_sets(project_dir)
+availability_audit<-build_replication_grid(sets_for_audit,native_display_df,exclude_anchor=FALSE)
+openxlsx::addWorksheet(wb,'Candidate_availability')
+openxlsx::writeData(wb,'Candidate_availability',availability_audit)
+coverage<-availability_audit %>% dplyr::filter(Set=='Shared') %>% dplyr::group_by(Gene) %>% dplyr::summarise(N_evaluable=sum(measured),N_support=sum(same_direction),Fixed_required=6L,Eligible_for_six=N_evaluable>=6,Support_fraction_evaluable=ifelse(N_evaluable>0,N_support/N_evaluable,NA_real_),Coverage_sensitivity=N_evaluable>=6 & N_support>=ceiling(.75*N_evaluable),.groups='drop')
+openxlsx::addWorksheet(wb,'Consensus_coverage')
+openxlsx::writeData(wb,'Consensus_coverage',coverage)
+
+add_protein_audit(wb,protein_audit)
+openxlsx::addWorksheet(wb,'Human_model_samples');openxlsx::writeData(wb,'Human_model_samples',human240921_metadata(colnames(readxl::read_excel(file_240921,sheet=2))[-1],project_dir))
+openxlsx::addWorksheet(wb,'Human_model');openxlsx::writeData(wb,'Human_model',data.frame(Formula='~Batch + Sex + Group',Contrast='dRV minus Ctrl; all40 fit; one consensus vote',Scope='Technical PE25/SE15 strata and GEO sex; no age/ischemia/cause-of-death or SVA/RUV adjustment; heterogeneous batch-specific effects documented in FigureS8'))
 openxlsx::saveWorkbook(
   wb,
   file.path(out_dir, "Figure5_source_data.xlsx"),

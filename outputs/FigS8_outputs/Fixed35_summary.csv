@@ -1,0 +1,6 @@
+"Model","Fixed_panel","Covered","Testable","Direction_match","FDR_concordant","Strict_concordant","Strict_discordant"
+"SE15_Group",35,34,34,27,25,23,1
+"SE15_Sex_Group",35,34,34,28,24,22,2
+"PE25_Group",35,32,12,21,0,0,0
+"PE25_Sex_Group",35,32,26,23,0,0,0
+"Joint40_Batch_Sex",35,34,33,27,11,7,2

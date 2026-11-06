@@ -1,0 +1,7 @@
+"Batch","Set","N_reference","N_present","N_used","N_up","N_down"
+"Batch1","LV-only",477,403,403,310,93
+"Batch1","RV-only",52,45,45,34,11
+"Batch1","Shared",108,90,90,79,11
+"Batch2","LV-only",477,402,402,310,92
+"Batch2","RV-only",52,44,44,34,10
+"Batch2","Shared",108,90,90,79,11

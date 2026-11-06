@@ -7,7 +7,7 @@ source(file.path(.dir, "00_common_helpers.R"))
 script_dir <- get_script_dir(); project_dir <- find_project_dir(script_dir)
 out_dir <- file.path(project_dir, "outputs", "Fig4_outputs"); dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
 fig1_sets <- read_fig1_sets(project_dir); f5 <- read_fig5_objects(project_dir)
-grid <- build_replication_grid(fig1_sets, f5$display, exclude_anchor = TRUE)
+grid <- build_replication_grid(fig1_sets, f5$native, exclude_anchor = TRUE)
 summary_df <- summarise_replication(grid)
 dataset_order <- unique(grid$Dataset)
 
@@ -32,15 +32,10 @@ pB <- ggplot(gene_support, aes(Set, n_same, fill = Set)) +
 
 model_df <- grid %>% filter(measured) %>% mutate(Set = relevel(factor(Set), ref = "Shared"),
   z_abs_lfc = as.numeric(scale(discovery_abs_log2FC)), same_direction = as.integer(same_direction))
-if (requireNamespace("lme4", quietly=TRUE)) {
-  fit <- lme4::glmer(same_direction ~ Set + z_abs_lfc + (1 | Dataset) + (1 | Gene), data = model_df,
-                     family = binomial(), control = lme4::glmerControl(optimizer = "bobyqa"))
-  cf <- lme4::fixef(fit); se <- sqrt(diag(as.matrix(vcov(fit)))); model_name <- "Crossed random-intercept logistic model"
-} else {
-  warning("Package lme4 is unavailable; using dataset-adjusted logistic regression fallback.")
-  fit <- glm(same_direction ~ Set + z_abs_lfc + Dataset, data=model_df, family=binomial())
-  cf <- coef(fit); se <- sqrt(diag(vcov(fit))); model_name <- "Dataset-adjusted logistic regression"
-}
+if(!requireNamespace('lme4',quietly=TRUE))stop('Install lme4; the specified mixed model has no alternative-model fallback.')
+fit <- lme4::glmer(same_direction ~ Set + z_abs_lfc + (1 | Dataset) + (1 | Gene), data = model_df,
+ family=binomial(),control=lme4::glmerControl(optimizer='bobyqa'))
+cf<-lme4::fixef(fit);se<-sqrt(diag(as.matrix(vcov(fit))));model_name<-'Crossed random-intercept logistic model'
 or_df <- tibble(term=names(cf), estimate=exp(cf), conf.low=exp(cf-1.96*se), conf.high=exp(cf+1.96*se), Model=model_name) %>%
   filter(term %in% c("SetLV-only", "SetRV-only", "z_abs_lfc")) %>%
   mutate(term = recode(term, "SetLV-only" = "LV-only vs Shared", "SetRV-only" = "RV-only vs Shared",
@@ -65,7 +60,7 @@ pC <- ggplot(or_df, aes(estimate, reorder(term, estimate), color=term)) +
        x = "Odds ratio (95% CI; log scale)", y = NULL) +
   theme_manuscript(10) + theme(legend.position="none",plot.subtitle=element_text(hjust=.5,size=8.5))
 
-species_df <- grid %>% filter(measured) %>% group_by(Species, Set) %>% summarise(n_same = sum(same_direction), n_total = n(), .groups = "drop") %>%
+species_df <- grid %>% filter(measured) %>% group_by(Species, Set) %>% summarise(n_same = sum(same_direction, na.rm = TRUE), n_total = n(), .groups = "drop") %>%
   rowwise() %>% mutate(rate = n_same/n_total, ci = list(wilson_ci(n_same,n_total)), lower=ci[[1]], upper=ci[[2]]) %>% ungroup()
 pD <- ggplot(species_df, aes(Species, rate, fill = Set)) +
   geom_col(position = position_dodge(.75), width = .68, color = "black", linewidth = .25) +
@@ -79,12 +74,24 @@ ggsave(file.path(out_dir,"Figure4.pdf"),fig4,width=11,height=8.2)
 ggsave(file.path(out_dir,"Figure4.tiff"),fig4,width=11,height=8.2,dpi=600,compression="lzw")
 
 # Individual panels: edit width/height here when assembling the final figure.
-ggsave(file.path(out_dir,"Fig4A_replication_by_dataset.pdf"),pA,width=4.5,height=4)
-ggsave(file.path(out_dir,"Fig4B_per_gene_replication.pdf"),pB,width=3.8,height=3.3)
-ggsave(file.path(out_dir,"Fig4C_adjusted_model.pdf"),pC,width=4.3,height=3.2)
-ggsave(file.path(out_dir,"Fig4D_species_summary.pdf"),pD,width=4.0,height=3.35)
-write.xlsx(list(Replication_grid=grid, Dataset_summary=summary_df, Gene_support=gene_support,
+ggsave(file.path(out_dir,"Fig4A_replication_by_dataset.pdf"),pA,width=4.5,height=3.8)
+ggsave(file.path(out_dir,"Fig4B_per_gene_replication.pdf"),pB,width=3.5,height=3.2)
+ggsave(file.path(out_dir,"Fig4C_adjusted_model.pdf"),pC,width=4.2,height=3.4)
+ggsave(file.path(out_dir,"Fig4D_species_summary.pdf"),pD,width=3.8,height=3.5)
+# Sensitivity restricted to discovery genes with reciprocal-unique human orthologues.
+source(file.path(script_dir,'11_orthology_helpers.R'))
+mapping_all<-rat_query(unique(grid$Gene),project_dir)
+model_one_to_one<-model_df %>% filter(Gene %in% mapping_all$Gene[mapping_all$Mapping=='One_to_one'])
+fit_one_to_one<-lme4::glmer(same_direction ~ Set + z_abs_lfc + (1|Dataset)+(1|Gene),data=model_one_to_one,family=binomial(),control=lme4::glmerControl(optimizer='bobyqa'))
+cc<-lme4::fixef(fit_one_to_one);ss<-sqrt(diag(as.matrix(vcov(fit_one_to_one))))
+one_to_one_OR<-data.frame(term=names(cc),estimate=exp(cc),conf.low=exp(cc-1.96*ss),conf.high=exp(cc+1.96*ss))
+
+source(file.path(script_dir,'17_model_diagnostics_helpers.R'))
+diag_primary<-audit_glmm(fit,'Primary')
+diag_orthology<-audit_glmm(fit_one_to_one,'One-to-one sensitivity')
+saveRDS(list(primary=fit,one_to_one=fit_one_to_one),file.path(out_dir,'Figure4_fitted_models.rds'))
+write.xlsx(list(Model_diagnostics=rbind(diag_primary$Summary,diag_orthology$Summary),Random_effects=rbind(diag_primary$Random_effects,diag_orthology$Random_effects),Calibration=rbind(diag_primary$Calibration,diag_orthology$Calibration),Model_input=model_df,sessionInfo=data.frame(Text=capture.output(sessionInfo())),One_to_one_OR=one_to_one_OR, Mapping_audit=mapping_all, Replication_grid=grid, Dataset_summary=summary_df, Gene_support=gene_support,
                 Mixed_model_OR=or_df, Species_summary=species_df,
-                Meta=data.frame(Figure5_source=f5$path, Note="GSE266139 excluded; denominator is genes with an estimable external result; same-direction padj<0.05 and |log2FC|>=1")),
+                Meta=data.frame(Figure5_source=f5$path, Note="GSE266139 excluded; reciprocal-unique RGD orthology for human queries; missing mapping or unestimable tests excluded from replication-rate/model denominators; same-direction padj<0.05 and |log2FC|>=1")),
            file.path(out_dir,"Figure4_source_data.xlsx"), overwrite=TRUE)
 message("Figure 4 finished: ", out_dir)

@@ -1,0 +1,51 @@
+                         Dataset N_Shared N_complete_pairs
+2.5%      GSE133402_RV (Rat_Hyp)       55               55
+2.5%1          GSE198618 (Human)       59               59
+2.5%2        GSE242014 (Rat_PAB)       51               51
+2.5%3 GSE240923_batch1 (Rat_MCT)       61               61
+2.5%4 GSE240923_batch2 (Rat_MCT)       61               61
+2.5%5       GSE186989 (Rat_SuHx)       53               53
+2.5%6          GSE240921 (Human)       72               72
+      N_distinct_comparator Shared_rate Comparator_rate  Difference       Lower
+2.5%                     23   0.4727273      0.54545455 -0.07272727 -0.33941973
+2.5%1                    21   0.5084746      0.40677966  0.10169492 -0.20531149
+2.5%2                    21   0.5686275      0.50980392  0.05882353 -0.26373931
+2.5%3                    22   0.7049180      0.47540984  0.22950820 -0.11115900
+2.5%4                    22   0.7213115      0.44262295  0.27868852 -0.04107172
+2.5%5                    22   0.8679245      0.79245283  0.07547170 -0.13892274
+2.5%6                    26   0.1388889      0.04166667  0.09722222 -0.01840161
+          Upper
+2.5%  0.2101042
+2.5%1 0.4247541
+2.5%2 0.3250543
+2.5%3 0.4823961
+2.5%4 0.5302308
+2.5%5 0.3114823
+2.5%6 0.2031751
+                Dataset Difference       Lower     Upper
+2.5% Equal-dataset mean  0.1098117 -0.04054472 0.2369165
+      Covariate     Before      After
+1        abs_RV 0.28872763 0.01168706
+2        log_SE 0.23632208 0.03491198
+3      log_mean 0.33482447 0.04340620
+4 detectability 0.04437343 0.06574844
+                     Term        OR     Lower    Upper
+(Intercept)   (Intercept) 0.9321810 0.3668573 2.368663
+z_LV_support z_LV_support 1.3271319 1.0531882 1.672331
+z_abs_RV         z_abs_RV 0.8253144 0.4427520 1.538432
+z_log_SE         z_log_SE 2.3222737 1.2038628 4.479709
+z_log_mean     z_log_mean 1.1313624 0.8756682 1.461719
+               Item
+1          Matching
+2         Bootstrap
+3             Scope
+4  Continuous model
+5 Model diagnostics
+6           Caution
+                                                                                                                                                        Value
+1                        1:1 nearest neighbor with replacement; exact RV direction; 0.5 pooled SD caliper for all3 covariates; no tuning to external outcomes
+2                                                                     2000 Poisson gene-cluster multiplier draws; fixed matches; equal-dataset pooled average
+3                         Shared vs RV-only; common-support subset, not whole Shared set; curated human orthology; finite external estimate and padj required
+4                                                sign(RV log2FC)*LV log2FC/LV lfcSE; adjusted for RV effect, SE, baseMean; detectability added as sensitivity
+5                                                                                                         Singular primary: FALSE Singular sensitivity: FALSE
+6 Complete matched pairs required in each external dataset. Association only; matching uncertainty and generalization beyond observed datasets not quantified

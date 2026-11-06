@@ -1,0 +1,50 @@
+LODO rule and interpretation:
+The 108 discovery Shared genes were held fixed as the candidate universe. Each dataset was omitted once, retaining genes with at least 6/7 same-direction votes. Omitting GSE266139 removes its vote only; Shared membership is not recalculated.
+Of the final 35 genes, 21 had exactly 6/8 full-cohort support and were retained in exactly 2/8 omission runs by construction. The other 14 had at least 7/8 support and were retained in all eight runs. This threshold-conditioned retention is not independent evidence of biological stability.
+
+Per-omission Jaccard and retained-gene counts:
+                    Left_out n_selected n_overlap n_union   Jaccard N_lost
+1     GSE266139_RV (Rat_MCT)         14        14      35 0.4000000     21
+2     GSE133402_RV (Rat_Hyp)         19        19      35 0.5428571     16
+3          GSE198618 (Human)         28        28      35 0.8000000      7
+4        GSE242014 (Rat_PAB)         17        17      35 0.4857143     18
+5 GSE240923_batch1 (Rat_MCT)         14        14      35 0.4000000     21
+6 GSE240923_batch2 (Rat_MCT)         15        15      35 0.4285714     20
+7       GSE186989 (Rat_SuHx)         14        14      35 0.4000000     21
+8          GSE240921 (Human)         33        33      35 0.9428571      2
+  N_added
+1       0
+2       0
+3       0
+4       0
+5       0
+6       0
+7       0
+8       0
+
+Threshold sensitivity:
+    LFC Support_required Candidate_n Selected Retained_primary
+1 0.585                5         108       78               35
+2 0.585                6         108       63               35
+3 0.585                7         108       28               19
+4 1.000                5         108       50               35
+5 1.000                6         108       35               35
+6 1.000                7         108       14               14
+7 1.500                5         108       31               25
+8 1.500                6         108       21               21
+9 1.500                7         108        6                6
+                                                                                                                                                                   Lost_primary
+1                                                                                                                                                                              
+2                                                                                                                                                                              
+3                                                                                ADRA1D;ANKRD23;CILP;EMB;FHAD1;LBP;MYBPC2;NCAM1;POSTN;PRSS35;SFRP1;STC2;TMEM119;TMOD4;TRH;TUBB3
+4                                                                                                                                                                              
+5                                                                                                                                                                              
+6                                                 ADRA1D;ANKRD23;CILP;EMB;FHAD1;FXYD5;LBP;LOXL1;MYBPC2;NCAM1;PLOD2;POSTN;PRSS35;RAMP3;SFRP1;SLC6A6;STC2;TMEM119;TMOD4;TRH;TUBB3
+7                                                                                                                     FN1;FXYD5;LBP;LOXL1;LOXL2;SFRP1;SLC6A6;SRPX2;STC2;TMEM100
+8                                                                                              CILP;FN1;FXYD5;LBP;LOXL1;LOXL2;PLOD2;SFRP1;SLC6A6;SRPX2;STC2;TMEM100;TMOD4;TUBB3
+9 ADRA1D;ANKRD23;CENPA;CILP;EMB;FHAD1;FN1;FXYD5;LBP;LOXL1;LOXL2;MYBPC2;NCAM1;PLOD2;POSTN;PRSS35;RAMP3;SCN3B;SFRP1;SLC6A6;SRPX2;STC2;TIMP1;TMEM100;TMEM119;TMOD4;TRH;TUBB3;UCHL1
+
+Primary-gene LODO retention-frequency table:
+
+ 2  8 
+21 14 

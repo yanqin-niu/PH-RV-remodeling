@@ -1,0 +1,10 @@
+﻿Item,Value
+Reference URL,https://download.rgd.mcw.edu/pub/data_release/RAT/ORTHOLOGS_RAT.txt
+Orthology SHA256,0457710d21b40d6226e0f31a772580f9d2fc3fc98bd8e58470a0d3d5edec2207
+Input Figure5 SHA256,7c4fe587dd91fa0448967e171f8d4b495f4fef1c1709c218044b92dca221d601
+GEO matrix SHA256,5c4a32ca6add1e1519e491bccd219dd8b4072f35ca98a9ad41db51965643fabd
+Mapping policy,Reciprocal uniqueness within RGD pairwise one-to-one export; ambiguous and unmapped human queries unavailable
+Threshold,Finite effect and adjusted P; padj >=0 and <0.05; absolute log2FC >=1; anchor direction required
+Missingness,"Missing human mapping or unestimable test is unavailable, not tested nonsignificant; no vote, fixed denominator for selection"
+Weighting scope,Collapse GSE240923 only; not publication-level or model-level weighting across all accessions
+Scope,Shared-anchor selection sensitivity; not a refit of Figure4 or raw-count models

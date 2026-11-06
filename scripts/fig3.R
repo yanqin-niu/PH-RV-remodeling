@@ -16,11 +16,12 @@
 ##     - Fig3A_Batch1_SignatureScores.png
 ##     - Fig3B_Batch2_SignatureScores.pdf
 ##     - Fig3B_Batch2_SignatureScores.png
-##     - Fig3_source_data.xlsx
+##     - Figure3_source_data.xlsx
 ## ==========================================================
 
 suppressPackageStartupMessages({
   library(openxlsx)
+  library(DESeq2)
   library(dplyr)
   library(ggplot2)
   library(ggpubr)
@@ -123,7 +124,7 @@ ens2symbol_and_collapse <- function(mat_counts) {
   
   df_sym <- df %>%
     group_by(Gene) %>%
-    summarise(across(where(is.numeric), ~ mean(.x, na.rm = TRUE)), .groups = "drop") %>%
+    summarise(across(where(is.numeric), ~ sum(.x)), .groups = "drop") %>%
     as.data.frame()
   
   rownames(df_sym) <- df_sym$Gene
@@ -134,8 +135,7 @@ ens2symbol_and_collapse <- function(mat_counts) {
   rownames(mat_sym_upper) <- rn_up
   
   if (any(duplicated(rownames(mat_sym_upper)))) {
-    mat_sym_upper <- rowsum(mat_sym_upper, group = rownames(mat_sym_upper)) /
-      as.vector(table(rownames(mat_sym_upper)))
+    mat_sym_upper <- rowsum(mat_sym_upper, group = rownames(mat_sym_upper))
   }
   
   list(
@@ -222,52 +222,63 @@ message(sprintf(
 ## 6) 计算 signature 分数
 ##    行向 z-score -> 每个样本对集合取均值
 ## ----------------------------------------------------------
+# Normalize separately within each experimental batch, using all expressed genes.
+normalize_for_score <- function(counts) {
+  if(any(!is.finite(counts)) || any(counts<0) || any(abs(counts-round(counts))>1e-8)) stop("Invalid raw counts")
+  counts<-counts[rowSums(counts)>0,,drop=FALSE]
+  cd<-data.frame(row.names=colnames(counts),constant=rep(1,ncol(counts)))
+  dds<-DESeq2::DESeqDataSetFromMatrix(round(counts),cd,~1)
+  dds<-DESeq2::estimateSizeFactors(dds,type="poscounts")
+  list(expr=log2(DESeq2::counts(dds,normalized=TRUE)+1),
+       size_factors=data.frame(Sample=colnames(counts),Size_factor=DESeq2::sizeFactors(dds)))
+}
+score_normalized_b1<-normalize_for_score(count1_sym)
+score_normalized_b2<-normalize_for_score(count2_sym)
+score_gene_audit<-list()
 score_sets <- function(expr_sym, meta_df, sets_list, group_levels, has_sex = FALSE) {
-  stopifnot(all(colnames(expr_sym) == rownames(meta_df)))
-  
-  calc_one <- function(glist, label) {
-    keep <- rownames(expr_sym) %in% TOUP(glist)
-    if (!any(keep)) return(NULL)
-    
-    mat <- expr_sym[keep, , drop = FALSE]
-    mat <- t(scale(t(as.matrix(mat))))
-    mat[!is.finite(mat)] <- 0
-    
-    data.frame(
-      Sample = colnames(mat),
-      Score = colMeans(mat),
-      Set = label,
-      stringsAsFactors = FALSE
-    )
+  stopifnot(all(colnames(expr_sym)==rownames(meta_df)))
+  calc_one <- function(glist,label,sheet,lfc_col) {
+    ref<-openxlsx::read.xlsx(fig1_xlsx,sheet=sheet)
+    gcol<-intersect(c("Genename","Gene","SYMBOL","GeneSymbol","Gene.name"),names(ref))[1]
+    ref<-data.frame(Gene=TOUP(ref[[gcol]]),Direction=sign(as.numeric(ref[[lfc_col]])))
+    ref<-unique(ref[!is.na(ref$Gene)&nzchar(ref$Gene),])
+    if(anyDuplicated(ref$Gene))stop("Conflicting discovery directions within ",label)
+    ref<-ref[ref$Gene %in% TOUP(glist),]
+    ref$Measured<-ref$Gene %in% rownames(expr_sym)
+    ref$SD<-vapply(ref$Gene,function(g)if(g %in% rownames(expr_sym))sd(expr_sym[g,]) else NA_real_,numeric(1))
+    ref$Used<-ref$Measured & is.finite(ref$SD) & ref$SD>0 & is.finite(ref$Direction) & ref$Direction!=0
+    ref$Set<-label;ref$Batch<-if(has_sex)"Batch2" else "Batch1"
+    score_gene_audit[[paste(ref$Batch[1],label)]]<<-ref
+    r<-ref[ref$Used,];if(!nrow(r))stop("No usable scoring genes in ",label)
+    z<-t(scale(t(expr_sym[r$Gene,,drop=FALSE])))
+    aligned<-z*r$Direction
+    data.frame(Sample=colnames(z),Score=colMeans(aligned),Unsigned_score=colMeans(z),
+      Up_component=if(any(r$Direction>0))colMeans(z[r$Direction>0,,drop=FALSE]) else NA_real_,
+      Down_component=if(any(r$Direction<0))colMeans(-z[r$Direction<0,,drop=FALSE]) else NA_real_,
+      N_used=nrow(r),Set=label)
   }
-  
-  df <- dplyr::bind_rows(
-    calc_one(sets_list$LV_only, "LV-only"),
-    calc_one(sets_list$RV_only, "RV-only"),
-    calc_one(sets_list$Shared,  "Shared")
-  )
-  
-  meta2 <- meta_df
-  if (!"Sample" %in% names(meta2)) meta2$Sample <- rownames(meta2)
-  
-  df <- dplyr::left_join(df, meta2, by = "Sample")
-  df$Group <- factor(df$Group, levels = group_levels)
-  if (has_sex && "Sex" %in% names(df)) {
-    df$Sex <- droplevels(factor(df$Sex, levels = c("F", "M")))
-  }
-  df$Set <- factor(df$Set, levels = c("LV-only", "RV-only", "Shared"))
+  df<-dplyr::bind_rows(calc_one(sets_list$LV_only,"LV-only","LV_only_genes","lfc_lv"),
+    calc_one(sets_list$RV_only,"RV-only","RV_only_genes","lfc_rv"),
+    calc_one(sets_list$Shared,"Shared","Shared_genes","lfc_rv"))
+  if(!"Sample" %in% names(meta_df))meta_df$Sample<-rownames(meta_df)
+  df<-dplyr::left_join(df,meta_df,by="Sample")
+  df$Group<-factor(df$Group,levels=group_levels)
+  if(has_sex)df$Sex<-factor(df$Sex,levels=c("F","M"))
+  df$Set<-factor(df$Set,levels=c("LV-only","RV-only","Shared"))
   df
 }
 
 ## ----------------------------------------------------------
 ## 7) 单图绘制：三个面板并列
 ## ----------------------------------------------------------
+source(file.path(script_dir,'14_score_statistics_helpers.R'))
 plot_scores_faceted <- function(df_scores, title, group_levels, outfile,
                                 ctrl_label = "Ctrl", same_y_scale = TRUE,
                                 width_in = 8.8, height_in = 3.6,
                                 anova_x = 0.6) {
   
   comps <- lapply(setdiff(group_levels, ctrl_label), function(x) c(ctrl_label, x))
+  plot_tests <- score_group_inference(df_scores)
   
   y_stats <- df_scores %>%
     dplyr::group_by(Set) %>%
@@ -282,10 +293,8 @@ plot_scores_faceted <- function(df_scores, title, group_levels, outfile,
     dat <- df_scores[df_scores$Set == set_i, , drop = FALSE]
     if (nrow(dat) == 0) return(NULL)
     
-    tt <- rstatix::t_test(dat, Score ~ Group, comparisons = comps) %>%
-      rstatix::add_significance("p") %>%
-      dplyr::mutate(Set = set_i)
-    
+    tt <- plot_tests$contrasts[plot_tests$contrasts$Set==set_i,]
+
     tt <- dplyr::left_join(tt, y_stats, by = "Set") %>%
       dplyr::group_by(Set) %>%
       dplyr::mutate(
@@ -301,7 +310,7 @@ plot_scores_faceted <- function(df_scores, title, group_levels, outfile,
     dat <- df_scores[df_scores$Set == set_i, , drop = FALSE]
     if (nrow(dat) == 0) return(NULL)
     
-    pval <- rstatix::anova_test(dat, Score ~ Group)$p
+    pval <- plot_tests$groups$P[plot_tests$groups$Set==set_i]
     ys <- y_stats[y_stats$Set == set_i, ]
     n_pairs <- length(comps)
     y_pos <- ys$y_max + (n_pairs + 1) * 0.08 * ys$y_rng + 0.02 * ys$y_rng
@@ -310,7 +319,7 @@ plot_scores_faceted <- function(df_scores, title, group_levels, outfile,
       Set = set_i,
       x = anova_x,
       y.position = y_pos,
-      label = sprintf("p = %.2e", pval),
+      label = sprintf("Group p = %.2e", pval),
       stringsAsFactors = FALSE
     )
   }))
@@ -328,7 +337,7 @@ plot_scores_faceted <- function(df_scores, title, group_levels, outfile,
     theme(
       plot.margin = margin(t = 16, r = 12, b = 6, l = 10)
     ) +
-    labs(title = title, x = NULL, y = "Z-score mean") +
+    labs(title = title, x = NULL, y = "Direction-aligned Z-score mean") +
     ggpubr::stat_pvalue_manual(
       pair_df,
       label = "label",
@@ -359,7 +368,7 @@ plot_scores_faceted <- function(df_scores, title, group_levels, outfile,
 ## 8) 生成 Batch1 / Batch2 图
 ## ----------------------------------------------------------
 fig3_b1 <- score_sets(
-  count1_sym, meta_b1, sets,
+  score_normalized_b1$expr, meta_b1, sets,
   group_levels = c("Ctrl", "cRV", "early_dRV", "late_dRV"),
   has_sex = FALSE
 )
@@ -375,7 +384,7 @@ p3A <- plot_scores_faceted(
 )
 
 fig3_b2 <- score_sets(
-  count2_sym, meta_b2, sets,
+  score_normalized_b2$expr, meta_b2, sets,
   group_levels = c("Ctrl", "cRV", "dRV"),
   has_sex = TRUE
 )
@@ -484,6 +493,30 @@ writeData(
 addWorksheet(wb, "sessionInfo")
 writeData(wb, "sessionInfo", capture.output(sessionInfo()))
 
-saveWorkbook(wb, file.path(out_dir, "Fig3_source_data.xlsx"), overwrite = TRUE)
+addWorksheet(wb,"Scoring_gene_audit");writeData(wb,"Scoring_gene_audit",dplyr::bind_rows(score_gene_audit))
+addWorksheet(wb,"Batch1_size_factors");writeData(wb,"Batch1_size_factors",score_normalized_b1$size_factors)
+addWorksheet(wb,"Batch2_size_factors");writeData(wb,"Batch2_size_factors",score_normalized_b2$size_factors)
+addWorksheet(wb,"Score_definition");writeData(wb,"Score_definition",data.frame(
+ Definition=c("Raw gene counts summed by symbol; each batch normalized separately with DESeq2 poscounts size factors",
+ "log2(normalized counts+1); gene-wise Z across all samples within batch; no cross-batch pooling",
+ "Mean Z multiplied by discovery direction: LV-only LV effect; RV-only and Shared RV effect",
+ "Missing or zero-variance genes excluded, not replaced with zero; coverage exported",
+ "Unsigned scores and separate direction-aligned up/down components retained for sensitivity comparison")))
+
+score_stats<-score_statistics(fig3_b1,fig3_b2,dplyr::bind_rows(score_gene_audit))
+for(nm in c('trends','paired','sex','sex_by_stage','sex_interaction','coverage','methods')){
+ sn<-paste0('Stats_',nm);addWorksheet(wb,sn);writeData(wb,sn,score_stats[[nm]])
+}
+for(batch in c('Batch1','Batch2')){
+ d<-if(batch=='Batch1')fig3_b1 else fig3_b2;inf<-score_group_inference(d)
+ for(nm in c('contrasts','groups')){sn<-paste0(batch,'_',nm);addWorksheet(wb,sn);writeData(wb,sn,inf[[nm]])}
+}
+write.csv(score_stats$trends,file.path(out_dir,'Stage_trends.csv'),row.names=FALSE)
+write.csv(score_stats$paired,file.path(out_dir,'Shared_vs_other_trends.csv'),row.names=FALSE)
+write.csv(score_stats$sex,file.path(out_dir,'Sex_effects.csv'),row.names=FALSE)
+write.csv(score_stats$sex_interaction,file.path(out_dir,'Sex_stage_interactions.csv'),row.names=FALSE)
+write.csv(score_stats$coverage,file.path(out_dir,'Scoring_coverage.csv'),row.names=FALSE)
+
+saveWorkbook(wb, file.path(out_dir, "Figure3_source_data.xlsx"), overwrite = TRUE)
 
 message("✅ Figure 3 finished. Outputs saved to: ", out_dir)

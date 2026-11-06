@@ -1,0 +1,6 @@
+"Model","Genes","Testable","FDR05","Strict","Strict_up","Strict_down"
+"SE15_Group",25894,25888,10328,6620,6120,500
+"SE15_Sex_Group",25894,25382,7639,4734,4277,457
+"PE25_Group",20450,7366,0,0,0,0
+"PE25_Sex_Group",20450,15265,9,3,1,2
+"Joint40_Batch_Sex",27090,20246,2084,855,804,51

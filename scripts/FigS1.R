@@ -100,7 +100,7 @@ read_set <- function(sheet, set_name) {
     stop("Unexpected columns in Figure 1 sheet: ", sheet)
   }
   x %>%
-    transmute(
+    dplyr::transmute(
       Gene = toupper(trimws(as.character(.data[[gene_col]]))),
       Set = set_name,
       lfc_lv = suppressWarnings(as.numeric(lfc_lv)),
@@ -108,21 +108,21 @@ read_set <- function(sheet, set_name) {
       lfc_rv = suppressWarnings(as.numeric(lfc_rv)),
       padj_rv = suppressWarnings(as.numeric(padj_rv))
     ) %>%
-    filter(!is.na(Gene), Gene != "", is.finite(lfc_lv), is.finite(lfc_rv)) %>%
-    distinct(Gene, .keep_all = TRUE)
+    dplyr::filter(!is.na(Gene), Gene != "", is.finite(lfc_lv), is.finite(lfc_rv)) %>%
+    dplyr::distinct(Gene, .keep_all = TRUE)
 }
 
-only_genes <- bind_rows(
+only_genes <- dplyr::bind_rows(
   read_set("LV_only_genes", "LV-only"),
   read_set("RV_only_genes", "RV-only")
 ) %>%
-  mutate(
+  dplyr::mutate(
     Set = factor(Set, levels = c("LV-only", "RV-only")),
-    significant_log2FC = if_else(Set == "LV-only", lfc_lv, lfc_rv),
-    counterpart_log2FC = if_else(Set == "LV-only", lfc_rv, lfc_lv),
-    counterpart_padj = if_else(Set == "LV-only", padj_rv, padj_lv),
+    significant_log2FC = dplyr::if_else(Set == "LV-only", lfc_lv, lfc_rv),
+    counterpart_log2FC = dplyr::if_else(Set == "LV-only", lfc_rv, lfc_lv),
+    counterpart_padj = dplyr::if_else(Set == "LV-only", padj_rv, padj_lv),
     signed_counterpart_log2FC = counterpart_log2FC * sign(significant_log2FC),
-    counterpart_direction = if_else(
+    counterpart_direction = dplyr::if_else(
       signed_counterpart_log2FC >= 0,
       "Concordant", "Discordant"
     ),
@@ -138,29 +138,29 @@ if (any(only_genes$counterpart_meets_full_threshold, na.rm = TRUE)) {
 }
 
 direction_summary <- only_genes %>%
-  count(Set, counterpart_direction, name = "n") %>%
-  group_by(Set) %>%
-  mutate(
+  dplyr::count(Set, counterpart_direction, name = "n") %>%
+  dplyr::group_by(Set) %>%
+  dplyr::mutate(
     total = sum(n),
     proportion = n / total,
     percent = 100 * proportion
   ) %>%
-  ungroup()
+  dplyr::ungroup()
 
 annotation_df <- direction_summary %>%
-  filter(counterpart_direction == "Concordant") %>%
-  transmute(
+  dplyr::filter(counterpart_direction == "Concordant") %>%
+  dplyr::transmute(
     Set,
     label = paste0(round(percent, 1), "% concordant")
   )
 
 # Label a small number of the most reproducibly large concordant effects.
 label_df <- only_genes %>%
-  filter(counterpart_direction == "Concordant") %>%
-  mutate(label_score = abs(lfc_lv) + abs(lfc_rv)) %>%
-  group_by(Set) %>%
-  slice_max(label_score, n = 5, with_ties = FALSE) %>%
-  ungroup()
+  dplyr::filter(counterpart_direction == "Concordant") %>%
+  dplyr::mutate(label_score = abs(lfc_lv) + abs(lfc_rv)) %>%
+  dplyr::group_by(Set) %>%
+  dplyr::slice_max(label_score, n = 5, with_ties = FALSE) %>%
+  dplyr::ungroup()
 
 # ---------- 2. Panel A: effect-size scatter restricted to only genes ----------
 pA <- ggplot(only_genes, aes(lfc_lv, lfc_rv, color = Set)) +
@@ -230,7 +230,7 @@ pC <- ggplot(
 ) +
   geom_col(width = 0.66, color = "black", linewidth = 0.3) +
   geom_text(
-    aes(label = if_else(percent >= 5, paste0(round(percent, 1), "%"), "")),
+    aes(label = dplyr::if_else(percent >= 5, paste0(round(percent, 1), "%"), "")),
     position = position_stack(vjust = 0.5),
     color = "white",
     fontface = "bold",

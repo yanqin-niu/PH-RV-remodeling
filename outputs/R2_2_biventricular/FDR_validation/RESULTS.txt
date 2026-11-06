@@ -1,0 +1,18 @@
+                                     Metric   N
+1                    Discovery Shared total 108
+2                 Present in external table 102
+3               Expression-eligible in both 102
+4      FDR evaluable in both among eligible  80
+5   Both direction match (no FDR threshold)  99
+6                            LV FDR support  20
+7                            RV FDR support  65
+8                          Both FDR support  19
+9      Both FDR support plus abs(log2FC)>=1  14
+10 FDR significant opposite direction in LV   0
+11 FDR significant opposite direction in RV   0
+            Class  N
+1   Both chambers 19
+2         LV only  1
+3         RV only 39
+4 Neither chamber 21
+5 FDR unavailable 22

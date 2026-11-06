@@ -1,0 +1,295 @@
+{
+  "n_anchor_candidates": 108,
+  "n_primary_signature": 35,
+  "mapping_status_candidates": {
+    "one_to_one": 101,
+    "unmapped": 7
+  },
+  "mapping_status_primary_signature": {
+    "one_to_one": 35
+  },
+  "primary_signature_human_support_counts": {
+    "0": 13,
+    "1": 16,
+    "2": 6
+  },
+  "mapped_6of8": {
+    "n": 35,
+    "retained_original": 35,
+    "lost_original": [],
+    "added": []
+  },
+  "study_any_6of7": {
+    "n": 15,
+    "retained_original": 15,
+    "lost_original": [
+      "ADRA1D",
+      "ANKRD23",
+      "CILP",
+      "EMB",
+      "FHAD1",
+      "FXYD5",
+      "LBP",
+      "LOXL1",
+      "MYBPC2",
+      "NCAM1",
+      "PLOD2",
+      "POSTN",
+      "PRSS35",
+      "RAMP3",
+      "SFRP1",
+      "STC2",
+      "TMEM119",
+      "TMOD4",
+      "TRH",
+      "TUBB3"
+    ],
+    "added": []
+  },
+  "study_both_6of7": {
+    "n": 14,
+    "retained_original": 14,
+    "lost_original": [
+      "ADRA1D",
+      "ANKRD23",
+      "CILP",
+      "EMB",
+      "FHAD1",
+      "FXYD5",
+      "LBP",
+      "LOXL1",
+      "MYBPC2",
+      "NCAM1",
+      "PLOD2",
+      "POSTN",
+      "PRSS35",
+      "RAMP3",
+      "SFRP1",
+      "SLC6A6",
+      "STC2",
+      "TMEM119",
+      "TMOD4",
+      "TRH",
+      "TUBB3"
+    ],
+    "added": []
+  },
+  "study_any_5of7": {
+    "n": 38,
+    "retained_original": 35,
+    "lost_original": [],
+    "added": [
+      "BGN",
+      "CCDC136",
+      "IFITM1"
+    ]
+  },
+  "omit_both_MCT_5of6": {
+    "n": 17,
+    "retained_original": 15,
+    "lost_original": [
+      "ADRA1D",
+      "ANKRD23",
+      "CILP",
+      "EMB",
+      "FHAD1",
+      "FXYD5",
+      "LBP",
+      "LOXL1",
+      "MYBPC2",
+      "NCAM1",
+      "PLOD2",
+      "POSTN",
+      "PRSS35",
+      "RAMP3",
+      "SFRP1",
+      "STC2",
+      "TMEM119",
+      "TMOD4",
+      "TRH",
+      "TUBB3"
+    ],
+    "added": [
+      "BGN",
+      "IFITM1"
+    ]
+  },
+  "batch_sample_counts": [
+    26,
+    27
+  ],
+  "batch_shared_column_ids": [],
+  "orthology_file_sha256": "0457710d21b40d6226e0f31a772580f9d2fc3fc98bd8e58470a0d3d5edec2207",
+  "source": "https://download.rgd.mcw.edu/pub/data_release/RAT/ORTHOLOGS_RAT.txt"
+}
+Saved supplementary workbook
+C:\Users\Administrator\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\site-packages\openpyxl\styles\stylesheet.py:237: UserWarning: Workbook contains no default style, apply openpyxl's default
+  warn("Workbook contains no default style, apply openpyxl's default")
+[
+  {
+    "Level": "Accession",
+    "Aggregation": "all",
+    "Threshold": ">=5/7",
+    "Interpretation": "Fixed denominator selection sensitivity",
+    "Selected": 37,
+    "Retained_primary": 35,
+    "Lost": "",
+    "Added": "BGN;IFITM1",
+    "Genes": "ADRA1D;ANKRD23;BGN;CENPA;CILP;COL8A1;CRLF1;CTHRC1;EMB;FHAD1;FN1;FXYD5;IFITM1;INHBB;LBP;LOXL1;LOXL2;MYBPC2;NCAM1;PLOD2;POSTN;PRG4;PRSS35;RAMP3;SCN3B;SFRP1;SLC6A6;SRPX2;STC2;THBS4;TIMP1;TMEM100;TMEM119;TMOD4;TRH;TUBB3;UCHL1"
+  },
+  {
+    "Level": "Accession",
+    "Aggregation": "all",
+    "Threshold": ">=6/7",
+    "Interpretation": "Fixed denominator selection sensitivity",
+    "Selected": 14,
+    "Retained_primary": 14,
+    "Lost": "ADRA1D;ANKRD23;CILP;EMB;FHAD1;FXYD5;LBP;LOXL1;MYBPC2;NCAM1;PLOD2;POSTN;PRSS35;RAMP3;SFRP1;SLC6A6;STC2;TMEM119;TMOD4;TRH;TUBB3",
+    "Added": "",
+    "Genes": "CENPA;COL8A1;CRLF1;CTHRC1;FN1;INHBB;LOXL2;PRG4;SCN3B;SRPX2;THBS4;TIMP1;TMEM100;UCHL1"
+  },
+  {
+    "Level": "Accession",
+    "Aggregation": "any",
+    "Threshold": ">=5/7",
+    "Interpretation": "Fixed denominator selection sensitivity",
+    "Selected": 38,
+    "Retained_primary": 35,
+    "Lost": "",
+    "Added": "BGN;CCDC136;IFITM1",
+    "Genes": "ADRA1D;ANKRD23;BGN;CCDC136;CENPA;CILP;COL8A1;CRLF1;CTHRC1;EMB;FHAD1;FN1;FXYD5;IFITM1;INHBB;LBP;LOXL1;LOXL2;MYBPC2;NCAM1;PLOD2;POSTN;PRG4;PRSS35;RAMP3;SCN3B;SFRP1;SLC6A6;SRPX2;STC2;THBS4;TIMP1;TMEM100;TMEM119;TMOD4;TRH;TUBB3;UCHL1"
+  },
+  {
+    "Level": "Accession",
+    "Aggregation": "any",
+    "Threshold": ">=6/7",
+    "Interpretation": "Fixed denominator selection sensitivity",
+    "Selected": 15,
+    "Retained_primary": 15,
+    "Lost": "ADRA1D;ANKRD23;CILP;EMB;FHAD1;FXYD5;LBP;LOXL1;MYBPC2;NCAM1;PLOD2;POSTN;PRSS35;RAMP3;SFRP1;STC2;TMEM119;TMOD4;TRH;TUBB3",
+    "Added": "",
+    "Genes": "CENPA;COL8A1;CRLF1;CTHRC1;FN1;INHBB;LOXL2;PRG4;SCN3B;SLC6A6;SRPX2;THBS4;TIMP1;TMEM100;UCHL1"
+  },
+  {
+    "Level": "Animal_model",
+    "Aggregation": "all",
+    "Threshold": ">=3/4",
+    "Interpretation": "Descriptive model breadth, not replacement panel",
+    "Selected": 43,
+    "Retained_primary": 34,
+    "Lost": "SLC6A6",
+    "Added": "ACE;CLEC10A;CLEC7A;FLRT2;GPNMB;LRRC3B;MRC1;OLR1;SLAMF9",
+    "Genes": "ACE;ADRA1D;ANKRD23;CENPA;CILP;CLEC10A;CLEC7A;COL8A1;CRLF1;CTHRC1;EMB;FHAD1;FLRT2;FN1;FXYD5;GPNMB;INHBB;LBP;LOXL1;LOXL2;LRRC3B;MRC1;MYBPC2;NCAM1;OLR1;PLOD2;POSTN;PRG4;PRSS35;RAMP3;SCN3B;SFRP1;SLAMF9;SRPX2;STC2;THBS4;TIMP1;TMEM100;TMEM119;TMOD4;TRH;TUBB3;UCHL1"
+  },
+  {
+    "Level": "Animal_model",
+    "Aggregation": "any",
+    "Threshold": ">=3/4",
+    "Interpretation": "Descriptive model breadth, not replacement panel",
+    "Selected": 59,
+    "Retained_primary": 35,
+    "Lost": "",
+    "Added": "ACE;ADGRA1;ANXA2;BGN;CCDC136;CLEC10A;CLEC7A;FAM131C;FGF16;FLRT2;FSTL1;GPNMB;IFITM1;IGFBP6;LRRC3B;MFAP5;MGC105649;MRC1;OLR1;PFKP;REG3B;RGD1311744;S100A4;SLAMF9",
+    "Genes": "ACE;ADGRA1;ADRA1D;ANKRD23;ANXA2;BGN;CCDC136;CENPA;CILP;CLEC10A;CLEC7A;COL8A1;CRLF1;CTHRC1;EMB;FAM131C;FGF16;FHAD1;FLRT2;FN1;FSTL1;FXYD5;GPNMB;IFITM1;IGFBP6;INHBB;LBP;LOXL1;LOXL2;LRRC3B;MFAP5;MGC105649;MRC1;MYBPC2;NCAM1;OLR1;PFKP;PLOD2;POSTN;PRG4;PRSS35;RAMP3;REG3B;RGD1311744;S100A4;SCN3B;SFRP1;SLAMF9;SLC6A6;SRPX2;STC2;THBS4;TIMP1;TMEM100;TMEM119;TMOD4;TRH;TUBB3;UCHL1"
+  },
+  {
+    "Level": "Cohort",
+    "Aggregation": "any",
+    "Threshold": ">=6/8",
+    "Interpretation": "Fixed denominator selection sensitivity",
+    "Selected": 35,
+    "Retained_primary": 35,
+    "Lost": "",
+    "Added": "",
+    "Genes": "ADRA1D;ANKRD23;CENPA;CILP;COL8A1;CRLF1;CTHRC1;EMB;FHAD1;FN1;FXYD5;INHBB;LBP;LOXL1;LOXL2;MYBPC2;NCAM1;PLOD2;POSTN;PRG4;PRSS35;RAMP3;SCN3B;SFRP1;SLC6A6;SRPX2;STC2;THBS4;TIMP1;TMEM100;TMEM119;TMOD4;TRH;TUBB3;UCHL1"
+  },
+  {
+    "Level": "Omit_GSE198618_normalized",
+    "Aggregation": "any",
+    "Threshold": ">=5/7",
+    "Interpretation": "Fixed denominator selection sensitivity",
+    "Selected": 44,
+    "Retained_primary": 35,
+    "Lost": "",
+    "Added": "ACE;CLEC10A;CLEC7A;FLRT2;GPNMB;LRRC3B;MRC1;OLR1;SLAMF9",
+    "Genes": "ACE;ADRA1D;ANKRD23;CENPA;CILP;CLEC10A;CLEC7A;COL8A1;CRLF1;CTHRC1;EMB;FHAD1;FLRT2;FN1;FXYD5;GPNMB;INHBB;LBP;LOXL1;LOXL2;LRRC3B;MRC1;MYBPC2;NCAM1;OLR1;PLOD2;POSTN;PRG4;PRSS35;RAMP3;SCN3B;SFRP1;SLAMF9;SLC6A6;SRPX2;STC2;THBS4;TIMP1;TMEM100;TMEM119;TMOD4;TRH;TUBB3;UCHL1"
+  },
+  {
+    "Level": "Omit_GSE198618_normalized",
+    "Aggregation": "any",
+    "Threshold": ">=6/7",
+    "Interpretation": "Fixed denominator selection sensitivity",
+    "Selected": 28,
+    "Retained_primary": 28,
+    "Lost": "FXYD5;LOXL1;PLOD2;POSTN;RAMP3;SLC6A6;TUBB3",
+    "Added": "",
+    "Genes": "ADRA1D;ANKRD23;CENPA;CILP;COL8A1;CRLF1;CTHRC1;EMB;FHAD1;FN1;INHBB;LBP;LOXL2;MYBPC2;NCAM1;PRG4;PRSS35;SCN3B;SFRP1;SRPX2;STC2;THBS4;TIMP1;TMEM100;TMEM119;TMOD4;TRH;UCHL1"
+  },
+  {
+    "Level": "Omit_both_GSE240923",
+    "Aggregation": "any",
+    "Threshold": ">=4/6",
+    "Interpretation": "Fixed denominator selection sensitivity",
+    "Selected": 43,
+    "Retained_primary": 35,
+    "Lost": "",
+    "Added": "ANXA2;BASP1;BGN;CCDC136;ENO2;IFITM1;IGFBP6;MFAP5",
+    "Genes": "ADRA1D;ANKRD23;ANXA2;BASP1;BGN;CCDC136;CENPA;CILP;COL8A1;CRLF1;CTHRC1;EMB;ENO2;FHAD1;FN1;FXYD5;IFITM1;IGFBP6;INHBB;LBP;LOXL1;LOXL2;MFAP5;MYBPC2;NCAM1;PLOD2;POSTN;PRG4;PRSS35;RAMP3;SCN3B;SFRP1;SLC6A6;SRPX2;STC2;THBS4;TIMP1;TMEM100;TMEM119;TMOD4;TRH;TUBB3;UCHL1"
+  },
+  {
+    "Level": "Omit_both_GSE240923",
+    "Aggregation": "any",
+    "Threshold": ">=5/6",
+    "Interpretation": "Fixed denominator selection sensitivity",
+    "Selected": 17,
+    "Retained_primary": 15,
+    "Lost": "ADRA1D;ANKRD23;CILP;EMB;FHAD1;FXYD5;LBP;LOXL1;MYBPC2;NCAM1;PLOD2;POSTN;PRSS35;RAMP3;SFRP1;STC2;TMEM119;TMOD4;TRH;TUBB3",
+    "Added": "BGN;IFITM1",
+    "Genes": "BGN;CENPA;COL8A1;CRLF1;CTHRC1;FN1;IFITM1;INHBB;LOXL2;PRG4;SCN3B;SLC6A6;SRPX2;THBS4;TIMP1;TMEM100;UCHL1"
+  },
+  {
+    "Level": "Publication",
+    "Aggregation": "all",
+    "Threshold": ">=3/5",
+    "Interpretation": "Fixed denominator selection sensitivity",
+    "Selected": 58,
+    "Retained_primary": 35,
+    "Lost": "",
+    "Added": "ANXA2;BASP1;BGN;C1QA;C1QC;CCDC136;CMBL;COL5A2;ENO2;FAM131C;FCER1G;FSTL1;IFITM1;IGFBP6;LAMA5;MFAP5;MGC105649;PFKP;RGD1311744;RT1-DB1;S100A4;TMEM25;VWA1",
+    "Genes": "ADRA1D;ANKRD23;ANXA2;BASP1;BGN;C1QA;C1QC;CCDC136;CENPA;CILP;CMBL;COL5A2;COL8A1;CRLF1;CTHRC1;EMB;ENO2;FAM131C;FCER1G;FHAD1;FN1;FSTL1;FXYD5;IFITM1;IGFBP6;INHBB;LAMA5;LBP;LOXL1;LOXL2;MFAP5;MGC105649;MYBPC2;NCAM1;PFKP;PLOD2;POSTN;PRG4;PRSS35;RAMP3;RGD1311744;RT1-DB1;S100A4;SCN3B;SFRP1;SLC6A6;SRPX2;STC2;THBS4;TIMP1;TMEM100;TMEM119;TMEM25;TMOD4;TRH;TUBB3;UCHL1;VWA1"
+  },
+  {
+    "Level": "Publication",
+    "Aggregation": "all",
+    "Threshold": ">=4/5",
+    "Interpretation": "Fixed denominator selection sensitivity",
+    "Selected": 22,
+    "Retained_primary": 17,
+    "Lost": "ADRA1D;ANKRD23;CILP;EMB;FHAD1;LBP;MYBPC2;NCAM1;POSTN;PRSS35;RAMP3;SFRP1;SLC6A6;STC2;TMEM119;TMOD4;TRH;TUBB3",
+    "Added": "ANXA2;BGN;IFITM1;IGFBP6;MFAP5",
+    "Genes": "ANXA2;BGN;CENPA;COL8A1;CRLF1;CTHRC1;FN1;FXYD5;IFITM1;IGFBP6;INHBB;LOXL1;LOXL2;MFAP5;PLOD2;PRG4;SCN3B;SRPX2;THBS4;TIMP1;TMEM100;UCHL1"
+  },
+  {
+    "Level": "Publication",
+    "Aggregation": "any",
+    "Threshold": ">=3/5",
+    "Interpretation": "Fixed denominator selection sensitivity",
+    "Selected": 85,
+    "Retained_primary": 35,
+    "Lost": "",
+    "Added": "ACE;ADGRA1;ANXA2;AVPI1;BASP1;BGN;C1QA;C1QC;CCDC136;CCN5;CD163;CLEC10A;CLEC7A;CMBL;COL5A2;CTSS;CX3CR1;CYBB;EMC9;ENO2;FAM131C;FCER1G;FGF16;FKBP4;FLRT2;FSTL1;GPNMB;IFITM1;IGFBP6;LAMA5;LRRC3B;MFAP5;MGC105649;MRC1;OLR1;PFKP;PLA1A;PRC1;PTPRO;REG3B;RGD1311744;RT1-DB1;S100A4;SLAMF9;TGM1;TLR8;TMEM25;VSIR;VWA1;ZDHHC9",
+    "Genes": "ACE;ADGRA1;ADRA1D;ANKRD23;ANXA2;AVPI1;BASP1;BGN;C1QA;C1QC;CCDC136;CCN5;CD163;CENPA;CILP;CLEC10A;CLEC7A;CMBL;COL5A2;COL8A1;CRLF1;CTHRC1;CTSS;CX3CR1;CYBB;EMB;EMC9;ENO2;FAM131C;FCER1G;FGF16;FHAD1;FKBP4;FLRT2;FN1;FSTL1;FXYD5;GPNMB;IFITM1;IGFBP6;INHBB;LAMA5;LBP;LOXL1;LOXL2;LRRC3B;MFAP5;MGC105649;MRC1;MYBPC2;NCAM1;OLR1;PFKP;PLA1A;PLOD2;POSTN;PRC1;PRG4;PRSS35;PTPRO;RAMP3;REG3B;RGD1311744;RT1-DB1;S100A4;SCN3B;SFRP1;SLAMF9;SLC6A6;SRPX2;STC2;TGM1;THBS4;TIMP1;TLR8;TMEM100;TMEM119;TMEM25;TMOD4;TRH;TUBB3;UCHL1;VSIR;VWA1;ZDHHC9"
+  },
+  {
+    "Level": "Publication",
+    "Aggregation": "any",
+    "Threshold": ">=4/5",
+    "Interpretation": "Fixed denominator selection sensitivity",
+    "Selected": 48,
+    "Retained_primary": 34,
+    "Lost": "FHAD1",
+    "Added": "ANXA2;BASP1;BGN;CCDC136;CMBL;ENO2;FCER1G;IFITM1;IGFBP6;MFAP5;PFKP;S100A4;TMEM25;VWA1",
+    "Genes": "ADRA1D;ANKRD23;ANXA2;BASP1;BGN;CCDC136;CENPA;CILP;CMBL;COL8A1;CRLF1;CTHRC1;EMB;ENO2;FCER1G;FN1;FXYD5;IFITM1;IGFBP6;INHBB;LBP;LOXL1;LOXL2;MFAP5;MYBPC2;NCAM1;PFKP;PLOD2;POSTN;PRG4;PRSS35;RAMP3;S100A4;SCN3B;SFRP1;SLC6A6;SRPX2;STC2;THBS4;TIMP1;TMEM100;TMEM119;TMEM25;TMOD4;TRH;TUBB3;UCHL1;VWA1"
+  }
+]
+Input samples 179 GSE240923 controls 10 8

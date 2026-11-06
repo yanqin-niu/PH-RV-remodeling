@@ -1,0 +1,146 @@
+New names:
+• `` -> `...1`
+• `` -> `...2`
+• `` -> `...3`
+• `` -> `...4`
+• `` -> `...5`
+• `` -> `...6`
+• `` -> `...7`
+• `` -> `...8`
+• `` -> `...9`
+• `` -> `...10`
+• `` -> `...11`
+• `` -> `...12`
+• `` -> `...13`
+• `` -> `...14`
+• `` -> `...15`
+• `` -> `...16`
+• `` -> `...17`
+• `` -> `...18`
+• `` -> `...19`
+• `` -> `...20`
+• `` -> `...21`
+• `` -> `...22`
+• `` -> `...23`
+• `` -> `...24`
+• `` -> `...25`
+• `` -> `...26`
+• `` -> `...27`
+• `` -> `...28`
+• `` -> `...29`
+• `` -> `...30`
+• `` -> `...31`
+• `` -> `...32`
+• `` -> `...33`
+• `` -> `...34`
+• `` -> `...35`
+• `` -> `...36`
+• `` -> `...37`
+• `` -> `...38`
+PREFILTER GSE133402 all12: 23551 -> 16715 features; 12 cohort columns; rowSums>=10
+PREFILTER GSE133402 LV: 16715 -> 15608 features; 6 cohort columns; rowSums>=10
+converting counts to integer mode
+PREFILTER GSE133402 RV: 16715 -> 15995 features; 6 cohort columns; rowSums>=10
+converting counts to integer mode
+converting counts to integer mode
+  the design formula contains one or more numeric variables with integer values,
+  specifying a model with increasing fold change for higher values.
+  did you mean for this to be a factor? if so, first convert
+  this variable to a factor using the factor() function
+Finished: E:\百度云同步盘\右心生信分析\PH-RV-remodeling\PH-RV-remodeling_new/outputs/R2_2_biventricular
+FDR validation finished: E:\百度云同步盘\右心生信分析\PH-RV-remodeling\PH-RV-remodeling_new/outputs/R2_2_biventricular/FDR_validation
+Warning messages:
+1: package 'ggplot2' was built under R version 4.5.3 
+2: package 'patchwork' was built under R version 4.5.3 
+3: package 'dplyr' was built under R version 4.5.3 
+4: package 'tidyr' was built under R version 4.5.3 
+5: package 'stringr' was built under R version 4.5.1 
+New names:
+• `` -> `...1`
+• `` -> `...2`
+• `` -> `...3`
+• `` -> `...4`
+• `` -> `...5`
+• `` -> `...6`
+• `` -> `...7`
+• `` -> `...8`
+• `` -> `...9`
+• `` -> `...10`
+• `` -> `...11`
+• `` -> `...12`
+• `` -> `...13`
+• `` -> `...14`
+• `` -> `...15`
+• `` -> `...16`
+• `` -> `...17`
+• `` -> `...18`
+• `` -> `...19`
+• `` -> `...20`
+• `` -> `...21`
+• `` -> `...22`
+• `` -> `...23`
+• `` -> `...24`
+• `` -> `...25`
+• `` -> `...26`
+• `` -> `...27`
+• `` -> `...28`
+• `` -> `...29`
+• `` -> `...30`
+• `` -> `...31`
+• `` -> `...32`
+• `` -> `...33`
+• `` -> `...34`
+• `` -> `...35`
+• `` -> `...36`
+• `` -> `...37`
+• `` -> `...38`
+PREFILTER GSE133402 all12: 23551 -> 16715 features; 12 cohort columns; rowSums>=10
+PREFILTER GSE133402 LV: 16715 -> 15608 features; 6 cohort columns; rowSums>=10
+converting counts to integer mode
+PREFILTER GSE133402 RV: 16715 -> 15995 features; 6 cohort columns; rowSums>=10
+converting counts to integer mode
+New names:
+• `` -> `...1`
+• `` -> `...2`
+• `` -> `...3`
+• `` -> `...4`
+• `` -> `...5`
+• `` -> `...6`
+• `` -> `...7`
+• `` -> `...8`
+• `` -> `...9`
+• `` -> `...10`
+• `` -> `...11`
+• `` -> `...12`
+• `` -> `...13`
+• `` -> `...14`
+• `` -> `...15`
+• `` -> `...16`
+• `` -> `...17`
+• `` -> `...18`
+• `` -> `...19`
+• `` -> `...20`
+• `` -> `...21`
+• `` -> `...22`
+• `` -> `...23`
+• `` -> `...24`
+• `` -> `...25`
+• `` -> `...26`
+• `` -> `...27`
+• `` -> `...28`
+• `` -> `...29`
+• `` -> `...30`
+• `` -> `...31`
+• `` -> `...32`
+• `` -> `...33`
+• `` -> `...34`
+• `` -> `...35`
+• `` -> `...36`
+• `` -> `...37`
+• `` -> `...38`
+PREFILTER GSE133402 all12: 23551 -> 16715 features; 12 cohort columns; rowSums>=10
+converting counts to integer mode
+Warning message:
+In DESeqDataSet(se, design = design, ignoreRank) :
+  some variables in design formula are characters, converting to factors
+Figure S4 finished: E:\百度云同步盘\右心生信分析\PH-RV-remodeling\PH-RV-remodeling_new/outputs/FigS4_outputs

@@ -62,6 +62,7 @@ get_script_dir <- function() {
 }
 
 script_dir   <- get_script_dir()
+source(file.path(script_dir,'12_count_filter_helpers.R'))
 project_dir  <- normalizePath(file.path(script_dir, ".."))
 raw_dir      <- file.path(project_dir, "data", "raw")
 processed_dir <- file.path(project_dir, "data", "processed")
@@ -134,8 +135,8 @@ clean_sym <- function(x) {
 }
 
 deg_count <- function(res, alpha = 0.05, lfc_thr = 1) {
-  up   <- sum(res$log2FoldChange >  lfc_thr & res$padj < alpha, na.rm = TRUE)
-  down <- sum(res$log2FoldChange < -lfc_thr & res$padj < alpha, na.rm = TRUE)
+  up   <- sum(res$log2FoldChange >=  lfc_thr & res$padj < alpha, na.rm = TRUE)
+  down <- sum(res$log2FoldChange <= -lfc_thr & res$padj < alpha, na.rm = TRUE)
   data.frame(Up = up, Down = down, Total = up + down)
 }
 
@@ -212,7 +213,7 @@ rownames(coldata) <- samples
 # ---------- Low-count filter ----------
 # filter low-count genes to improve DESeq2 estimation
 keep <- rowSums(expr_mat) >= 10
-expr_mat <- expr_mat[keep, , drop = FALSE]
+expr_mat <- prefilter_counts(expr_mat[keep, , drop = FALSE],"GSE266139 all20")
 gene_annot <- gene_annot[match(rownames(expr_mat), gene_annot$Geneid), , drop = FALSE]
 
 cat("After low-count filter:", dim(expr_mat)[1], "genes x", dim(expr_mat)[2], "samples\n")
@@ -318,8 +319,8 @@ m$set <- factor(m$set, levels = c("NS", "Shared", "LV-only", "RV-only", "Opposit
 # keep original display logic but compute correlation from observed values only
 cor_df <- m %>%
   dplyr::mutate(
-    lfc_lv_plot = ifelse(is.na(lfc_lv), 0, lfc_lv),
-    lfc_rv_plot = ifelse(is.na(lfc_rv), 0, lfc_rv)
+    lfc_lv_plot = lfc_lv,
+    lfc_rv_plot = lfc_rv
   )
 
 cor_val <- cor(m$lfc_lv, m$lfc_rv, use = "pairwise.complete.obs", method = "pearson")

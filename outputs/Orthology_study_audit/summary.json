@@ -1,0 +1,124 @@
+{
+  "n_anchor_candidates": 108,
+  "n_primary_signature": 35,
+  "mapping_status_candidates": {
+    "one_to_one": 101,
+    "unmapped": 7
+  },
+  "mapping_status_primary_signature": {
+    "one_to_one": 35
+  },
+  "primary_signature_human_support_counts": {
+    "0": 13,
+    "1": 16,
+    "2": 6
+  },
+  "mapped_6of8": {
+    "n": 35,
+    "retained_original": 35,
+    "lost_original": [],
+    "added": []
+  },
+  "study_any_6of7": {
+    "n": 15,
+    "retained_original": 15,
+    "lost_original": [
+      "ADRA1D",
+      "ANKRD23",
+      "CILP",
+      "EMB",
+      "FHAD1",
+      "FXYD5",
+      "LBP",
+      "LOXL1",
+      "MYBPC2",
+      "NCAM1",
+      "PLOD2",
+      "POSTN",
+      "PRSS35",
+      "RAMP3",
+      "SFRP1",
+      "STC2",
+      "TMEM119",
+      "TMOD4",
+      "TRH",
+      "TUBB3"
+    ],
+    "added": []
+  },
+  "study_both_6of7": {
+    "n": 14,
+    "retained_original": 14,
+    "lost_original": [
+      "ADRA1D",
+      "ANKRD23",
+      "CILP",
+      "EMB",
+      "FHAD1",
+      "FXYD5",
+      "LBP",
+      "LOXL1",
+      "MYBPC2",
+      "NCAM1",
+      "PLOD2",
+      "POSTN",
+      "PRSS35",
+      "RAMP3",
+      "SFRP1",
+      "SLC6A6",
+      "STC2",
+      "TMEM119",
+      "TMOD4",
+      "TRH",
+      "TUBB3"
+    ],
+    "added": []
+  },
+  "study_any_5of7": {
+    "n": 38,
+    "retained_original": 35,
+    "lost_original": [],
+    "added": [
+      "BGN",
+      "CCDC136",
+      "IFITM1"
+    ]
+  },
+  "omit_both_MCT_5of6": {
+    "n": 17,
+    "retained_original": 15,
+    "lost_original": [
+      "ADRA1D",
+      "ANKRD23",
+      "CILP",
+      "EMB",
+      "FHAD1",
+      "FXYD5",
+      "LBP",
+      "LOXL1",
+      "MYBPC2",
+      "NCAM1",
+      "PLOD2",
+      "POSTN",
+      "PRSS35",
+      "RAMP3",
+      "SFRP1",
+      "STC2",
+      "TMEM119",
+      "TMOD4",
+      "TRH",
+      "TUBB3"
+    ],
+    "added": [
+      "BGN",
+      "IFITM1"
+    ]
+  },
+  "batch_sample_counts": [
+    26,
+    27
+  ],
+  "batch_shared_column_ids": [],
+  "orthology_file_sha256": "0457710d21b40d6226e0f31a772580f9d2fc3fc98bd8e58470a0d3d5edec2207",
+  "source": "https://download.rgd.mcw.edu/pub/data_release/RAT/ORTHOLOGS_RAT.txt"
+}

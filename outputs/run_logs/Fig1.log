@@ -1,0 +1,52 @@
+Warning messages:
+1: package 'ggplot2' was built under R version 4.5.3 
+2: package 'dplyr' was built under R version 4.5.3 
+3: package 'tidyr' was built under R version 4.5.3 
+4: package 'ggrepel' was built under R version 4.5.3 
+5: package 'patchwork' was built under R version 4.5.3 
+6: package 'pheatmap' was built under R version 4.5.3 
+7: package 'ggplotify' was built under R version 4.5.3 
+8: package 'scales' was built under R version 4.5.3 
+Selected sample columns:
+ [1] "LM_1" "LM_2" "LM_3" "LM_4" "LM_5" "LP_1" "LP_2" "LP_3" "LP_4" "LP_5"
+[11] "RM_1" "RM_2" "RM_3" "RM_4" "RM_5" "RP_1" "RP_2" "RP_3" "RP_4" "RP_5"
+Number of samples: 20 
+NA count per sample column:
+LM_1 LM_2 LM_3 LM_4 LM_5 LP_1 LP_2 LP_3 LP_4 LP_5 RM_1 RM_2 RM_3 RM_4 RM_5 RP_1 
+   0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0 
+RP_2 RP_3 RP_4 RP_5 
+   0    0    0    0 
+Genes with any NA across selected samples: 0 
+Final matrix dimension: 30452 genes x 20 samples
+Any NA left?  FALSE 
+PREFILTER GSE266139 all20: 14970 -> 14970 features; 20 cohort columns; rowSums>=10
+After low-count filter: 14970 genes x 20 samples
+=== DEG counts by contrast (padj < 0.05, |log2FC| >= 1) ===
+  Contrast  Up Down Total
+1   LMvsLP 464  138   602
+  Contrast  Up Down Total
+1   RMvsRP 136   26   162
+  Contrast Up Down Total
+1   RPvsLP 55   42    97
+  Contrast Up Down Total
+1   RMvsLM  0    0     0
+`geom_smooth()` using formula = 'y ~ x'
+Warning messages:
+1: Removed 480 rows containing non-finite outside the scale range
+(`stat_smooth()`). 
+2: Removed 480 rows containing missing values or values outside the scale range
+(`geom_point()`). 
+`geom_smooth()` using formula = 'y ~ x'
+Warning messages:
+1: Removed 480 rows containing non-finite outside the scale range
+(`stat_smooth()`). 
+2: Removed 480 rows containing missing values or values outside the scale range
+(`geom_point()`). 
+[1] TRUE
+✅ Figure 1 finished. Outputs saved to: E:\百度云同步盘\右心生信分析\PH-RV-remodeling\PH-RV-remodeling_new/outputs/Fig1_outputs
+`geom_smooth()` using formula = 'y ~ x'
+Warning messages:
+1: Removed 480 rows containing non-finite outside the scale range
+(`stat_smooth()`). 
+2: Removed 480 rows containing missing values or values outside the scale range
+(`geom_point()`). 

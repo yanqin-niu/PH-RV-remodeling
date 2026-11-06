@@ -1,0 +1,421 @@
+"Gene","Contrast","baseMean","log2FC","padj","Contrast_group","Contrast_key","discovery_RV_log2FC","effect_available","test_available","direction_product","direction_status","significant"
+"CRLF1","Moderate vs severe pre-PEA RV",9.236138,-0.791337,0.091889,"Within pre-PEA RV","Fig 2c",2.71146257654948,TRUE,TRUE,-0.791337,"Discordant",FALSE
+"CRLF1","Moderate vs intermediate pre-PEA RV",8.93471934187432,-0.724428419177017,0.204392819079643,"Within pre-PEA RV","Fig 2d",2.71146257654948,TRUE,TRUE,-0.724428419177017,"Discordant",FALSE
+"CRLF1","Intermediate vs severe pre-PEA RV",12.411689327424,-0.0564824436567814,0.997685944100342,"Within pre-PEA RV","Fig 2e",2.71146257654948,TRUE,TRUE,-0.0564824436567814,"Discordant",FALSE
+"CRLF1","Moderate pre-PEA RV vs control RV",8.93241229008844,-0.648826985250328,0.164195388079141,"Disease vs control","Fig 3c",2.71146257654948,TRUE,TRUE,-0.648826985250328,"Discordant",FALSE
+"CRLF1","Intermediate pre-PEA RV vs control RV",13.101657164464,0.0701800764398973,0.914258796069185,"Disease vs control","Fig 3d",2.71146257654948,TRUE,TRUE,0.0701800764398973,"Concordant",FALSE
+"CRLF1","Severe pre-PEA RV vs control RV",14.9702233899597,0.11899457930643,0.854354628270248,"Disease vs control","Fig 3e",2.71146257654948,TRUE,TRUE,0.11899457930643,"Concordant",FALSE
+"CRLF1","Pre-PEA septum vs control septum",13.8721782810692,0.0169444973592514,0.988554926675823,"Regional comparison","Fig 4c",2.71146257654948,TRUE,TRUE,0.0169444973592514,"Concordant",FALSE
+"CRLF1","Pre-PEA septum vs pre-PEA RV",5.90568997648083,0.0597722732783164,0.998022197509881,"Regional comparison","Fig 4e",2.71146257654948,TRUE,TRUE,0.0597722732783164,"Concordant",FALSE
+"CRLF1","Post-PEA septum vs pre-PEA RV",5.85432877207073,-0.605430188412649,0.315397726768853,"Post-PEA-associated","Fig 5c",2.71146257654948,TRUE,TRUE,-0.605430188412649,"Discordant",FALSE
+"CRLF1","Post-PEA moderate septum vs pre-PEA moderate RV",5.90468316838509,-0.0901644421478471,0.957872804877181,"Post-PEA-associated","Fig 5d",2.71146257654948,TRUE,TRUE,-0.0901644421478471,"Discordant",FALSE
+"CRLF1","Post-PEA intermediate septum vs pre-PEA intermediate RV",6.42191236597471,-0.785827547302373,0.64751539695144,"Post-PEA-associated","Fig 5e",2.71146257654948,TRUE,TRUE,-0.785827547302373,"Discordant",FALSE
+"CRLF1","Post-PEA severe septum vs pre-PEA severe RV",4.56818154906149,-1.68814368987084,0.277297770874693,"Post-PEA-associated","Fig 5f",2.71146257654948,TRUE,TRUE,-1.68814368987084,"Discordant",FALSE
+"TIMP1","Moderate vs severe pre-PEA RV",36.113212,-0.613746,0.001057,"Within pre-PEA RV","Fig 2c",2.05638684179847,TRUE,TRUE,-0.613746,"Discordant",FALSE
+"TIMP1","Moderate vs intermediate pre-PEA RV",35.93727,-0.6980437,0.0297261,"Within pre-PEA RV","Fig 2d",2.05638684179847,TRUE,TRUE,-0.6980437,"Discordant",FALSE
+"TIMP1","Intermediate vs severe pre-PEA RV",48.09998,0.08720496,0.9952889,"Within pre-PEA RV","Fig 2e",2.05638684179847,TRUE,TRUE,0.08720496,"Concordant",FALSE
+"TIMP1","Moderate pre-PEA RV vs control RV",44.52612,-1.343009,2.803635e-13,"Disease vs control","Fig 3c",2.05638684179847,TRUE,TRUE,-1.343009,"Discordant",TRUE
+"TIMP1","Intermediate pre-PEA RV vs control RV",62.6365377091743,-0.658422483806822,0.0599519252167234,"Disease vs control","Fig 3d",2.05638684179847,TRUE,TRUE,-0.658422483806822,"Discordant",FALSE
+"TIMP1","Severe pre-PEA RV vs control RV",71.447100223655,-0.744513719164627,0.00356002699016315,"Disease vs control","Fig 3e",2.05638684179847,TRUE,TRUE,-0.744513719164627,"Discordant",FALSE
+"TIMP1","Pre-PEA septum vs control septum",68.2776683283517,0.456975728976899,0.368815987418454,"Regional comparison","Fig 4c",2.05638684179847,TRUE,TRUE,0.456975728976899,"Concordant",FALSE
+"TIMP1","Pre-PEA septum vs pre-PEA RV",20.342269679213,0.396089513570738,0.959191978469237,"Regional comparison","Fig 4e",2.05638684179847,TRUE,TRUE,0.396089513570738,"Concordant",FALSE
+"TIMP1","Post-PEA septum vs pre-PEA RV",26.37368,0.2198478,0.5058871,"Post-PEA-associated","Fig 5c",2.05638684179847,TRUE,TRUE,0.2198478,"Concordant",FALSE
+"TIMP1","Post-PEA moderate septum vs pre-PEA moderate RV",28.4681316202034,0.650552847067427,0.147981675347717,"Post-PEA-associated","Fig 5d",2.05638684179847,TRUE,TRUE,0.650552847067427,"Concordant",FALSE
+"TIMP1","Post-PEA intermediate septum vs pre-PEA intermediate RV",25.3733,-0.007654538,0.9957993,"Post-PEA-associated","Fig 5e",2.05638684179847,TRUE,TRUE,-0.007654538,"Discordant",FALSE
+"TIMP1","Post-PEA severe septum vs pre-PEA severe RV",23.77879,-0.4116741,0.6494519,"Post-PEA-associated","Fig 5f",2.05638684179847,TRUE,TRUE,-0.4116741,"Discordant",FALSE
+"THBS4","Moderate vs severe pre-PEA RV",539.82974,-0.590852,0.044652,"Within pre-PEA RV","Fig 2c",3.93832403309806,TRUE,TRUE,-0.590852,"Discordant",FALSE
+"THBS4","Moderate vs intermediate pre-PEA RV",461.6476,-0.2552223,0.5852186,"Within pre-PEA RV","Fig 2d",3.93832403309806,TRUE,TRUE,-0.2552223,"Discordant",FALSE
+"THBS4","Intermediate vs severe pre-PEA RV",609.3288,-0.3354846,0.9471456,"Within pre-PEA RV","Fig 2e",3.93832403309806,TRUE,TRUE,-0.3354846,"Discordant",FALSE
+"THBS4","Moderate pre-PEA RV vs control RV",412.8585,1.260004,1.647009e-06,"Disease vs control","Fig 3c",3.93832403309806,TRUE,TRUE,1.260004,"Concordant",TRUE
+"THBS4","Intermediate pre-PEA RV vs control RV",473.5529,1.50461,7.592134e-11,"Disease vs control","Fig 3d",3.93832403309806,TRUE,TRUE,1.50461,"Concordant",TRUE
+"THBS4","Severe pre-PEA RV vs control RV",633.29947773625,1.83806103605214,2.62650755873002e-19,"Disease vs control","Fig 3e",3.93832403309806,TRUE,TRUE,1.83806103605214,"Concordant",TRUE
+"THBS4","Pre-PEA septum vs control septum",335.97618275622,-1.29989637387402,1.20441715984039e-07,"Regional comparison","Fig 4c",3.93832403309806,TRUE,TRUE,-1.29989637387402,"Discordant",TRUE
+"THBS4","Pre-PEA septum vs pre-PEA RV",415.403024159404,-1.0321470497419,0.677905389399559,"Regional comparison","Fig 4e",3.93832403309806,TRUE,TRUE,-1.0321470497419,"Discordant",FALSE
+"THBS4","Post-PEA septum vs pre-PEA RV",336.4145,-0.5586429,0.02673171,"Post-PEA-associated","Fig 5c",3.93832403309806,TRUE,TRUE,-0.5586429,"Discordant",FALSE
+"THBS4","Post-PEA moderate septum vs pre-PEA moderate RV",326.555858529883,-0.450514115010551,0.508100255800571,"Post-PEA-associated","Fig 5d",3.93832403309806,TRUE,TRUE,-0.450514115010551,"Discordant",FALSE
+"THBS4","Post-PEA intermediate septum vs pre-PEA intermediate RV",317.9401,-0.2829928,0.6707019,"Post-PEA-associated","Fig 5e",3.93832403309806,TRUE,TRUE,-0.2829928,"Discordant",FALSE
+"THBS4","Post-PEA severe septum vs pre-PEA severe RV",395.2607,-1.305327,6.679898e-05,"Post-PEA-associated","Fig 5f",3.93832403309806,TRUE,TRUE,-1.305327,"Discordant",TRUE
+"CTHRC1","Moderate vs severe pre-PEA RV",4.613148,-0.853695,0.103846,"Within pre-PEA RV","Fig 2c",3.5609895486722,TRUE,TRUE,-0.853695,"Discordant",FALSE
+"CTHRC1","Moderate vs intermediate pre-PEA RV",4.234772,-0.7243337,0.3009629,"Within pre-PEA RV","Fig 2d",3.5609895486722,TRUE,TRUE,-0.7243337,"Discordant",FALSE
+"CTHRC1","Intermediate vs severe pre-PEA RV",6.01728,-0.1249558,0.9952889,"Within pre-PEA RV","Fig 2e",3.5609895486722,TRUE,TRUE,-0.1249558,"Discordant",FALSE
+"CTHRC1","Moderate pre-PEA RV vs control RV",4.756333,-0.9612952,0.004347816,"Disease vs control","Fig 3c",3.5609895486722,TRUE,TRUE,-0.9612952,"Discordant",FALSE
+"CTHRC1","Intermediate pre-PEA RV vs control RV",6.671353,-0.2490182,0.6392969,"Disease vs control","Fig 3d",3.5609895486722,TRUE,TRUE,-0.2490182,"Discordant",FALSE
+"CTHRC1","Severe pre-PEA RV vs control RV",8.22261549747287,-0.118051175360991,0.817717703413456,"Disease vs control","Fig 3e",3.5609895486722,TRUE,TRUE,-0.118051175360991,"Discordant",FALSE
+"CTHRC1","Pre-PEA septum vs control septum",8.92420214549897,-0.534929066381104,0.352945036314031,"Regional comparison","Fig 4c",3.5609895486722,TRUE,TRUE,-0.534929066381104,"Discordant",FALSE
+"CTHRC1","Pre-PEA septum vs pre-PEA RV",3.62936648691895,1.08132818321528,1,"Regional comparison","Fig 4e",3.5609895486722,TRUE,TRUE,1.08132818321528,"Concordant",FALSE
+"CTHRC1","Post-PEA septum vs pre-PEA RV",5.041033,1.723846,0.0001491256,"Post-PEA-associated","Fig 5c",3.5609895486722,TRUE,TRUE,1.723846,"Concordant",TRUE
+"CTHRC1","Post-PEA moderate septum vs pre-PEA moderate RV",5.870728,2.67388,0.001083639,"Post-PEA-associated","Fig 5d",3.5609895486722,TRUE,TRUE,2.67388,"Concordant",TRUE
+"CTHRC1","Post-PEA intermediate septum vs pre-PEA intermediate RV",4.393036,1.024461,0.3412261,"Post-PEA-associated","Fig 5e",3.5609895486722,TRUE,TRUE,1.024461,"Concordant",FALSE
+"CTHRC1","Post-PEA severe septum vs pre-PEA severe RV",4.535554,1.393219,0.4394856,"Post-PEA-associated","Fig 5f",3.5609895486722,TRUE,TRUE,1.393219,"Concordant",FALSE
+"INHBB","Moderate vs severe pre-PEA RV",44.491088,0.205286,0.796734,"Within pre-PEA RV","Fig 2c",3.05106372451607,TRUE,TRUE,0.205286,"Concordant",FALSE
+"INHBB","Moderate vs intermediate pre-PEA RV",40.95261,0.2492461,0.7205844,"Within pre-PEA RV","Fig 2d",3.05106372451607,TRUE,TRUE,0.2492461,"Concordant",FALSE
+"INHBB","Intermediate vs severe pre-PEA RV",40.33692,-0.04303637,0.9976859,"Within pre-PEA RV","Fig 2e",3.05106372451607,TRUE,TRUE,-0.04303637,"Discordant",FALSE
+"INHBB","Moderate pre-PEA RV vs control RV",49.30173,0.069458,0.8674694,"Disease vs control","Fig 3c",3.05106372451607,TRUE,TRUE,0.069458,"Concordant",FALSE
+"INHBB","Intermediate pre-PEA RV vs control RV",44.86625,-0.1896211,0.6438493,"Disease vs control","Fig 3d",3.05106372451607,TRUE,TRUE,-0.1896211,"Discordant",FALSE
+"INHBB","Severe pre-PEA RV vs control RV",52.713110838983,-0.150489264388577,0.777265934870585,"Disease vs control","Fig 3e",3.05106372451607,TRUE,TRUE,-0.150489264388577,"Discordant",FALSE
+"INHBB","Pre-PEA septum vs control septum",43.7293707413643,0.574578979937129,0.381965614035557,"Regional comparison","Fig 4c",3.05106372451607,TRUE,TRUE,0.574578979937129,"Concordant",FALSE
+"INHBB","Pre-PEA septum vs pre-PEA RV",12.846167340371,0.208659900778394,0.991562063107429,"Regional comparison","Fig 4e",3.05106372451607,TRUE,TRUE,0.208659900778394,"Concordant",FALSE
+"INHBB","Post-PEA septum vs pre-PEA RV",24.96114,-0.8496717,0.009514466,"Post-PEA-associated","Fig 5c",3.05106372451607,TRUE,TRUE,-0.8496717,"Discordant",FALSE
+"INHBB","Post-PEA moderate septum vs pre-PEA moderate RV",31.2684,-0.9048884,0.1424759,"Post-PEA-associated","Fig 5d",3.05106372451607,TRUE,TRUE,-0.9048884,"Discordant",FALSE
+"INHBB","Post-PEA intermediate septum vs pre-PEA intermediate RV",22.38602,-0.9728745,0.1680854,"Post-PEA-associated","Fig 5e",3.05106372451607,TRUE,TRUE,-0.9728745,"Discordant",FALSE
+"INHBB","Post-PEA severe septum vs pre-PEA severe RV",16.77748,-0.3695997,0.7663708,"Post-PEA-associated","Fig 5f",3.05106372451607,TRUE,TRUE,-0.3695997,"Discordant",FALSE
+"CENPA","Moderate vs severe pre-PEA RV",19.381429,-1.224222,0.048955,"Within pre-PEA RV","Fig 2c",3.00359977953378,TRUE,TRUE,-1.224222,"Discordant",TRUE
+"CENPA","Moderate vs intermediate pre-PEA RV",17.1154,-0.9856464,0.1893905,"Within pre-PEA RV","Fig 2d",3.00359977953378,TRUE,TRUE,-0.9856464,"Discordant",FALSE
+"CENPA","Intermediate vs severe pre-PEA RV",27.86351,-0.2322167,0.9905616,"Within pre-PEA RV","Fig 2e",3.00359977953378,TRUE,TRUE,-0.2322167,"Discordant",FALSE
+"CENPA","Moderate pre-PEA RV vs control RV",10.77903,2.569378,1.778399e-05,"Disease vs control","Fig 3c",3.00359977953378,TRUE,TRUE,2.569378,"Concordant",TRUE
+"CENPA","Intermediate pre-PEA RV vs control RV",19.98844,3.547999,1.582546e-10,"Disease vs control","Fig 3d",3.00359977953378,TRUE,TRUE,3.547999,"Concordant",TRUE
+"CENPA","Severe pre-PEA RV vs control RV",25.4060910544787,3.78136905930003,1.06250358754422e-13,"Disease vs control","Fig 3e",3.00359977953378,TRUE,TRUE,3.78136905930003,"Concordant",TRUE
+"CENPA","Pre-PEA septum vs control septum",3.71797927744662,-0.427556012681619,0.749863486568136,"Regional comparison","Fig 4c",3.00359977953378,TRUE,TRUE,-0.427556012681619,"Discordant",FALSE
+"CENPA","Pre-PEA septum vs pre-PEA RV",4.9507203856361,-1.47456653490489,0.653024766265789,"Regional comparison","Fig 4e",3.00359977953378,TRUE,TRUE,-1.47456653490489,"Discordant",FALSE
+"CENPA","Post-PEA septum vs pre-PEA RV",8.709034,-2.165794,0.002353731,"Post-PEA-associated","Fig 5c",3.00359977953378,TRUE,TRUE,-2.165794,"Discordant",TRUE
+"CENPA","Post-PEA moderate septum vs pre-PEA moderate RV",4.57062594367357,-1.30877919228413,0.391466694350042,"Post-PEA-associated","Fig 5d",3.00359977953378,TRUE,TRUE,-1.30877919228413,"Discordant",FALSE
+"CENPA","Post-PEA intermediate septum vs pre-PEA intermediate RV",7.27099,-1.943095,0.140498,"Post-PEA-associated","Fig 5e",3.00359977953378,TRUE,TRUE,-1.943095,"Discordant",FALSE
+"CENPA","Post-PEA severe septum vs pre-PEA severe RV",20.45457,-3.006372,0.06147083,"Post-PEA-associated","Fig 5f",3.00359977953378,TRUE,TRUE,-3.006372,"Discordant",FALSE
+"PRG4","Moderate vs severe pre-PEA RV",47.640642,-0.009566,0.996847,"Within pre-PEA RV","Fig 2c",2.84881241956271,TRUE,TRUE,-0.009566,"Discordant",FALSE
+"PRG4","Moderate vs intermediate pre-PEA RV",92.23592,-1.787768,0.07135745,"Within pre-PEA RV","Fig 2d",2.84881241956271,TRUE,TRUE,-1.787768,"Discordant",FALSE
+"PRG4","Intermediate vs severe pre-PEA RV",76.33112,0.9943427,0.9471456,"Within pre-PEA RV","Fig 2e",2.84881241956271,TRUE,TRUE,0.9943427,"Concordant",FALSE
+"PRG4","Moderate pre-PEA RV vs control RV",41.07261,1.990102,0.002711203,"Disease vs control","Fig 3c",2.84881241956271,TRUE,TRUE,1.990102,"Concordant",TRUE
+"PRG4","Intermediate pre-PEA RV vs control RV",76.87443,2.989039,8.306073e-05,"Disease vs control","Fig 3d",2.84881241956271,TRUE,TRUE,2.989039,"Concordant",TRUE
+"PRG4","Severe pre-PEA RV vs control RV",73.9961310565119,2.82184467035777,0.00029122755021663,"Disease vs control","Fig 3e",2.84881241956271,TRUE,TRUE,2.82184467035777,"Concordant",TRUE
+"PRG4","Pre-PEA septum vs control septum",23.8844121048886,0.0922364947809119,0.933825561681498,"Regional comparison","Fig 4c",2.84881241956271,TRUE,TRUE,0.0922364947809119,"Concordant",FALSE
+"PRG4","Pre-PEA septum vs pre-PEA RV",10.9649730321224,-0.235096858864395,0.996179203127463,"Regional comparison","Fig 4e",2.84881241956271,TRUE,TRUE,-0.235096858864395,"Discordant",FALSE
+"PRG4","Post-PEA septum vs pre-PEA RV",25.43109,-2.882426,0.0002363783,"Post-PEA-associated","Fig 5c",2.84881241956271,TRUE,TRUE,-2.882426,"Discordant",TRUE
+"PRG4","Post-PEA moderate septum vs pre-PEA moderate RV",24.0367823721155,-2.32623335306224,0.274289352857214,"Post-PEA-associated","Fig 5d",2.84881241956271,TRUE,TRUE,-2.32623335306224,"Discordant",FALSE
+"PRG4","Post-PEA intermediate septum vs pre-PEA intermediate RV",32.30263,-4.070583,0.003038593,"Post-PEA-associated","Fig 5e",2.84881241956271,TRUE,TRUE,-4.070583,"Discordant",TRUE
+"PRG4","Post-PEA severe septum vs pre-PEA severe RV",14.38272,-1.864987,0.1085442,"Post-PEA-associated","Fig 5f",2.84881241956271,TRUE,TRUE,-1.864987,"Discordant",FALSE
+"COL8A1","Moderate vs severe pre-PEA RV",269.629233,-0.680222,5e-06,"Within pre-PEA RV","Fig 2c",2.76521271963057,TRUE,TRUE,-0.680222,"Discordant",FALSE
+"COL8A1","Moderate vs intermediate pre-PEA RV",244.8348,-0.5120569,0.02733661,"Within pre-PEA RV","Fig 2d",2.76521271963057,TRUE,TRUE,-0.5120569,"Discordant",FALSE
+"COL8A1","Intermediate vs severe pre-PEA RV",333.9337,-0.1668062,0.9850598,"Within pre-PEA RV","Fig 2e",2.76521271963057,TRUE,TRUE,-0.1668062,"Discordant",FALSE
+"COL8A1","Moderate pre-PEA RV vs control RV",224.9505,0.2512601,0.2292801,"Disease vs control","Fig 3c",2.76521271963057,TRUE,TRUE,0.2512601,"Concordant",FALSE
+"COL8A1","Intermediate pre-PEA RV vs control RV",299.5766,0.7539053,0.002455546,"Disease vs control","Fig 3d",2.76521271963057,TRUE,TRUE,0.7539053,"Concordant",FALSE
+"COL8A1","Severe pre-PEA RV vs control RV",365.507165181603,0.919146605428641,8.53001534986342e-06,"Disease vs control","Fig 3e",2.76521271963057,TRUE,TRUE,0.919146605428641,"Concordant",FALSE
+"COL8A1","Pre-PEA septum vs control septum",222.460777607598,-0.794681739501158,0.0204281389037708,"Regional comparison","Fig 4c",2.76521271963057,TRUE,TRUE,-0.794681739501158,"Discordant",FALSE
+"COL8A1","Pre-PEA septum vs pre-PEA RV",146.470099832017,-0.0220237435917416,0.998022197509881,"Regional comparison","Fig 4e",2.76521271963057,TRUE,TRUE,-0.0220237435917416,"Discordant",FALSE
+"COL8A1","Post-PEA septum vs pre-PEA RV",180.1724,-0.1709419,0.5407985,"Post-PEA-associated","Fig 5c",2.76521271963057,TRUE,TRUE,-0.1709419,"Discordant",FALSE
+"COL8A1","Post-PEA moderate septum vs pre-PEA moderate RV",181.0641,0.2781838,0.5457755,"Post-PEA-associated","Fig 5d",2.76521271963057,TRUE,TRUE,0.2781838,"Concordant",FALSE
+"COL8A1","Post-PEA intermediate septum vs pre-PEA intermediate RV",175.0628,-0.3431697,0.6507761,"Post-PEA-associated","Fig 5e",2.76521271963057,TRUE,TRUE,-0.3431697,"Discordant",FALSE
+"COL8A1","Post-PEA severe septum vs pre-PEA severe RV",187.7807,-0.8114592,0.0002720143,"Post-PEA-associated","Fig 5f",2.76521271963057,TRUE,TRUE,-0.8114592,"Discordant",FALSE
+"UCHL1","Moderate vs severe pre-PEA RV",13.551381,-0.996918,0.027377,"Within pre-PEA RV","Fig 2c",2.52902636681364,TRUE,TRUE,-0.996918,"Discordant",FALSE
+"UCHL1","Moderate vs intermediate pre-PEA RV",11.5037,-0.5751949,0.3437282,"Within pre-PEA RV","Fig 2d",2.52902636681364,TRUE,TRUE,-0.5751949,"Discordant",FALSE
+"UCHL1","Intermediate vs severe pre-PEA RV",17.2637,-0.4394657,0.9577863,"Within pre-PEA RV","Fig 2e",2.52902636681364,TRUE,TRUE,-0.4394657,"Discordant",FALSE
+"UCHL1","Moderate pre-PEA RV vs control RV",13.75354,-1.143138,0.002807736,"Disease vs control","Fig 3c",2.52902636681364,TRUE,TRUE,-1.143138,"Discordant",TRUE
+"UCHL1","Intermediate pre-PEA RV vs control RV",18.78301,-0.6057516,0.05570675,"Disease vs control","Fig 3d",2.52902636681364,TRUE,TRUE,-0.6057516,"Discordant",FALSE
+"UCHL1","Severe pre-PEA RV vs control RV",25.4230605489487,-0.15103819276384,0.703158105403988,"Disease vs control","Fig 3e",2.52902636681364,TRUE,TRUE,-0.15103819276384,"Discordant",FALSE
+"UCHL1","Pre-PEA septum vs control septum",25.7924903820041,-0.0163949003920283,0.992165777328104,"Regional comparison","Fig 4c",2.52902636681364,TRUE,TRUE,-0.0163949003920283,"Discordant",FALSE
+"UCHL1","Pre-PEA septum vs pre-PEA RV",11.1615513945708,0.0728871656389804,0.992474161123566,"Regional comparison","Fig 4e",2.52902636681364,TRUE,TRUE,0.0728871656389804,"Concordant",FALSE
+"UCHL1","Post-PEA septum vs pre-PEA RV",12.01894,0.5153767,0.2348037,"Post-PEA-associated","Fig 5c",2.52902636681364,TRUE,TRUE,0.5153767,"Concordant",FALSE
+"UCHL1","Post-PEA moderate septum vs pre-PEA moderate RV",10.7983,0.634851,0.367752,"Post-PEA-associated","Fig 5d",2.52902636681364,TRUE,TRUE,0.634851,"Concordant",FALSE
+"UCHL1","Post-PEA intermediate septum vs pre-PEA intermediate RV",15.48324,0.5976697,0.6475154,"Post-PEA-associated","Fig 5e",2.52902636681364,TRUE,TRUE,0.5976697,"Concordant",FALSE
+"UCHL1","Post-PEA severe septum vs pre-PEA severe RV",7.403052,-0.1677191,0.9342183,"Post-PEA-associated","Fig 5f",2.52902636681364,TRUE,TRUE,-0.1677191,"Discordant",FALSE
+"SCN3B","Moderate vs severe pre-PEA RV",29.386169,-0.088527,0.814522,"Within pre-PEA RV","Fig 2c",2.48248964763031,TRUE,TRUE,-0.088527,"Discordant",FALSE
+"SCN3B","Moderate vs intermediate pre-PEA RV",27.2728,-0.05761457,0.9142589,"Within pre-PEA RV","Fig 2d",2.48248964763031,TRUE,TRUE,-0.05761457,"Discordant",FALSE
+"SCN3B","Intermediate vs severe pre-PEA RV",29.9106,-0.02697413,0.9973748,"Within pre-PEA RV","Fig 2e",2.48248964763031,TRUE,TRUE,-0.02697413,"Discordant",FALSE
+"SCN3B","Moderate pre-PEA RV vs control RV",30.47009,0.02974118,0.9094662,"Disease vs control","Fig 3c",2.48248964763031,TRUE,TRUE,0.02974118,"Concordant",FALSE
+"SCN3B","Intermediate pre-PEA RV vs control RV",31.37571,0.07490388,0.7903866,"Disease vs control","Fig 3d",2.48248964763031,TRUE,TRUE,0.07490388,"Concordant",FALSE
+"SCN3B","Severe pre-PEA RV vs control RV",36.6544436073753,0.103669727775554,0.691717883773613,"Disease vs control","Fig 3e",2.48248964763031,TRUE,TRUE,0.103669727775554,"Concordant",FALSE
+"SCN3B","Pre-PEA septum vs control septum",32.5466890027356,-0.0769770409034547,0.905619509286142,"Regional comparison","Fig 4c",2.48248964763031,TRUE,TRUE,-0.0769770409034547,"Discordant",FALSE
+"SCN3B","Pre-PEA septum vs pre-PEA RV",14.7755175784655,0.0265153109174578,0.995351465790676,"Regional comparison","Fig 4e",2.48248964763031,TRUE,TRUE,0.0265153109174578,"Concordant",FALSE
+"SCN3B","Post-PEA septum vs pre-PEA RV",18.33022,-0.5494841,0.01626117,"Post-PEA-associated","Fig 5c",2.48248964763031,TRUE,TRUE,-0.5494841,"Discordant",FALSE
+"SCN3B","Post-PEA moderate septum vs pre-PEA moderate RV",20.32888,-0.3301512,0.4423954,"Post-PEA-associated","Fig 5d",2.48248964763031,TRUE,TRUE,-0.3301512,"Discordant",FALSE
+"SCN3B","Post-PEA intermediate septum vs pre-PEA intermediate RV",16.40554,-0.4468696,0.567082,"Post-PEA-associated","Fig 5e",2.48248964763031,TRUE,TRUE,-0.4468696,"Discordant",FALSE
+"SCN3B","Post-PEA severe septum vs pre-PEA severe RV",18.02572,-1.353082,0.03190341,"Post-PEA-associated","Fig 5f",2.48248964763031,TRUE,TRUE,-1.353082,"Discordant",TRUE
+"TMEM100","Moderate vs severe pre-PEA RV",50.231062,-0.110529,0.774819,"Within pre-PEA RV","Fig 2c",2.31974140255278,TRUE,TRUE,-0.110529,"Discordant",FALSE
+"TMEM100","Moderate vs intermediate pre-PEA RV",41.33559,0.3749482,0.1918284,"Within pre-PEA RV","Fig 2d",2.31974140255278,TRUE,TRUE,0.3749482,"Concordant",FALSE
+"TMEM100","Intermediate vs severe pre-PEA RV",44.88571,-0.486664,0.3836376,"Within pre-PEA RV","Fig 2e",2.31974140255278,TRUE,TRUE,-0.486664,"Discordant",FALSE
+"TMEM100","Moderate pre-PEA RV vs control RV",52.87049,-0.09492443,0.7056243,"Disease vs control","Fig 3c",2.31974140255278,TRUE,TRUE,-0.09492443,"Discordant",FALSE
+"TMEM100","Intermediate pre-PEA RV vs control RV",46.28007,-0.4791242,0.04186995,"Disease vs control","Fig 3d",2.31974140255278,TRUE,TRUE,-0.4791242,"Discordant",FALSE
+"TMEM100","Severe pre-PEA RV vs control RV",65.9774745601489,0.00721102878531147,0.980038070156191,"Disease vs control","Fig 3e",2.31974140255278,TRUE,TRUE,0.00721102878531147,"Concordant",FALSE
+"TMEM100","Pre-PEA septum vs control septum",44.9411185390228,0.499843587755842,0.398781322612857,"Regional comparison","Fig 4c",2.31974140255278,TRUE,TRUE,0.499843587755842,"Concordant",FALSE
+"TMEM100","Pre-PEA septum vs pre-PEA RV",16.892099845211,-0.326498820684241,0.969333599854859,"Regional comparison","Fig 4e",2.31974140255278,TRUE,TRUE,-0.326498820684241,"Discordant",FALSE
+"TMEM100","Post-PEA septum vs pre-PEA RV",24.01583,-0.6886769,0.001870396,"Post-PEA-associated","Fig 5c",2.31974140255278,TRUE,TRUE,-0.6886769,"Discordant",FALSE
+"TMEM100","Post-PEA moderate septum vs pre-PEA moderate RV",29.80915,-0.6788574,0.1068758,"Post-PEA-associated","Fig 5d",2.31974140255278,TRUE,TRUE,-0.6788574,"Discordant",FALSE
+"TMEM100","Post-PEA intermediate septum vs pre-PEA intermediate RV",19.88735,-0.5970679,0.2436466,"Post-PEA-associated","Fig 5e",2.31974140255278,TRUE,TRUE,-0.5970679,"Discordant",FALSE
+"TMEM100","Post-PEA severe septum vs pre-PEA severe RV",20.09964,-0.9568146,0.1198975,"Post-PEA-associated","Fig 5f",2.31974140255278,TRUE,TRUE,-0.9568146,"Discordant",FALSE
+"FN1","Moderate vs severe pre-PEA RV",1593.263205,-0.432009,0.009344,"Within pre-PEA RV","Fig 2c",2.18313492526349,TRUE,TRUE,-0.432009,"Discordant",FALSE
+"FN1","Moderate vs intermediate pre-PEA RV",1473.627,-0.3356428,0.2051838,"Within pre-PEA RV","Fig 2d",2.18313492526349,TRUE,TRUE,-0.3356428,"Discordant",FALSE
+"FN1","Intermediate vs severe pre-PEA RV",1850.892,-0.09601183,0.9905616,"Within pre-PEA RV","Fig 2e",2.18313492526349,TRUE,TRUE,-0.09601183,"Discordant",FALSE
+"FN1","Moderate pre-PEA RV vs control RV",1532.527,-0.1211793,0.5757154,"Disease vs control","Fig 3c",2.18313492526349,TRUE,TRUE,-0.1211793,"Discordant",FALSE
+"FN1","Intermediate pre-PEA RV vs control RV",1859.913,0.2049679,0.4340267,"Disease vs control","Fig 3d",2.18313492526349,TRUE,TRUE,0.2049679,"Concordant",FALSE
+"FN1","Severe pre-PEA RV vs control RV",2213.75705594476,0.299167499461251,0.116919391172363,"Disease vs control","Fig 3e",2.18313492526349,TRUE,TRUE,0.299167499461251,"Concordant",FALSE
+"FN1","Pre-PEA septum vs control septum",1848.56880314286,-0.735894286447405,0.137286324993977,"Regional comparison","Fig 4c",2.18313492526349,TRUE,TRUE,-0.735894286447405,"Discordant",FALSE
+"FN1","Pre-PEA septum vs pre-PEA RV",1133.48987332868,0.101490374536355,0.990740302982874,"Regional comparison","Fig 4e",2.18313492526349,TRUE,TRUE,0.101490374536355,"Concordant",FALSE
+"FN1","Post-PEA septum vs pre-PEA RV",1207.586,-0.08008254,0.8029683,"Post-PEA-associated","Fig 5c",2.18313492526349,TRUE,TRUE,-0.08008254,"Discordant",FALSE
+"FN1","Post-PEA moderate septum vs pre-PEA moderate RV",1231.93369691326,0.231733076084637,0.699147065518446,"Post-PEA-associated","Fig 5d",2.18313492526349,TRUE,TRUE,0.231733076084637,"Concordant",FALSE
+"FN1","Post-PEA intermediate septum vs pre-PEA intermediate RV",1172.816,-0.2431331,0.7859193,"Post-PEA-associated","Fig 5e",2.18313492526349,TRUE,TRUE,-0.2431331,"Discordant",FALSE
+"FN1","Post-PEA severe septum vs pre-PEA severe RV",1220.044,-0.4700288,0.04784086,"Post-PEA-associated","Fig 5f",2.18313492526349,TRUE,TRUE,-0.4700288,"Discordant",FALSE
+"LOXL2","Moderate vs severe pre-PEA RV",71.320597,-0.738825,2.2e-05,"Within pre-PEA RV","Fig 2c",1.55428583627996,TRUE,TRUE,-0.738825,"Discordant",FALSE
+"LOXL2","Moderate vs intermediate pre-PEA RV",62.46416,-0.4650531,0.05130217,"Within pre-PEA RV","Fig 2d",1.55428583627996,TRUE,TRUE,-0.4650531,"Discordant",FALSE
+"LOXL2","Intermediate vs severe pre-PEA RV",85.79901,-0.2699037,0.9471456,"Within pre-PEA RV","Fig 2e",1.55428583627996,TRUE,TRUE,-0.2699037,"Discordant",FALSE
+"LOXL2","Moderate pre-PEA RV vs control RV",71.48977,-0.7493024,6.006101e-05,"Disease vs control","Fig 3c",1.55428583627996,TRUE,TRUE,-0.7493024,"Discordant",FALSE
+"LOXL2","Intermediate pre-PEA RV vs control RV",90.87529,-0.2948552,0.2028243,"Disease vs control","Fig 3d",1.55428583627996,TRUE,TRUE,-0.2948552,"Discordant",FALSE
+"LOXL2","Severe pre-PEA RV vs control RV",118.156083361665,-0.0263435477596841,0.92414417920946,"Disease vs control","Fig 3e",1.55428583627996,TRUE,TRUE,-0.0263435477596841,"Discordant",FALSE
+"LOXL2","Pre-PEA septum vs control septum",104.90214226636,-0.366525538563442,0.261726485972918,"Regional comparison","Fig 4c",1.55428583627996,TRUE,TRUE,-0.366525538563442,"Discordant",FALSE
+"LOXL2","Pre-PEA septum vs pre-PEA RV",44.7471510742798,0.713128672474068,0.264747979278084,"Regional comparison","Fig 4e",1.55428583627996,TRUE,TRUE,0.713128672474068,"Concordant",FALSE
+"LOXL2","Post-PEA septum vs pre-PEA RV",50.84812,0.03598996,0.8938795,"Post-PEA-associated","Fig 5c",1.55428583627996,TRUE,TRUE,0.03598996,"Concordant",FALSE
+"LOXL2","Post-PEA moderate septum vs pre-PEA moderate RV",52.41632,0.2914195,0.3849589,"Post-PEA-associated","Fig 5d",1.55428583627996,TRUE,TRUE,0.2914195,"Concordant",FALSE
+"LOXL2","Post-PEA intermediate septum vs pre-PEA intermediate RV",50.44035,-0.047543,0.9577032,"Post-PEA-associated","Fig 5e",1.55428583627996,TRUE,TRUE,-0.047543,"Discordant",FALSE
+"LOXL2","Post-PEA severe septum vs pre-PEA severe RV",48.06635,-0.3828031,0.5206791,"Post-PEA-associated","Fig 5f",1.55428583627996,TRUE,TRUE,-0.3828031,"Discordant",FALSE
+"SRPX2","Moderate vs severe pre-PEA RV",208.825203,-0.56251,0.000553,"Within pre-PEA RV","Fig 2c",1.40592769312172,TRUE,TRUE,-0.56251,"Discordant",FALSE
+"SRPX2","Moderate vs intermediate pre-PEA RV",185.7373,-0.3407765,0.1920336,"Within pre-PEA RV","Fig 2d",1.40592769312172,TRUE,TRUE,-0.3407765,"Discordant",FALSE
+"SRPX2","Intermediate vs severe pre-PEA RV",243.0822,-0.2203355,0.9850598,"Within pre-PEA RV","Fig 2e",1.40592769312172,TRUE,TRUE,-0.2203355,"Discordant",FALSE
+"SRPX2","Moderate pre-PEA RV vs control RV",176.671,0.4249319,0.0271749,"Disease vs control","Fig 3c",1.40592769312172,TRUE,TRUE,0.4249319,"Concordant",FALSE
+"SRPX2","Intermediate pre-PEA RV vs control RV",214.247579239712,0.757682431417352,0.00177441895818885,"Disease vs control","Fig 3d",1.40592769312172,TRUE,TRUE,0.757682431417352,"Concordant",FALSE
+"SRPX2","Severe pre-PEA RV vs control RV",268.863563995311,0.97575787960958,2.08835990973349e-06,"Disease vs control","Fig 3e",1.40592769312172,TRUE,TRUE,0.97575787960958,"Concordant",FALSE
+"SRPX2","Pre-PEA septum vs control septum",145.792498096625,-0.337261323191987,0.556637447467925,"Regional comparison","Fig 4c",1.40592769312172,TRUE,TRUE,-0.337261323191987,"Discordant",FALSE
+"SRPX2","Pre-PEA septum vs pre-PEA RV",106.231201992041,-0.820614683698753,0.26787945255714,"Regional comparison","Fig 4e",1.40592769312172,TRUE,TRUE,-0.820614683698753,"Discordant",FALSE
+"SRPX2","Post-PEA septum vs pre-PEA RV",118.8237,-1.213138,2.265978e-06,"Post-PEA-associated","Fig 5c",1.40592769312172,TRUE,TRUE,-1.213138,"Discordant",TRUE
+"SRPX2","Post-PEA moderate septum vs pre-PEA moderate RV",108.920281540381,-0.898401492993562,0.00494071587641759,"Post-PEA-associated","Fig 5d",1.40592769312172,TRUE,TRUE,-0.898401492993562,"Discordant",FALSE
+"SRPX2","Post-PEA intermediate septum vs pre-PEA intermediate RV",118.8969,-1.279236,0.05153175,"Post-PEA-associated","Fig 5e",1.40592769312172,TRUE,TRUE,-1.279236,"Discordant",FALSE
+"SRPX2","Post-PEA severe septum vs pre-PEA severe RV",139.5719,-1.685386,0.1448309,"Post-PEA-associated","Fig 5f",1.40592769312172,TRUE,TRUE,-1.685386,"Discordant",FALSE
+"PRSS35","Moderate vs severe pre-PEA RV",1.429627,-0.177572,1,"Within pre-PEA RV","Fig 2c",4.26338621689683,TRUE,TRUE,-0.177572,"Discordant",FALSE
+"PRSS35","Moderate vs intermediate pre-PEA RV",1.412116,-0.1645869,1,"Within pre-PEA RV","Fig 2d",4.26338621689683,TRUE,TRUE,-0.1645869,"Discordant",FALSE
+"PRSS35","Intermediate vs severe pre-PEA RV",1.649838,-0.003923715,0.9997589,"Within pre-PEA RV","Fig 2e",4.26338621689683,TRUE,TRUE,-0.003923715,"Discordant",FALSE
+"PRSS35","Moderate pre-PEA RV vs control RV",1.436592,0.0743323,0.9183037,"Disease vs control","Fig 3c",4.26338621689683,TRUE,TRUE,0.0743323,"Concordant",FALSE
+"PRSS35","Intermediate pre-PEA RV vs control RV",1.729522,0.2118571,0.8189974,"Disease vs control","Fig 3d",4.26338621689683,TRUE,TRUE,0.2118571,"Concordant",FALSE
+"PRSS35","Severe pre-PEA RV vs control RV",1.84127173509254,0.230872648319645,0.782393193851341,"Disease vs control","Fig 3e",4.26338621689683,TRUE,TRUE,0.230872648319645,"Concordant",FALSE
+"PRSS35","Pre-PEA septum vs control septum",2.5517055871328,-1.25421137131037,0.143283653162369,"Regional comparison","Fig 4c",4.26338621689683,TRUE,TRUE,-1.25421137131037,"Discordant",FALSE
+"PRSS35","Pre-PEA septum vs pre-PEA RV",1.52117599682857,1.01905682412985,1,"Regional comparison","Fig 4e",4.26338621689683,TRUE,TRUE,1.01905682412985,"Concordant",FALSE
+"PRSS35","Post-PEA septum vs pre-PEA RV",1.902861,1.277673,0.123464,"Post-PEA-associated","Fig 5c",4.26338621689683,TRUE,TRUE,1.277673,"Concordant",FALSE
+"PRSS35","Post-PEA moderate septum vs pre-PEA moderate RV",2.903108,2.081079,0.1760812,"Post-PEA-associated","Fig 5d",4.26338621689683,TRUE,TRUE,2.081079,"Concordant",FALSE
+"PRSS35","Post-PEA intermediate septum vs pre-PEA intermediate RV",1.523974,0.3058569,1,"Post-PEA-associated","Fig 5e",4.26338621689683,TRUE,TRUE,0.3058569,"Concordant",FALSE
+"PRSS35","Post-PEA severe septum vs pre-PEA severe RV",0.5295472,0.539302,1,"Post-PEA-associated","Fig 5f",4.26338621689683,TRUE,TRUE,0.539302,"Concordant",FALSE
+"POSTN","Moderate vs severe pre-PEA RV",314.299657,-1.470123,0.000772,"Within pre-PEA RV","Fig 2c",3.64833931101709,TRUE,TRUE,-1.470123,"Discordant",TRUE
+"POSTN","Moderate vs intermediate pre-PEA RV",248.5107,-0.9431623,0.1159186,"Within pre-PEA RV","Fig 2d",3.64833931101709,TRUE,TRUE,-0.9431623,"Discordant",FALSE
+"POSTN","Intermediate vs severe pre-PEA RV",437.7899,-0.5268966,0.9676735,"Within pre-PEA RV","Fig 2e",3.64833931101709,TRUE,TRUE,-0.5268966,"Discordant",FALSE
+"POSTN","Moderate pre-PEA RV vs control RV",233.9928,-0.723763,0.110847,"Disease vs control","Fig 3c",3.64833931101709,TRUE,TRUE,-0.723763,"Discordant",FALSE
+"POSTN","Intermediate pre-PEA RV vs control RV",379.3137,0.2088971,0.7007021,"Disease vs control","Fig 3d",3.64833931101709,TRUE,TRUE,0.2088971,"Concordant",FALSE
+"POSTN","Severe pre-PEA RV vs control RV",559.865453128504,0.734737753594162,0.0698948314921757,"Disease vs control","Fig 3e",3.64833931101709,TRUE,TRUE,0.734737753594162,"Concordant",FALSE
+"POSTN","Pre-PEA septum vs control septum",381.66387889243,-0.412379959178172,0.5042578428279,"Regional comparison","Fig 4c",3.64833931101709,TRUE,TRUE,-0.412379959178172,"Discordant",FALSE
+"POSTN","Pre-PEA septum vs pre-PEA RV",273.679850667107,-0.702358424812643,0.976162857669178,"Regional comparison","Fig 4e",3.64833931101709,TRUE,TRUE,-0.702358424812643,"Discordant",FALSE
+"POSTN","Post-PEA septum vs pre-PEA RV",214.1144,-0.2180967,0.7479792,"Post-PEA-associated","Fig 5c",3.64833931101709,TRUE,TRUE,-0.2180967,"Discordant",FALSE
+"POSTN","Post-PEA moderate septum vs pre-PEA moderate RV",196.8461,0.5816083,0.6218369,"Post-PEA-associated","Fig 5d",3.64833931101709,TRUE,TRUE,0.5816083,"Concordant",FALSE
+"POSTN","Post-PEA intermediate septum vs pre-PEA intermediate RV",202.1639,-0.4548287,0.8108805,"Post-PEA-associated","Fig 5e",3.64833931101709,TRUE,TRUE,-0.4548287,"Discordant",FALSE
+"POSTN","Post-PEA severe septum vs pre-PEA severe RV",274.6559,-1.149533,0.4229446,"Post-PEA-associated","Fig 5f",3.64833931101709,TRUE,TRUE,-1.149533,"Discordant",FALSE
+"ANKRD23","Moderate vs severe pre-PEA RV",13.778247,-0.021534,0.975031,"Within pre-PEA RV","Fig 2c",3.42048673234292,TRUE,TRUE,-0.021534,"Discordant",FALSE
+"ANKRD23","Moderate vs intermediate pre-PEA RV",13.18417,-0.04335631,0.9457074,"Within pre-PEA RV","Fig 2d",3.42048673234292,TRUE,TRUE,-0.04335631,"Discordant",FALSE
+"ANKRD23","Intermediate vs severe pre-PEA RV",14.1684,0.02376662,0.9976859,"Within pre-PEA RV","Fig 2e",3.42048673234292,TRUE,TRUE,0.02376662,"Concordant",FALSE
+"ANKRD23","Moderate pre-PEA RV vs control RV",13.25872,0.7236061,0.0008192637,"Disease vs control","Fig 3c",3.42048673234292,TRUE,TRUE,0.7236061,"Concordant",FALSE
+"ANKRD23","Intermediate pre-PEA RV vs control RV",13.62156,0.7586144,0.001339276,"Disease vs control","Fig 3d",3.42048673234292,TRUE,TRUE,0.7586144,"Concordant",FALSE
+"ANKRD23","Severe pre-PEA RV vs control RV",14.6967031849137,0.731849833761719,0.00607715684222897,"Disease vs control","Fig 3e",3.42048673234292,TRUE,TRUE,0.731849833761719,"Concordant",FALSE
+"ANKRD23","Pre-PEA septum vs control septum",7.27043711664579,-0.653808887657583,0.401249584166179,"Regional comparison","Fig 4c",3.42048673234292,TRUE,TRUE,-0.653808887657583,"Discordant",FALSE
+"ANKRD23","Pre-PEA septum vs pre-PEA RV",7.05504077725268,-0.902598180454366,0.780414480430655,"Regional comparison","Fig 4e",3.42048673234292,TRUE,TRUE,-0.902598180454366,"Discordant",FALSE
+"ANKRD23","Post-PEA septum vs pre-PEA RV",9.79397,-0.1074366,0.6836812,"Post-PEA-associated","Fig 5c",3.42048673234292,TRUE,TRUE,-0.1074366,"Discordant",FALSE
+"ANKRD23","Post-PEA moderate septum vs pre-PEA moderate RV",10.32831,0.03624845,0.9582097,"Post-PEA-associated","Fig 5d",3.42048673234292,TRUE,TRUE,0.03624845,"Concordant",FALSE
+"ANKRD23","Post-PEA intermediate septum vs pre-PEA intermediate RV",9.700278,-0.3444226,0.6209822,"Post-PEA-associated","Fig 5e",3.42048673234292,TRUE,TRUE,-0.3444226,"Discordant",FALSE
+"ANKRD23","Post-PEA severe septum vs pre-PEA severe RV",8.793071,0.04050853,0.9860768,"Post-PEA-associated","Fig 5f",3.42048673234292,TRUE,TRUE,0.04050853,"Concordant",FALSE
+"FHAD1","Moderate vs severe pre-PEA RV",2.971021,0.211839,0.808902,"Within pre-PEA RV","Fig 2c",3.05712532776695,TRUE,TRUE,0.211839,"Concordant",FALSE
+"FHAD1","Moderate vs intermediate pre-PEA RV",2.721638,0.4452201,0.598059,"Within pre-PEA RV","Fig 2d",3.05712532776695,TRUE,TRUE,0.4452201,"Concordant",FALSE
+"FHAD1","Intermediate vs severe pre-PEA RV",2.766378,-0.2362514,0.9905616,"Within pre-PEA RV","Fig 2e",3.05712532776695,TRUE,TRUE,-0.2362514,"Discordant",FALSE
+"FHAD1","Moderate pre-PEA RV vs control RV",2.84628,1.09661,0.02877097,"Disease vs control","Fig 3c",3.05712532776695,TRUE,TRUE,1.09661,"Concordant",TRUE
+"FHAD1","Intermediate pre-PEA RV vs control RV",2.534604,0.676949,0.3104119,"Disease vs control","Fig 3d",3.05712532776695,TRUE,TRUE,0.676949,"Concordant",FALSE
+"FHAD1","Severe pre-PEA RV vs control RV",2.89897965778577,0.86352618246444,0.162298623762253,"Disease vs control","Fig 3e",3.05712532776695,TRUE,TRUE,0.86352618246444,"Concordant",FALSE
+"FHAD1","Pre-PEA septum vs control septum",3.01370828561457,-1.24262900256265,0.199152709992745,"Regional comparison","Fig 4c",3.05712532776695,TRUE,TRUE,-1.24262900256265,"Discordant",FALSE
+"FHAD1","Pre-PEA septum vs pre-PEA RV",1.84633019743788,0.930467169991147,1,"Regional comparison","Fig 4e",3.05712532776695,TRUE,TRUE,0.930467169991147,"Concordant",FALSE
+"FHAD1","Post-PEA septum vs pre-PEA RV",2.428644,0.2383921,0.6908466,"Post-PEA-associated","Fig 5c",3.05712532776695,TRUE,TRUE,0.2383921,"Concordant",FALSE
+"FHAD1","Post-PEA moderate septum vs pre-PEA moderate RV",2.494434,0.2573991,0.8657669,"Post-PEA-associated","Fig 5d",3.05712532776695,TRUE,TRUE,0.2573991,"Concordant",FALSE
+"FHAD1","Post-PEA intermediate septum vs pre-PEA intermediate RV",2.571001,0.4045633,0.8166708,"Post-PEA-associated","Fig 5e",3.05712532776695,TRUE,TRUE,0.4045633,"Concordant",FALSE
+"FHAD1","Post-PEA severe septum vs pre-PEA severe RV",18.18862,0.01386949,1,"Post-PEA-associated","Fig 5f",3.05712532776695,TRUE,TRUE,0.01386949,"Concordant",FALSE
+"MYBPC2","Moderate vs severe pre-PEA RV",NA,NA,NA,"Within pre-PEA RV","Fig 2c",2.86931604142301,FALSE,FALSE,NA,"Unavailable",FALSE
+"MYBPC2","Moderate vs intermediate pre-PEA RV",0.1011721,-0.6279886,1,"Within pre-PEA RV","Fig 2d",2.86931604142301,TRUE,TRUE,-0.6279886,"Discordant",FALSE
+"MYBPC2","Intermediate vs severe pre-PEA RV",0.1609577,0.7088906,1,"Within pre-PEA RV","Fig 2e",2.86931604142301,TRUE,TRUE,0.7088906,"Concordant",FALSE
+"MYBPC2","Moderate pre-PEA RV vs control RV",0.363416819402973,-2.80487839165993,0.0103055635716577,"Disease vs control","Fig 3c",2.86931604142301,TRUE,TRUE,-2.80487839165993,"Discordant",TRUE
+"MYBPC2","Intermediate pre-PEA RV vs control RV",0.64354670910541,-2.18563193508613,0.0315954718999417,"Disease vs control","Fig 3d",2.86931604142301,TRUE,TRUE,-2.18563193508613,"Discordant",TRUE
+"MYBPC2","Severe pre-PEA RV vs control RV",0.652459057252566,-2.89508071288711,0.00241518652385448,"Disease vs control","Fig 3e",2.86931604142301,TRUE,TRUE,-2.89508071288711,"Discordant",TRUE
+"MYBPC2","Pre-PEA septum vs control septum",0.423860871058616,0.633216482643523,1,"Regional comparison","Fig 4c",2.86931604142301,TRUE,TRUE,0.633216482643523,"Concordant",FALSE
+"MYBPC2","Pre-PEA septum vs pre-PEA RV",NA,NA,NA,"Regional comparison","Fig 4e",2.86931604142301,FALSE,FALSE,NA,"Unavailable",FALSE
+"MYBPC2","Post-PEA septum vs pre-PEA RV",0.09336388,0.4172039,1,"Post-PEA-associated","Fig 5c",2.86931604142301,TRUE,TRUE,0.4172039,"Concordant",FALSE
+"MYBPC2","Post-PEA moderate septum vs pre-PEA moderate RV",NA,NA,NA,"Post-PEA-associated","Fig 5d",2.86931604142301,FALSE,FALSE,NA,"Unavailable",FALSE
+"MYBPC2","Post-PEA intermediate septum vs pre-PEA intermediate RV",NA,NA,NA,"Post-PEA-associated","Fig 5e",2.86931604142301,FALSE,FALSE,NA,"Unavailable",FALSE
+"MYBPC2","Post-PEA severe septum vs pre-PEA severe RV",NA,NA,NA,"Post-PEA-associated","Fig 5f",2.86931604142301,FALSE,FALSE,NA,"Unavailable",FALSE
+"TRH","Moderate vs severe pre-PEA RV",0.215688,0.166569,1,"Within pre-PEA RV","Fig 2c",2.54905261502926,TRUE,TRUE,0.166569,"Concordant",FALSE
+"TRH","Moderate vs intermediate pre-PEA RV",0.1595626,0.3254451,1,"Within pre-PEA RV","Fig 2d",2.54905261502926,TRUE,TRUE,0.3254451,"Concordant",FALSE
+"TRH","Intermediate vs severe pre-PEA RV",0.1298755,-0.1609537,1,"Within pre-PEA RV","Fig 2e",2.54905261502926,TRUE,TRUE,-0.1609537,"Discordant",FALSE
+"TRH","Moderate pre-PEA RV vs control RV",0.3186984,-0.7800537,0.4809118,"Disease vs control","Fig 3c",2.54905261502926,TRUE,TRUE,-0.7800537,"Discordant",FALSE
+"TRH","Intermediate pre-PEA RV vs control RV",0.228618,-1.110307,1,"Disease vs control","Fig 3d",2.54905261502926,TRUE,TRUE,-1.110307,"Discordant",FALSE
+"TRH","Severe pre-PEA RV vs control RV",0.368571085716802,-0.962202141219981,0.436034714175679,"Disease vs control","Fig 3e",2.54905261502926,TRUE,TRUE,-0.962202141219981,"Discordant",FALSE
+"TRH","Pre-PEA septum vs control septum",0.523982302458247,-0.1068904447073,1,"Regional comparison","Fig 4c",2.54905261502926,TRUE,TRUE,-0.1068904447073,"Discordant",FALSE
+"TRH","Pre-PEA septum vs pre-PEA RV",NA,NA,NA,"Regional comparison","Fig 4e",2.54905261502926,FALSE,FALSE,NA,"Unavailable",FALSE
+"TRH","Post-PEA septum vs pre-PEA RV",0.1014183,-0.2745371,1,"Post-PEA-associated","Fig 5c",2.54905261502926,TRUE,TRUE,-0.2745371,"Discordant",FALSE
+"TRH","Post-PEA moderate septum vs pre-PEA moderate RV",NA,NA,NA,"Post-PEA-associated","Fig 5d",2.54905261502926,FALSE,FALSE,NA,"Unavailable",FALSE
+"TRH","Post-PEA intermediate septum vs pre-PEA intermediate RV",NA,NA,NA,"Post-PEA-associated","Fig 5e",2.54905261502926,FALSE,FALSE,NA,"Unavailable",FALSE
+"TRH","Post-PEA severe septum vs pre-PEA severe RV",NA,NA,NA,"Post-PEA-associated","Fig 5f",2.54905261502926,FALSE,FALSE,NA,"Unavailable",FALSE
+"NCAM1","Moderate vs severe pre-PEA RV",1315.999365,-0.057554,0.785421,"Within pre-PEA RV","Fig 2c",2.5142234905614,TRUE,TRUE,-0.057554,"Discordant",FALSE
+"NCAM1","Moderate vs intermediate pre-PEA RV",1225.975,-0.02274305,0.9458601,"Within pre-PEA RV","Fig 2d",2.5142234905614,TRUE,TRUE,-0.02274305,"Discordant",FALSE
+"NCAM1","Intermediate vs severe pre-PEA RV",1345.058,-0.03497028,0.9952889,"Within pre-PEA RV","Fig 2e",2.5142234905614,TRUE,TRUE,-0.03497028,"Discordant",FALSE
+"NCAM1","Moderate pre-PEA RV vs control RV",1435.337,-0.2197621,0.02103248,"Disease vs control","Fig 3c",2.5142234905614,TRUE,TRUE,-0.2197621,"Discordant",FALSE
+"NCAM1","Intermediate pre-PEA RV vs control RV",1501.995,-0.206246,0.05514003,"Disease vs control","Fig 3d",2.5142234905614,TRUE,TRUE,-0.206246,"Discordant",FALSE
+"NCAM1","Severe pre-PEA RV vs control RV",1759.97640960346,-0.173461866156109,0.0856545520784158,"Disease vs control","Fig 3e",2.5142234905614,TRUE,TRUE,-0.173461866156109,"Discordant",FALSE
+"NCAM1","Pre-PEA septum vs control septum",2039.29938815336,-0.0956940576239147,0.565091156231496,"Regional comparison","Fig 4c",2.5142234905614,TRUE,TRUE,-0.0956940576239147,"Discordant",FALSE
+"NCAM1","Pre-PEA septum vs pre-PEA RV",963.402898847622,-0.0600511710146702,0.983088690348357,"Regional comparison","Fig 4e",2.5142234905614,TRUE,TRUE,-0.0600511710146702,"Discordant",FALSE
+"NCAM1","Post-PEA septum vs pre-PEA RV",1103.264,0.05302564,0.7346025,"Post-PEA-associated","Fig 5c",2.5142234905614,TRUE,TRUE,0.05302564,"Concordant",FALSE
+"NCAM1","Post-PEA moderate septum vs pre-PEA moderate RV",1083.922,0.01477104,0.9740469,"Post-PEA-associated","Fig 5d",2.5142234905614,TRUE,TRUE,0.01477104,"Concordant",FALSE
+"NCAM1","Post-PEA intermediate septum vs pre-PEA intermediate RV",1092.991,0.1214762,0.7200668,"Post-PEA-associated","Fig 5e",2.5142234905614,TRUE,TRUE,0.1214762,"Concordant",FALSE
+"NCAM1","Post-PEA severe septum vs pre-PEA severe RV",1159.205,-0.04167079,0.9417531,"Post-PEA-associated","Fig 5f",2.5142234905614,TRUE,TRUE,-0.04167079,"Discordant",FALSE
+"TMEM119","Moderate vs severe pre-PEA RV",5.251542,-1.880142,0.000165,"Within pre-PEA RV","Fig 2c",2.28092480959762,TRUE,TRUE,-1.880142,"Discordant",TRUE
+"TMEM119","Moderate vs intermediate pre-PEA RV",3.27015,-0.8417104,0.2073956,"Within pre-PEA RV","Fig 2d",2.28092480959762,TRUE,TRUE,-0.8417104,"Discordant",FALSE
+"TMEM119","Intermediate vs severe pre-PEA RV",6.912781,-1.043251,0.6154895,"Within pre-PEA RV","Fig 2e",2.28092480959762,TRUE,TRUE,-1.043251,"Discordant",FALSE
+"TMEM119","Moderate pre-PEA RV vs control RV",3.959366,-1.399987,0.000418752,"Disease vs control","Fig 3c",2.28092480959762,TRUE,TRUE,-1.399987,"Discordant",TRUE
+"TMEM119","Intermediate pre-PEA RV vs control RV",5.87043,-0.5631708,0.2217273,"Disease vs control","Fig 3d",2.28092480959762,TRUE,TRUE,-0.5631708,"Discordant",FALSE
+"TMEM119","Severe pre-PEA RV vs control RV",10.9286807324939,0.467496753918665,0.392772174144084,"Disease vs control","Fig 3e",2.28092480959762,TRUE,TRUE,0.467496753918665,"Concordant",FALSE
+"TMEM119","Pre-PEA septum vs control septum",11.2018261853916,-1.91849711637348,0.000462354200234698,"Regional comparison","Fig 4c",2.28092480959762,TRUE,TRUE,-1.91849711637348,"Discordant",TRUE
+"TMEM119","Pre-PEA septum vs pre-PEA RV",6.30614455015053,2.93059730661776,0.0468272292105907,"Regional comparison","Fig 4e",2.28092480959762,TRUE,TRUE,2.93059730661776,"Concordant",TRUE
+"TMEM119","Post-PEA septum vs pre-PEA RV",5.685235,1.882332,4.450931e-05,"Post-PEA-associated","Fig 5c",2.28092480959762,TRUE,TRUE,1.882332,"Concordant",TRUE
+"TMEM119","Post-PEA moderate septum vs pre-PEA moderate RV",5.944573,2.360691,0.003161063,"Post-PEA-associated","Fig 5d",2.28092480959762,TRUE,TRUE,2.360691,"Concordant",TRUE
+"TMEM119","Post-PEA intermediate septum vs pre-PEA intermediate RV",5.756485,1.532356,0.1293261,"Post-PEA-associated","Fig 5e",2.28092480959762,TRUE,TRUE,1.532356,"Concordant",FALSE
+"TMEM119","Post-PEA severe septum vs pre-PEA severe RV",4.87923,1.698017,0.3356119,"Post-PEA-associated","Fig 5f",2.28092480959762,TRUE,TRUE,1.698017,"Concordant",FALSE
+"LBP","Moderate vs severe pre-PEA RV",0.182446,0.089849,1,"Within pre-PEA RV","Fig 2c",2.21077369534797,TRUE,TRUE,0.089849,"Concordant",FALSE
+"LBP","Moderate vs intermediate pre-PEA RV",0.1269021,0.3547159,1,"Within pre-PEA RV","Fig 2d",2.21077369534797,TRUE,TRUE,0.3547159,"Concordant",FALSE
+"LBP","Intermediate vs severe pre-PEA RV",0.1013827,-0.2635288,1,"Within pre-PEA RV","Fig 2e",2.21077369534797,TRUE,TRUE,-0.2635288,"Discordant",FALSE
+"LBP","Moderate pre-PEA RV vs control RV",0.9361311,-3.442527,0.0001042975,"Disease vs control","Fig 3c",2.21077369534797,TRUE,TRUE,-3.442527,"Discordant",TRUE
+"LBP","Intermediate pre-PEA RV vs control RV",1.014786,-3.80117,0.0006154637,"Disease vs control","Fig 3d",2.21077369534797,TRUE,TRUE,-3.80117,"Discordant",TRUE
+"LBP","Severe pre-PEA RV vs control RV",1.44169067066199,-3.53812837607679,0.000407838659294836,"Disease vs control","Fig 3e",2.21077369534797,TRUE,TRUE,-3.53812837607679,"Discordant",TRUE
+"LBP","Pre-PEA septum vs control septum",0.605677991924156,-0.00134501705098167,1,"Regional comparison","Fig 4c",2.21077369534797,TRUE,TRUE,-0.00134501705098167,"Discordant",FALSE
+"LBP","Pre-PEA septum vs pre-PEA RV",NA,NA,NA,"Regional comparison","Fig 4e",2.21077369534797,FALSE,FALSE,NA,"Unavailable",FALSE
+"LBP","Post-PEA septum vs pre-PEA RV",NA,NA,NA,"Post-PEA-associated","Fig 5c",2.21077369534797,FALSE,FALSE,NA,"Unavailable",FALSE
+"LBP","Post-PEA moderate septum vs pre-PEA moderate RV",NA,NA,NA,"Post-PEA-associated","Fig 5d",2.21077369534797,FALSE,FALSE,NA,"Unavailable",FALSE
+"LBP","Post-PEA intermediate septum vs pre-PEA intermediate RV",NA,NA,NA,"Post-PEA-associated","Fig 5e",2.21077369534797,FALSE,FALSE,NA,"Unavailable",FALSE
+"LBP","Post-PEA severe septum vs pre-PEA severe RV",NA,NA,NA,"Post-PEA-associated","Fig 5f",2.21077369534797,FALSE,FALSE,NA,"Unavailable",FALSE
+"CILP","Moderate vs severe pre-PEA RV",151.412788,-0.361922,0.200511,"Within pre-PEA RV","Fig 2c",2.15652581343887,TRUE,TRUE,-0.361922,"Discordant",FALSE
+"CILP","Moderate vs intermediate pre-PEA RV",137.5173,-0.218281,0.6927609,"Within pre-PEA RV","Fig 2d",2.15652581343887,TRUE,TRUE,-0.218281,"Discordant",FALSE
+"CILP","Intermediate vs severe pre-PEA RV",167.5189,-0.140273,0.9905616,"Within pre-PEA RV","Fig 2e",2.15652581343887,TRUE,TRUE,-0.140273,"Discordant",FALSE
+"CILP","Moderate pre-PEA RV vs control RV",136.2359,0.4418517,0.0875418,"Disease vs control","Fig 3c",2.15652581343887,TRUE,TRUE,0.4418517,"Concordant",FALSE
+"CILP","Intermediate pre-PEA RV vs control RV",153.7586,0.6532981,0.1165793,"Disease vs control","Fig 3d",2.15652581343887,TRUE,TRUE,0.6532981,"Concordant",FALSE
+"CILP","Severe pre-PEA RV vs control RV",185.525948467049,0.792785512829973,0.01971330637251,"Disease vs control","Fig 3e",2.15652581343887,TRUE,TRUE,0.792785512829973,"Concordant",FALSE
+"CILP","Pre-PEA septum vs control septum",109.100709880687,-0.632882833562361,0.557430005879572,"Regional comparison","Fig 4c",2.15652581343887,TRUE,TRUE,-0.632882833562361,"Discordant",FALSE
+"CILP","Pre-PEA septum vs pre-PEA RV",87.4157163627124,-0.704280574262212,0.902824707150706,"Regional comparison","Fig 4e",2.15652581343887,TRUE,TRUE,-0.704280574262212,"Discordant",FALSE
+"CILP","Post-PEA septum vs pre-PEA RV",100.9584,-0.4032539,0.2511516,"Post-PEA-associated","Fig 5c",2.15652581343887,TRUE,TRUE,-0.4032539,"Discordant",FALSE
+"CILP","Post-PEA moderate septum vs pre-PEA moderate RV",104.3008,-0.3195252,0.4074024,"Post-PEA-associated","Fig 5d",2.15652581343887,TRUE,TRUE,-0.3195252,"Discordant",FALSE
+"CILP","Post-PEA intermediate septum vs pre-PEA intermediate RV",97.00652,-0.3808259,0.7950131,"Post-PEA-associated","Fig 5e",2.15652581343887,TRUE,TRUE,-0.3808259,"Discordant",FALSE
+"CILP","Post-PEA severe septum vs pre-PEA severe RV",101.5043,-0.636769,0.693707,"Post-PEA-associated","Fig 5f",2.15652581343887,TRUE,TRUE,-0.636769,"Discordant",FALSE
+"TUBB3","Moderate vs severe pre-PEA RV",1.584851,-0.46882,0.599753,"Within pre-PEA RV","Fig 2c",2.06487593282349,TRUE,TRUE,-0.46882,"Discordant",FALSE
+"TUBB3","Moderate vs intermediate pre-PEA RV",1.223152,-0.05249411,1,"Within pre-PEA RV","Fig 2d",2.06487593282349,TRUE,TRUE,-0.05249411,"Discordant",FALSE
+"TUBB3","Intermediate vs severe pre-PEA RV",1.561962,-0.4400622,0.9854095,"Within pre-PEA RV","Fig 2e",2.06487593282349,TRUE,TRUE,-0.4400622,"Discordant",FALSE
+"TUBB3","Moderate pre-PEA RV vs control RV",1.317273,0.5687408,0.4113457,"Disease vs control","Fig 3c",2.06487593282349,TRUE,TRUE,0.5687408,"Concordant",FALSE
+"TUBB3","Intermediate pre-PEA RV vs control RV",1.217375,0.5847624,0.4804791,"Disease vs control","Fig 3d",2.06487593282349,TRUE,TRUE,0.5847624,"Concordant",FALSE
+"TUBB3","Severe pre-PEA RV vs control RV",1.95873835077462,1.06199937023798,0.173875482751796,"Disease vs control","Fig 3e",2.06487593282349,TRUE,TRUE,1.06199937023798,"Concordant",FALSE
+"TUBB3","Pre-PEA septum vs control septum",1.06595093672822,1.25443453826097,0.361631747034712,"Regional comparison","Fig 4c",2.06487593282349,TRUE,TRUE,1.25443453826097,"Concordant",FALSE
+"TUBB3","Pre-PEA septum vs pre-PEA RV",NA,NA,NA,"Regional comparison","Fig 4e",2.06487593282349,FALSE,FALSE,NA,"Unavailable",FALSE
+"TUBB3","Post-PEA septum vs pre-PEA RV",0.7985553,-1.066937,0.2028353,"Post-PEA-associated","Fig 5c",2.06487593282349,TRUE,TRUE,-1.066937,"Discordant",FALSE
+"TUBB3","Post-PEA moderate septum vs pre-PEA moderate RV",0.9222081,-0.9336483,1,"Post-PEA-associated","Fig 5d",2.06487593282349,TRUE,TRUE,-0.9336483,"Discordant",FALSE
+"TUBB3","Post-PEA intermediate septum vs pre-PEA intermediate RV",0.5544925,-0.2893735,1,"Post-PEA-associated","Fig 5e",2.06487593282349,TRUE,TRUE,-0.2893735,"Discordant",FALSE
+"TUBB3","Post-PEA severe septum vs pre-PEA severe RV",1.034707,-2.660466,1,"Post-PEA-associated","Fig 5f",2.06487593282349,TRUE,TRUE,-2.660466,"Discordant",FALSE
+"ADRA1D","Moderate vs severe pre-PEA RV",0.499744,-0.826854,1,"Within pre-PEA RV","Fig 2c",-2.03631228040273,TRUE,TRUE,0.826854,"Concordant",FALSE
+"ADRA1D","Moderate vs intermediate pre-PEA RV",0.42526,-0.5928001,1,"Within pre-PEA RV","Fig 2d",-2.03631228040273,TRUE,TRUE,0.5928001,"Concordant",FALSE
+"ADRA1D","Intermediate vs severe pre-PEA RV",0.649672,-0.2310356,1,"Within pre-PEA RV","Fig 2e",-2.03631228040273,TRUE,TRUE,0.2310356,"Concordant",FALSE
+"ADRA1D","Moderate pre-PEA RV vs control RV",0.5095467,-0.9366002,0.2636516,"Disease vs control","Fig 3c",-2.03631228040273,TRUE,TRUE,0.9366002,"Concordant",FALSE
+"ADRA1D","Intermediate pre-PEA RV vs control RV",0.7128158,-0.3512758,0.6897676,"Disease vs control","Fig 3d",-2.03631228040273,TRUE,TRUE,0.3512758,"Concordant",FALSE
+"ADRA1D","Severe pre-PEA RV vs control RV",0.960759489313845,-0.125160847190081,0.899720484857408,"Disease vs control","Fig 3e",-2.03631228040273,TRUE,TRUE,0.125160847190081,"Concordant",FALSE
+"ADRA1D","Pre-PEA septum vs control septum",0.732026029953223,0.139193864926959,1,"Regional comparison","Fig 4c",-2.03631228040273,TRUE,TRUE,-0.139193864926959,"Discordant",FALSE
+"ADRA1D","Pre-PEA septum vs pre-PEA RV",NA,NA,NA,"Regional comparison","Fig 4e",-2.03631228040273,FALSE,FALSE,NA,"Unavailable",FALSE
+"ADRA1D","Post-PEA septum vs pre-PEA RV",0.3767287,-0.1659162,1,"Post-PEA-associated","Fig 5c",-2.03631228040273,TRUE,TRUE,0.1659162,"Concordant",FALSE
+"ADRA1D","Post-PEA moderate septum vs pre-PEA moderate RV",0.281369,-0.7277658,1,"Post-PEA-associated","Fig 5d",-2.03631228040273,TRUE,TRUE,0.7277658,"Concordant",FALSE
+"ADRA1D","Post-PEA intermediate septum vs pre-PEA intermediate RV",0.455817,-0.0576527,1,"Post-PEA-associated","Fig 5e",-2.03631228040273,TRUE,TRUE,0.0576527,"Concordant",FALSE
+"ADRA1D","Post-PEA severe septum vs pre-PEA severe RV",NA,NA,NA,"Post-PEA-associated","Fig 5f",-2.03631228040273,FALSE,FALSE,NA,"Unavailable",FALSE
+"RAMP3","Moderate vs severe pre-PEA RV",37.613824,-0.297048,0.141305,"Within pre-PEA RV","Fig 2c",1.94640884709061,TRUE,TRUE,-0.297048,"Discordant",FALSE
+"RAMP3","Moderate vs intermediate pre-PEA RV",35.12863,-0.2197089,0.3596026,"Within pre-PEA RV","Fig 2d",1.94640884709061,TRUE,TRUE,-0.2197089,"Discordant",FALSE
+"RAMP3","Intermediate vs severe pre-PEA RV",42.20794,-0.07417832,0.9905616,"Within pre-PEA RV","Fig 2e",1.94640884709061,TRUE,TRUE,-0.07417832,"Discordant",FALSE
+"RAMP3","Moderate pre-PEA RV vs control RV",42.39303,-0.6762672,8.055579e-08,"Disease vs control","Fig 3c",1.94640884709061,TRUE,TRUE,-0.6762672,"Discordant",FALSE
+"RAMP3","Intermediate pre-PEA RV vs control RV",49.70299,-0.467939,0.001694919,"Disease vs control","Fig 3d",1.94640884709061,TRUE,TRUE,-0.467939,"Discordant",FALSE
+"RAMP3","Severe pre-PEA RV vs control RV",59.2400277100352,-0.391814698932259,0.0239062114381471,"Disease vs control","Fig 3e",1.94640884709061,TRUE,TRUE,-0.391814698932259,"Discordant",FALSE
+"RAMP3","Pre-PEA septum vs control septum",63.4495840742319,0.156559233474154,0.707995704643279,"Regional comparison","Fig 4c",1.94640884709061,TRUE,TRUE,0.156559233474154,"Concordant",FALSE
+"RAMP3","Pre-PEA septum vs pre-PEA RV",24.7544783369506,0.0978300946698685,0.996179203127463,"Regional comparison","Fig 4e",1.94640884709061,TRUE,TRUE,0.0978300946698685,"Concordant",FALSE
+"RAMP3","Post-PEA septum vs pre-PEA RV",29.17268,0.2343654,0.2008365,"Post-PEA-associated","Fig 5c",1.94640884709061,TRUE,TRUE,0.2343654,"Concordant",FALSE
+"RAMP3","Post-PEA moderate septum vs pre-PEA moderate RV",30.2812192690862,0.360014261942862,0.19961425046971,"Post-PEA-associated","Fig 5d",1.94640884709061,TRUE,TRUE,0.360014261942862,"Concordant",FALSE
+"RAMP3","Post-PEA intermediate septum vs pre-PEA intermediate RV",29.04466,0.08407927,0.9156001,"Post-PEA-associated","Fig 5e",1.94640884709061,TRUE,TRUE,0.08407927,"Concordant",FALSE
+"RAMP3","Post-PEA severe septum vs pre-PEA severe RV",26.88702,0.162286,0.8932037,"Post-PEA-associated","Fig 5f",1.94640884709061,TRUE,TRUE,0.162286,"Concordant",FALSE
+"EMB","Moderate vs severe pre-PEA RV",111.006585,-0.200953,0.48487,"Within pre-PEA RV","Fig 2c",1.89985567273515,TRUE,TRUE,-0.200953,"Discordant",FALSE
+"EMB","Moderate vs intermediate pre-PEA RV",104.3762,-0.187839,0.6706617,"Within pre-PEA RV","Fig 2d",1.89985567273515,TRUE,TRUE,-0.187839,"Discordant",FALSE
+"EMB","Intermediate vs severe pre-PEA RV",121.1917,-0.01328499,0.9976859,"Within pre-PEA RV","Fig 2e",1.89985567273515,TRUE,TRUE,-0.01328499,"Discordant",FALSE
+"EMB","Moderate pre-PEA RV vs control RV",123.6546,-0.5038442,0.00640454,"Disease vs control","Fig 3c",1.89985567273515,TRUE,TRUE,-0.5038442,"Discordant",FALSE
+"EMB","Intermediate pre-PEA RV vs control RV",140.3212,-0.3287813,0.2323318,"Disease vs control","Fig 3d",1.89985567273515,TRUE,TRUE,-0.3287813,"Discordant",FALSE
+"EMB","Severe pre-PEA RV vs control RV",164.396903978667,-0.314936243897337,0.118471036385666,"Disease vs control","Fig 3e",1.89985567273515,TRUE,TRUE,-0.314936243897337,"Discordant",FALSE
+"EMB","Pre-PEA septum vs control septum",118.903789887832,0.546166422894111,0.170320471419154,"Regional comparison","Fig 4c",1.89985567273515,TRUE,TRUE,0.546166422894111,"Concordant",FALSE
+"EMB","Pre-PEA septum vs pre-PEA RV",40.4020303880014,-0.13363960425086,0.98534777542238,"Regional comparison","Fig 4e",1.89985567273515,TRUE,TRUE,-0.13363960425086,"Discordant",FALSE
+"EMB","Post-PEA septum vs pre-PEA RV",69.96842,-0.161242,0.5970243,"Post-PEA-associated","Fig 5c",1.89985567273515,TRUE,TRUE,-0.161242,"Discordant",FALSE
+"EMB","Post-PEA moderate septum vs pre-PEA moderate RV",75.20389,-0.08938455,0.869254,"Post-PEA-associated","Fig 5d",1.89985567273515,TRUE,TRUE,-0.08938455,"Discordant",FALSE
+"EMB","Post-PEA intermediate septum vs pre-PEA intermediate RV",57.53878,-0.3819105,0.6475154,"Post-PEA-associated","Fig 5e",1.89985567273515,TRUE,TRUE,-0.3819105,"Discordant",FALSE
+"EMB","Post-PEA severe septum vs pre-PEA severe RV",83.79026,-0.03032242,0.9809589,"Post-PEA-associated","Fig 5f",1.89985567273515,TRUE,TRUE,-0.03032242,"Discordant",FALSE
+"SFRP1","Moderate vs severe pre-PEA RV",303.741045,0.341234,0.495595,"Within pre-PEA RV","Fig 2c",1.84923765479273,TRUE,TRUE,0.341234,"Concordant",FALSE
+"SFRP1","Moderate vs intermediate pre-PEA RV",295.3532,0.1629954,0.7803597,"Within pre-PEA RV","Fig 2d",1.84923765479273,TRUE,TRUE,0.1629954,"Concordant",FALSE
+"SFRP1","Intermediate vs severe pre-PEA RV",283.0959,0.1792376,0.9882211,"Within pre-PEA RV","Fig 2e",1.84923765479273,TRUE,TRUE,0.1792376,"Concordant",FALSE
+"SFRP1","Moderate pre-PEA RV vs control RV",320.8943,0.6031737,0.0561868,"Disease vs control","Fig 3c",1.84923765479273,TRUE,TRUE,0.6031737,"Concordant",FALSE
+"SFRP1","Intermediate pre-PEA RV vs control RV",296.671498545303,0.4304179879341,0.0913979584461894,"Disease vs control","Fig 3d",1.84923765479273,TRUE,TRUE,0.4304179879341,"Concordant",FALSE
+"SFRP1","Severe pre-PEA RV vs control RV",307.495330945618,0.250177996987861,0.542006457132866,"Disease vs control","Fig 3e",1.84923765479273,TRUE,TRUE,0.250177996987861,"Concordant",FALSE
+"SFRP1","Pre-PEA septum vs control septum",481.812118455724,1.46557144855013,0.000112883598473607,"Regional comparison","Fig 4c",1.84923765479273,TRUE,TRUE,1.46557144855013,"Concordant",TRUE
+"SFRP1","Pre-PEA septum vs pre-PEA RV",97.609390839828,-0.238622733140833,0.98534777542238,"Regional comparison","Fig 4e",1.84923765479273,TRUE,TRUE,-0.238622733140833,"Discordant",FALSE
+"SFRP1","Post-PEA septum vs pre-PEA RV",174.4655,-0.3463711,0.2353349,"Post-PEA-associated","Fig 5c",1.84923765479273,TRUE,TRUE,-0.3463711,"Discordant",FALSE
+"SFRP1","Post-PEA moderate septum vs pre-PEA moderate RV",166.211544005642,-0.207201057465472,0.770464211766024,"Post-PEA-associated","Fig 5d",1.84923765479273,TRUE,TRUE,-0.207201057465472,"Discordant",FALSE
+"SFRP1","Post-PEA intermediate septum vs pre-PEA intermediate RV",185.2178,-0.5214004,0.534133,"Post-PEA-associated","Fig 5e",1.84923765479273,TRUE,TRUE,-0.5214004,"Discordant",FALSE
+"SFRP1","Post-PEA severe septum vs pre-PEA severe RV",169.1643,-0.2758386,0.7078724,"Post-PEA-associated","Fig 5f",1.84923765479273,TRUE,TRUE,-0.2758386,"Discordant",FALSE
+"PLOD2","Moderate vs severe pre-PEA RV",215.185431,-0.213644,0.03538,"Within pre-PEA RV","Fig 2c",1.83043696640855,TRUE,TRUE,-0.213644,"Discordant",FALSE
+"PLOD2","Moderate vs intermediate pre-PEA RV",207.2343,-0.2724861,0.03941809,"Within pre-PEA RV","Fig 2d",1.83043696640855,TRUE,TRUE,-0.2724861,"Discordant",FALSE
+"PLOD2","Intermediate vs severe pre-PEA RV",243.6362,0.05556272,0.9905616,"Within pre-PEA RV","Fig 2e",1.83043696640855,TRUE,TRUE,0.05556272,"Concordant",FALSE
+"PLOD2","Moderate pre-PEA RV vs control RV",220.9013,-0.1285383,0.2544833,"Disease vs control","Fig 3c",1.83043696640855,TRUE,TRUE,-0.1285383,"Discordant",FALSE
+"PLOD2","Intermediate pre-PEA RV vs control RV",260.0524,0.130367,0.399695,"Disease vs control","Fig 3d",1.83043696640855,TRUE,TRUE,0.130367,"Concordant",FALSE
+"PLOD2","Severe pre-PEA RV vs control RV",290.255735907942,0.075457072494771,0.608438672444936,"Disease vs control","Fig 3e",1.83043696640855,TRUE,TRUE,0.075457072494771,"Concordant",FALSE
+"PLOD2","Pre-PEA septum vs control septum",240.809950287004,-0.136259543754451,0.584974737740326,"Regional comparison","Fig 4c",1.83043696640855,TRUE,TRUE,-0.136259543754451,"Discordant",FALSE
+"PLOD2","Pre-PEA septum vs pre-PEA RV",99.3745317665062,0.416567968954967,0.522616006162339,"Regional comparison","Fig 4e",1.83043696640855,TRUE,TRUE,0.416567968954967,"Concordant",FALSE
+"PLOD2","Post-PEA septum vs pre-PEA RV",159.9828,0.1817056,0.1234571,"Post-PEA-associated","Fig 5c",1.83043696640855,TRUE,TRUE,0.1817056,"Concordant",FALSE
+"PLOD2","Post-PEA moderate septum vs pre-PEA moderate RV",157.0689,0.2298349,0.2125283,"Post-PEA-associated","Fig 5d",1.83043696640855,TRUE,TRUE,0.2298349,"Concordant",FALSE
+"PLOD2","Post-PEA intermediate septum vs pre-PEA intermediate RV",159.0274,0.1657592,0.6861095,"Post-PEA-associated","Fig 5e",1.83043696640855,TRUE,TRUE,0.1657592,"Concordant",FALSE
+"PLOD2","Post-PEA severe septum vs pre-PEA severe RV",166.8757,0.07202938,0.9101647,"Post-PEA-associated","Fig 5f",1.83043696640855,TRUE,TRUE,0.07202938,"Concordant",FALSE
+"TMOD4","Moderate vs severe pre-PEA RV",2.838493,0.101417,0.926227,"Within pre-PEA RV","Fig 2c",-1.78332246320972,TRUE,TRUE,-0.101417,"Discordant",FALSE
+"TMOD4","Moderate vs intermediate pre-PEA RV",3.13072,-0.3579458,0.6561022,"Within pre-PEA RV","Fig 2d",-1.78332246320972,TRUE,TRUE,0.3579458,"Concordant",FALSE
+"TMOD4","Intermediate vs severe pre-PEA RV",3.193612,0.4474573,0.9776141,"Within pre-PEA RV","Fig 2e",-1.78332246320972,TRUE,TRUE,-0.4474573,"Discordant",FALSE
+"TMOD4","Moderate pre-PEA RV vs control RV",2.973561,0.4821665,0.3397792,"Disease vs control","Fig 3c",-1.78332246320972,TRUE,TRUE,-0.4821665,"Discordant",FALSE
+"TMOD4","Intermediate pre-PEA RV vs control RV",3.476813,0.8190878,0.06901833,"Disease vs control","Fig 3d",-1.78332246320972,TRUE,TRUE,-0.8190878,"Discordant",FALSE
+"TMOD4","Severe pre-PEA RV vs control RV",2.88997919127805,0.36342488152065,0.500073059072862,"Disease vs control","Fig 3e",-1.78332246320972,TRUE,TRUE,-0.36342488152065,"Discordant",FALSE
+"TMOD4","Pre-PEA septum vs control septum",1.88610549307967,-2.03771196713838,0.0277580054684295,"Regional comparison","Fig 4c",-1.78332246320972,TRUE,TRUE,2.03771196713838,"Concordant",TRUE
+"TMOD4","Pre-PEA septum vs pre-PEA RV",2.71433366519321,-0.0903889605243091,1,"Regional comparison","Fig 4e",-1.78332246320972,TRUE,TRUE,0.0903889605243091,"Concordant",FALSE
+"TMOD4","Post-PEA septum vs pre-PEA RV",2.568611,0.4950625,0.2669169,"Post-PEA-associated","Fig 5c",-1.78332246320972,TRUE,TRUE,-0.4950625,"Discordant",FALSE
+"TMOD4","Post-PEA moderate septum vs pre-PEA moderate RV",2.413718,0.6258857,0.5147492,"Post-PEA-associated","Fig 5d",-1.78332246320972,TRUE,TRUE,-0.6258857,"Discordant",FALSE
+"TMOD4","Post-PEA intermediate septum vs pre-PEA intermediate RV",2.5532,-0.03710459,0.9853189,"Post-PEA-associated","Fig 5e",-1.78332246320972,TRUE,TRUE,0.03710459,"Concordant",FALSE
+"TMOD4","Post-PEA severe septum vs pre-PEA severe RV",2.899407,1.336762,0.5605961,"Post-PEA-associated","Fig 5f",-1.78332246320972,TRUE,TRUE,-1.336762,"Discordant",FALSE
+"FXYD5","Moderate vs severe pre-PEA RV",35.214683,-0.195797,0.398438,"Within pre-PEA RV","Fig 2c",1.73713819680395,TRUE,TRUE,-0.195797,"Discordant",FALSE
+"FXYD5","Moderate vs intermediate pre-PEA RV",33.12996,-0.1638442,0.5668306,"Within pre-PEA RV","Fig 2d",1.73713819680395,TRUE,TRUE,-0.1638442,"Discordant",FALSE
+"FXYD5","Intermediate vs severe pre-PEA RV",38.16665,-0.03030879,0.9960254,"Within pre-PEA RV","Fig 2e",1.73713819680395,TRUE,TRUE,-0.03030879,"Discordant",FALSE
+"FXYD5","Moderate pre-PEA RV vs control RV",39.6039442757076,-0.508354321006217,0.000330777180258507,"Disease vs control","Fig 3c",1.73713819680395,TRUE,TRUE,-0.508354321006217,"Discordant",FALSE
+"FXYD5","Intermediate pre-PEA RV vs control RV",44.6051722468737,-0.356176867996114,0.0354674885833914,"Disease vs control","Fig 3d",1.73713819680395,TRUE,TRUE,-0.356176867996114,"Discordant",FALSE
+"FXYD5","Severe pre-PEA RV vs control RV",52.2206694159268,-0.326392471398364,0.060530522573233,"Disease vs control","Fig 3e",1.73713819680395,TRUE,TRUE,-0.326392471398364,"Discordant",FALSE
+"FXYD5","Pre-PEA septum vs control septum",52.1101982883863,0.197149301398543,0.622860054209542,"Regional comparison","Fig 4c",1.73713819680395,TRUE,TRUE,0.197149301398543,"Concordant",FALSE
+"FXYD5","Pre-PEA septum vs pre-PEA RV",16.8068045202595,0.618201251130627,0.796377179018909,"Regional comparison","Fig 4e",1.73713819680395,TRUE,TRUE,0.618201251130627,"Concordant",FALSE
+"FXYD5","Post-PEA septum vs pre-PEA RV",26.45191,0.2879833,0.183723,"Post-PEA-associated","Fig 5c",1.73713819680395,TRUE,TRUE,0.2879833,"Concordant",FALSE
+"FXYD5","Post-PEA moderate septum vs pre-PEA moderate RV",30.9359046884575,0.361491497550629,0.397120708143929,"Post-PEA-associated","Fig 5d",1.73713819680395,TRUE,TRUE,0.361491497550629,"Concordant",FALSE
+"FXYD5","Post-PEA intermediate septum vs pre-PEA intermediate RV",25.88027,0.2156597,0.7158998,"Post-PEA-associated","Fig 5e",1.73713819680395,TRUE,TRUE,0.2156597,"Concordant",FALSE
+"FXYD5","Post-PEA severe septum vs pre-PEA severe RV",17.91395,0.1594543,0.9021921,"Post-PEA-associated","Fig 5f",1.73713819680395,TRUE,TRUE,0.1594543,"Concordant",FALSE
+"LOXL1","Moderate vs severe pre-PEA RV",42.985044,-1.019421,5e-06,"Within pre-PEA RV","Fig 2c",1.60095571924723,TRUE,TRUE,-1.019421,"Discordant",TRUE
+"LOXL1","Moderate vs intermediate pre-PEA RV",37.00656,-0.6919089,0.05674719,"Within pre-PEA RV","Fig 2d",1.60095571924723,TRUE,TRUE,-0.6919089,"Discordant",FALSE
+"LOXL1","Intermediate vs severe pre-PEA RV",56.31024,-0.3241241,0.9850598,"Within pre-PEA RV","Fig 2e",1.60095571924723,TRUE,TRUE,-0.3241241,"Discordant",FALSE
+"LOXL1","Moderate pre-PEA RV vs control RV",45.19184,-1.298108,9.992345e-10,"Disease vs control","Fig 3c",1.60095571924723,TRUE,TRUE,-1.298108,"Discordant",TRUE
+"LOXL1","Intermediate pre-PEA RV vs control RV",63.55572,-0.6157645,0.0637829,"Disease vs control","Fig 3d",1.60095571924723,TRUE,TRUE,-0.6157645,"Discordant",FALSE
+"LOXL1","Severe pre-PEA RV vs control RV",84.7386581226734,-0.289538400145139,0.272537618585795,"Disease vs control","Fig 3e",1.60095571924723,TRUE,TRUE,-0.289538400145139,"Discordant",FALSE
+"LOXL1","Pre-PEA septum vs control septum",91.3730271447001,-0.414396454399991,0.415599734619312,"Regional comparison","Fig 4c",1.60095571924723,TRUE,TRUE,-0.414396454399991,"Discordant",FALSE
+"LOXL1","Pre-PEA septum vs pre-PEA RV",34.3496582562624,1.35478646056799,0.0345619286947089,"Regional comparison","Fig 4e",1.60095571924723,TRUE,TRUE,1.35478646056799,"Concordant",TRUE
+"LOXL1","Post-PEA septum vs pre-PEA RV",31.8976,0.387216,0.2013076,"Post-PEA-associated","Fig 5c",1.60095571924723,TRUE,TRUE,0.387216,"Concordant",FALSE
+"LOXL1","Post-PEA moderate septum vs pre-PEA moderate RV",32.4538912145107,0.710747118209858,0.0671740786739321,"Post-PEA-associated","Fig 5d",1.60095571924723,TRUE,TRUE,0.710747118209858,"Concordant",FALSE
+"LOXL1","Post-PEA intermediate septum vs pre-PEA intermediate RV",32.85045,0.5013979,0.5970785,"Post-PEA-associated","Fig 5e",1.60095571924723,TRUE,TRUE,0.5013979,"Concordant",FALSE
+"LOXL1","Post-PEA severe septum vs pre-PEA severe RV",28.54824,-0.6812107,0.2123145,"Post-PEA-associated","Fig 5f",1.60095571924723,TRUE,TRUE,-0.6812107,"Discordant",FALSE
+"STC2","Moderate vs severe pre-PEA RV",50.969126,0.088519,0.803232,"Within pre-PEA RV","Fig 2c",-1.56031505290103,TRUE,TRUE,-0.088519,"Discordant",FALSE
+"STC2","Moderate vs intermediate pre-PEA RV",48.47893,0.01863443,0.9760329,"Within pre-PEA RV","Fig 2d",-1.56031505290103,TRUE,TRUE,-0.01863443,"Discordant",FALSE
+"STC2","Intermediate vs severe pre-PEA RV",50.84014,0.065595,0.9952889,"Within pre-PEA RV","Fig 2e",-1.56031505290103,TRUE,TRUE,-0.065595,"Discordant",FALSE
+"STC2","Moderate pre-PEA RV vs control RV",63.38255,-0.6735286,3.497127e-07,"Disease vs control","Fig 3c",-1.56031505290103,TRUE,TRUE,0.6735286,"Concordant",FALSE
+"STC2","Intermediate pre-PEA RV vs control RV",66.20525,-0.6974407,0.0003675509,"Disease vs control","Fig 3d",-1.56031505290103,TRUE,TRUE,0.6974407,"Concordant",FALSE
+"STC2","Severe pre-PEA RV vs control RV",76.5216274257975,-0.768839880823975,2.72712928151774e-05,"Disease vs control","Fig 3e",-1.56031505290103,TRUE,TRUE,0.768839880823975,"Concordant",FALSE
+"STC2","Pre-PEA septum vs control septum",90.1051867041724,-0.0937328794022482,0.872352404832267,"Regional comparison","Fig 4c",-1.56031505290103,TRUE,TRUE,0.0937328794022482,"Concordant",FALSE
+"STC2","Pre-PEA septum vs pre-PEA RV",34.2130373102836,0.623299149857292,0.708539712225712,"Regional comparison","Fig 4e",-1.56031505290103,TRUE,TRUE,-0.623299149857292,"Discordant",FALSE
+"STC2","Post-PEA septum vs pre-PEA RV",34.92072,-0.06671025,0.8315141,"Post-PEA-associated","Fig 5c",-1.56031505290103,TRUE,TRUE,0.06671025,"Concordant",FALSE
+"STC2","Post-PEA moderate septum vs pre-PEA moderate RV",35.4174951484554,-0.348823247368636,0.395494996189016,"Post-PEA-associated","Fig 5d",-1.56031505290103,TRUE,TRUE,0.348823247368636,"Concordant",FALSE
+"STC2","Post-PEA intermediate septum vs pre-PEA intermediate RV",33.99122,0.1526902,0.8766393,"Post-PEA-associated","Fig 5e",-1.56031505290103,TRUE,TRUE,-0.1526902,"Discordant",FALSE
+"STC2","Post-PEA severe septum vs pre-PEA severe RV",35.55417,0.1341455,0.8928488,"Post-PEA-associated","Fig 5f",-1.56031505290103,TRUE,TRUE,-0.1341455,"Discordant",FALSE
+"SLC6A6","Moderate vs severe pre-PEA RV",216.672322,-1.008948,0.000105,"Within pre-PEA RV","Fig 2c",1.53225841201463,TRUE,TRUE,-1.008948,"Discordant",TRUE
+"SLC6A6","Moderate vs intermediate pre-PEA RV",171.7851,-0.4683989,0.1209848,"Within pre-PEA RV","Fig 2d",1.53225841201463,TRUE,TRUE,-0.4683989,"Discordant",FALSE
+"SLC6A6","Intermediate vs severe pre-PEA RV",262.6648,-0.5429643,0.7756478,"Within pre-PEA RV","Fig 2e",1.53225841201463,TRUE,TRUE,-0.5429643,"Discordant",FALSE
+"SLC6A6","Moderate pre-PEA RV vs control RV",248.1909,-1.555965,1.491112e-13,"Disease vs control","Fig 3c",1.53225841201463,TRUE,TRUE,-1.555965,"Discordant",TRUE
+"SLC6A6","Intermediate pre-PEA RV vs control RV",317.7743,-1.098321,7.461816e-06,"Disease vs control","Fig 3d",1.53225841201463,TRUE,TRUE,-1.098321,"Discordant",TRUE
+"SLC6A6","Severe pre-PEA RV vs control RV",460.678679385315,-0.559159037509214,0.114921566608775,"Disease vs control","Fig 3e",1.53225841201463,TRUE,TRUE,-0.559159037509214,"Discordant",FALSE
+"SLC6A6","Pre-PEA septum vs control septum",743.924160243518,-0.989121634438203,0.126687450647778,"Regional comparison","Fig 4c",1.53225841201463,TRUE,TRUE,-0.989121634438203,"Discordant",FALSE
+"SLC6A6","Pre-PEA septum vs pre-PEA RV",301.355285190628,2.82799784685498,2.2879196256927e-32,"Regional comparison","Fig 4e",1.53225841201463,TRUE,TRUE,2.82799784685498,"Concordant",TRUE
+"SLC6A6","Post-PEA septum vs pre-PEA RV",243.865,1.442548,7.622468e-10,"Post-PEA-associated","Fig 5c",1.53225841201463,TRUE,TRUE,1.442548,"Concordant",TRUE
+"SLC6A6","Post-PEA moderate septum vs pre-PEA moderate RV",216.22716542234,1.08329180094606,0.00352029524256784,"Post-PEA-associated","Fig 5d",1.53225841201463,TRUE,TRUE,1.08329180094606,"Concordant",TRUE
+"SLC6A6","Post-PEA intermediate septum vs pre-PEA intermediate RV",274.5466,1.875294,0.0001894104,"Post-PEA-associated","Fig 5e",1.53225841201463,TRUE,TRUE,1.875294,"Concordant",TRUE
+"SLC6A6","Post-PEA severe septum vs pre-PEA severe RV",237.0541,1.198274,0.1179068,"Post-PEA-associated","Fig 5f",1.53225841201463,TRUE,TRUE,1.198274,"Concordant",FALSE

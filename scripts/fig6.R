@@ -1,4 +1,4 @@
-# Figure 6 — three-panel CTEPH validation of the current Figure 5 signature
+# Figure 6 — three-panel CTEPH descriptive assessment of the current Figure 5 signature
 #
 # Required upstream output:
 #   outputs/Fig5_outputs/Figure5_source_data.xlsx
@@ -42,6 +42,12 @@ signature_genes <- signature_genes[!is.na(signature_genes) & signature_genes != 
 ct  <- read_cteph_data(project_dir, signature_genes)
 dat <- ct$data
 sm  <- signature_summary(dat)
+
+# Additional source data only; the plotted effects are unchanged.
+source(file.path(script_dir, "06_cteph_direction_helpers.R"))
+direction_audit <- cteph_direction_audit(ct$full, f5$consensus)
+write.csv(direction_audit$gene_level, file.path(out_dir, "CTEPH_gene_direction.csv"), row.names = FALSE)
+write.csv(direction_audit$summary, file.path(out_dir, "CTEPH_direction_summary.csv"), row.names = FALSE)
 
 contrast_order <- as.character(ct$spec$label)
 
@@ -275,7 +281,7 @@ p6C <- ggplot(heat, aes(x = Contrast_short, y = Gene, fill = log2FC_display)) +
     ),
     subtitle = paste0(
       "All 12 contrasts; grey/NA = not reported or not estimable; ",
-      "* padj < 0.05, ** padj < 0.01, *** padj < 0.001"
+      "Stars: padj only; * <0.05, ** <0.01, *** <0.001 (no FC cutoff)"
     ),
     x = NULL,
     y = NULL,
@@ -399,6 +405,10 @@ openxlsx::write.xlsx(
     Signature_genes = data.frame(Gene = signature_genes),
     All_CTEPH_data = dat,
     Contrast_summary = sm,
+    Direction_gene_level = direction_audit$gene_level,
+    Direction_summary = direction_audit$summary,
+    Direction_by_expected = direction_audit$by_expected_direction,
+    Direction_definitions = direction_audit$definitions,
     PanelA_gene_values = disease,
     PanelB_summary = other_sm,
     PanelC_gene_ranking = gene_rank,
@@ -419,3 +429,7 @@ openxlsx::write.xlsx(
 
 print(fig6)
 message("Figure 6 finished: ", out_dir)
+
+write.csv(direction_audit$by_expected_direction,file.path(out_dir,'CTEPH_by_expected_direction.csv'),row.names=FALSE)
+
+writeLines('Figure 6. Separate descriptive CTEPH assessment of the derived35-gene panel. (A) Pre-PEA RV disease-versus-control gene-level log2FC distributions. (B) Regional/post-PEA gene summaries. (C) Twenty recurrently significant genes; Figure S7 displays all35. Asterisks indicate adjusted P values alone (*<0.05, **<0.01, ***<0.001), not a combined fold-change criterion. Post-PEA-associated contrasts differ in sampling region and time and do not demonstrate direct molecular reversal within the same patient or tissue compartment. Coverage, expected-down genes and discovery-direction concordance are provided in source data. CTEPH was excluded from panel selection.',file.path(out_dir,'Figure6_legend.txt'))

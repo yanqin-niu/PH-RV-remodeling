@@ -1,0 +1,7 @@
+"Item","Definition"
+"Source","Boucherat et al 2022; DOI 10.1038/s44161-022-00113-w; imported statistical results, not refitted."
+"Tissue","MOESM3 dRV vs CTRL; 10 dRV and 10 CTRL tissue columns; supplied log2Ratio=dRV/CTRL; qval_Limma<0.05 and abs(zscore)>=2; no transcriptomic twofold cutoff."
+"Olink","MOESM4 two sheets; actual header row 2; supplied adjusted P<0.05 from Welch tests; disease-minus-control NPX difference, opposite to supplied estimate; no extra FC cutoff or additional log transform. Adjustment method not re-inferred from summary data."
+"Mapping","Frozen reciprocal-unique rat-human RGD mapping, then exact human symbol; NTproBNP explicitly NPPB-derived; multi-gene tissue groups excluded; assay IDs retained."
+"Aggregation","At least one significant concordant assay and no significant opposite assay within a contrast. Olink plot annotation is union of two contrast-specific support calls; contrasts are related, not independent replications. All assay rows retained."
+"Independence","Tissue proteomics and GSE198618 originate from the same source study; participant crosswalk to transcriptomic cohorts and plasma not available in the files used. Overlap cannot be excluded. Cross-modality annotation, not independent-subject validation. Plasma cannot establish RV tissue origin."

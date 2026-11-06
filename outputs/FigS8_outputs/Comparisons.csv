@@ -1,0 +1,5 @@
+"A","B","Common_effects","Spearman","Direction_agreement","Both_strict","Both_strict_same_direction","Panel_common_effects","Panel_direction_agree","Panel_both_expected_direction","Panel_both_FDR_concordant","Panel_both_strict_concordant"
+"SE15_Group","PE25_Group",19784,0.17305411962203,0.575262838657501,0,0,32,24,19,0,0
+"SE15_Sex_Group","PE25_Sex_Group",19784,0.144386180990719,0.560402345329559,2,1,32,21,19,0,0
+"SE15_Sex_Group","Joint40_Batch_Sex",25894,0.856620450088089,0.809376689580598,757,757,34,31,26,11,7
+"PE25_Sex_Group","Joint40_Batch_Sex",20450,0.688508281524627,0.802542787286064,1,1,32,24,20,0,0

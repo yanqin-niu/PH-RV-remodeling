@@ -1,0 +1,208 @@
+Warning messages:
+1: package 'dplyr' was built under R version 4.5.3 
+2: package 'tidyr' was built under R version 4.5.3 
+3: package 'stringr' was built under R version 4.5.1 
+4: package 'ggplot2' was built under R version 4.5.3 
+5: package 'forcats' was built under R version 4.5.1 
+PREFILTER GSE266139 all20: 14970 -> 14970 features; 20 cohort columns; rowSums>=10
+converting counts to integer mode
+New names:
+• `` -> `...1`
+• `` -> `...2`
+• `` -> `...3`
+• `` -> `...4`
+• `` -> `...5`
+• `` -> `...6`
+• `` -> `...7`
+• `` -> `...8`
+• `` -> `...9`
+• `` -> `...10`
+• `` -> `...11`
+• `` -> `...12`
+• `` -> `...13`
+• `` -> `...14`
+• `` -> `...15`
+• `` -> `...16`
+• `` -> `...17`
+• `` -> `...18`
+• `` -> `...19`
+• `` -> `...20`
+• `` -> `...21`
+• `` -> `...22`
+• `` -> `...23`
+• `` -> `...24`
+• `` -> `...25`
+• `` -> `...26`
+• `` -> `...27`
+• `` -> `...28`
+• `` -> `...29`
+• `` -> `...30`
+• `` -> `...31`
+• `` -> `...32`
+• `` -> `...33`
+• `` -> `...34`
+• `` -> `...35`
+• `` -> `...36`
+• `` -> `...37`
+• `` -> `...38`
+PREFILTER GSE133402 all12: 23551 -> 16715 features; 12 cohort columns; rowSums>=10
+PREFILTER condition / Hypoxia / Ctrl: 16715 -> 15995 features; 6 cohort columns; rowSums>=10
+converting counts to integer mode
+'select()' returned 1:many mapping between keys and columns
+PREFILTER condition / dRV / Ctrl: 16777 -> 15310 features; 32 cohort columns; rowSums>=10
+converting counts to integer mode
+Warning message:
+In run_deseq_simple(mat_sym, group, c("condition", "dRV", "Ctrl"),  :
+  Normalized counts supplied to DESeq2: exploratory approximation; obtain raw counts for confirmatory inference.
+'select()' returned 1:many mapping between keys and columns
+PREFILTER condition / dRV / Ctrl: 14047 -> 13625 features; 14 cohort columns; rowSums>=10
+converting counts to integer mode
+'select()' returned 1:many mapping between keys and columns
+PREFILTER condition / dRV / Ctrl: 14165 -> 13933 features; 26 cohort columns; rowSums>=10
+converting counts to integer mode
+'select()' returned 1:many mapping between keys and columns
+PREFILTER GSE240923 batch2: 14065 -> 13945 features; 27 cohort columns; rowSums>=10
+converting counts to integer mode
+PREFILTER GSE186989: 32619 -> 17850 features; 8 cohort columns; rowSums>=10
+converting counts to integer mode
+
+========== GSE240921 RAW-DATA DIAGNOSTIC ==========
+Input file: E:/百度云同步盘/右心生信分析/PH-RV-remodeling/PH-RV-remodeling_new/data/raw/GSE240921_processed-data-human.xlsx
+Workbook sheets: info table | count matrix
+Sheet 2 dimensions (rows x columns): 48738 x 41
+First column name: id
+Expression columns read from sheet 2:
+ [1] "Control_1"       "Control_2"       "Control_3"       "Control_4"      
+ [5] "Control_5"       "Compensated_1"   "Compensated_2"   "Compensated_3"  
+ [9] "Compensated_4"   "Compensated_5"   "Decompensated_1" "Decompensated_2"
+[13] "Decompensated_3" "Decompensated_4" "Decompensated_5" "RV-Normal_6"    
+[17] "RV-Normal_8"     "RV-Normal_10"    "RV-Normal_2"     "RV-Normal_9"    
+[21] "RV-Normal_7"     "RV-Normal_1"     "RV-Normal_4"     "RV-Compen_7"    
+[25] "RV-Compen_8"     "RV-Compen_4"     "RV-Compen_10"    "RV-Compen_9"    
+[29] "RV-Compen_6"     "RV-Compen_5"     "RV-Compen_3"     "RV-Failing_5"   
+[33] "RV-Failing_2"    "RV-Failing_4"    "RV-Failing_7"    "RV-Failing_9"   
+[37] "RV-Failing_6"    "RV-Failing_10"   "RV-Failing_8"    "RV-Failing_1"   
+All 40 human RV samples retained and assigned to primary clinical groups:
+          Sample Group
+       Control_1  Ctrl
+       Control_2  Ctrl
+       Control_3  Ctrl
+       Control_4  Ctrl
+       Control_5  Ctrl
+   Compensated_1   cRV
+   Compensated_2   cRV
+   Compensated_3   cRV
+   Compensated_4   cRV
+   Compensated_5   cRV
+ Decompensated_1   dRV
+ Decompensated_2   dRV
+ Decompensated_3   dRV
+ Decompensated_4   dRV
+ Decompensated_5   dRV
+     RV-Normal_6  Ctrl
+     RV-Normal_8  Ctrl
+    RV-Normal_10  Ctrl
+     RV-Normal_2  Ctrl
+     RV-Normal_9  Ctrl
+     RV-Normal_7  Ctrl
+     RV-Normal_1  Ctrl
+     RV-Normal_4  Ctrl
+     RV-Compen_7   cRV
+     RV-Compen_8   cRV
+     RV-Compen_4   cRV
+    RV-Compen_10   cRV
+     RV-Compen_9   cRV
+     RV-Compen_6   cRV
+     RV-Compen_5   cRV
+     RV-Compen_3   cRV
+    RV-Failing_5   cRV
+    RV-Failing_2   dRV
+    RV-Failing_4   dRV
+    RV-Failing_7   dRV
+    RV-Failing_9   dRV
+    RV-Failing_6   dRV
+   RV-Failing_10   dRV
+    RV-Failing_8   dRV
+    RV-Failing_1   dRV
+Group counts:
+group
+ cRV Ctrl  dRV 
+  14   13   13 
+Fraction of finite values that are integer-like: 1
+Expression-value range:       0 to 1425410
+'select()' returned 1:many mapping between keys and columns
+NPPA values entering DESeq2:
+          Sample Group  NPPA
+       Control_1  Ctrl     4
+       Control_2  Ctrl     2
+       Control_3  Ctrl     0
+       Control_4  Ctrl     2
+       Control_5  Ctrl     4
+   Compensated_1   cRV    28
+   Compensated_2   cRV    44
+   Compensated_3   cRV   257
+   Compensated_4   cRV    56
+   Compensated_5   cRV    63
+ Decompensated_1   dRV   257
+ Decompensated_2   dRV    24
+ Decompensated_3   dRV   294
+ Decompensated_4   dRV   377
+ Decompensated_5   dRV   516
+     RV-Normal_6  Ctrl   132
+     RV-Normal_8  Ctrl    90
+    RV-Normal_10  Ctrl   145
+     RV-Normal_2  Ctrl     7
+     RV-Normal_9  Ctrl  6406
+     RV-Normal_7  Ctrl    10
+     RV-Normal_1  Ctrl    10
+     RV-Normal_4  Ctrl   228
+     RV-Compen_7   cRV     0
+     RV-Compen_8   cRV     5
+     RV-Compen_4   cRV     4
+    RV-Compen_10   cRV   143
+     RV-Compen_9   cRV   751
+     RV-Compen_6   cRV  1416
+     RV-Compen_5   cRV    18
+     RV-Compen_3   cRV  4081
+    RV-Failing_5   cRV     2
+    RV-Failing_2   dRV   300
+    RV-Failing_4   dRV 11701
+    RV-Failing_7   dRV    44
+    RV-Failing_9   dRV    72
+    RV-Failing_6   dRV     9
+   RV-Failing_10   dRV    25
+    RV-Failing_8   dRV   172
+    RV-Failing_1   dRV  1418
+PREFILTER GSE240921 all40; Batch + Sex + Group: 31043 -> 27090 features; 40 cohort columns; rowSums>=10
+converting counts to integer mode
+Recomputed dRV vs Ctrl result for NPPA:
+# A tibble: 1 × 6
+  Gene  log2FC   padj Significant Direction Dataset          
+  <chr>  <dbl>  <dbl> <lgl>       <chr>     <chr>            
+1 NPPA    3.75 0.0133 TRUE        Up        GSE240921 (Human)
+Batch+Sex+Group model; published source-study estimate is not a numerical equality target.
+====================================================
+
+Dataset-level DEG audit:
+# A tibble: 8 × 5
+  Dataset                    n_tested n_significant  n_up n_down
+  <chr>                         <int>         <int> <int>  <int>
+1 GSE133402_RV (Rat_Hyp)        14727           595   386    209
+2 GSE186989 (Rat_SuHx)          17129          2034  1026   1008
+3 GSE198618 (Human)             13529          3385  2005   1380
+4 GSE240921 (Human)             15728           693   658     35
+5 GSE240923_batch1 (Rat_MCT)    13933          1709  1083    626
+6 GSE240923_batch2 (Rat_MCT)    13914          1902  1448    454
+7 GSE242014 (Rat_PAB)           13623           917   703    214
+8 GSE266139_RV (Rat_MCT)        11660           160   134     26
+GSE240921 NPPA audit from raw-data reanalysis:
+# A tibble: 1 × 6
+  Gene  log2FC   padj Significant Direction Dataset          
+  <chr>  <dbl>  <dbl> <lgl>       <chr>     <chr>            
+1 NPPA    3.75 0.0133 TRUE        Up        GSE240921 (Human)
+Final Shared-derived conserved genes: 35
+Rule: Shared + anchor significant + >= 5/7 external datasets in the same direction (>=6/8 overall)
+  8/8 genes: 2
+  7/8 genes: 12
+  6/8 genes: 21
+✅ Figure 5 finished. Outputs saved to: E:\百度云同步盘\右心生信分析\PH-RV-remodeling\PH-RV-remodeling_new/outputs/Fig5_outputs

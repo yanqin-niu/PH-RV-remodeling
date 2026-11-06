@@ -1,0 +1,21 @@
+﻿Sample,GSM,Description,Chamber,Treatment,Sample_suffix,Description_date_string,Sacrifice,Library,Pairing
+LP_4,GSM8241338,LP02112022,L,Control,4,02112022,Not explicitly annotated,Not explicitly annotated,Matching description after L/R prefix supports a candidate pair; not explicit animal ID
+LP_3,GSM8241339,LP08062022,L,Control,3,08062022,Not explicitly annotated,Not explicitly annotated,Matching description after L/R prefix supports a candidate pair; not explicit animal ID
+LP_1,GSM8241340,LP16052022,L,Control,1,16052022,Not explicitly annotated,Not explicitly annotated,Matching description after L/R prefix supports a candidate pair; not explicit animal ID
+LP_2,GSM8241341,LP19052022,L,Control,2,19052022,Not explicitly annotated,Not explicitly annotated,Matching description after L/R prefix supports a candidate pair; not explicit animal ID
+LP_5,GSM8241342,LP02112022_1,L,Control,5,02112022,Not explicitly annotated,Not explicitly annotated,Matching description after L/R prefix supports a candidate pair; not explicit animal ID
+RP_4,GSM8241343,RP02112022,R,Control,4,02112022,Not explicitly annotated,Not explicitly annotated,Matching description after L/R prefix supports a candidate pair; not explicit animal ID
+RP_3,GSM8241344,RP08062022,R,Control,3,08062022,Not explicitly annotated,Not explicitly annotated,Matching description after L/R prefix supports a candidate pair; not explicit animal ID
+RP_1,GSM8241345,RP16052022,R,Control,1,16052022,Not explicitly annotated,Not explicitly annotated,Matching description after L/R prefix supports a candidate pair; not explicit animal ID
+RP_2,GSM8241346,RP19052022,R,Control,2,19052022,Not explicitly annotated,Not explicitly annotated,Matching description after L/R prefix supports a candidate pair; not explicit animal ID
+RP_5,GSM8241347,RP02112022_1,R,Control,5,02112022,Not explicitly annotated,Not explicitly annotated,Matching description after L/R prefix supports a candidate pair; not explicit animal ID
+LM_4,GSM8241348,LM02112022,L,MCT,4,02112022,Not explicitly annotated,Not explicitly annotated,Matching description after L/R prefix supports a candidate pair; not explicit animal ID
+LM_5,GSM8241349,LM04112022,L,MCT,5,04112022,Not explicitly annotated,Not explicitly annotated,Matching description after L/R prefix supports a candidate pair; not explicit animal ID
+LM_3,GSM8241350,LM07062022,L,MCT,3,07062022,Not explicitly annotated,Not explicitly annotated,Matching description after L/R prefix supports a candidate pair; not explicit animal ID
+LM_1,GSM8241351,LM13052022,L,MCT,1,13052022,Not explicitly annotated,Not explicitly annotated,Matching description after L/R prefix supports a candidate pair; not explicit animal ID
+LM_2,GSM8241352,LM18052022,L,MCT,2,18052022,Not explicitly annotated,Not explicitly annotated,Matching description after L/R prefix supports a candidate pair; not explicit animal ID
+RM_4,GSM8241353,RM02112022,R,MCT,4,02112022,Not explicitly annotated,Not explicitly annotated,Matching description after L/R prefix supports a candidate pair; not explicit animal ID
+RM_5,GSM8241354,RM04112022,R,MCT,5,04112022,Not explicitly annotated,Not explicitly annotated,Matching description after L/R prefix supports a candidate pair; not explicit animal ID
+RM_3,GSM8241355,RM07062022,R,MCT,3,07062022,Not explicitly annotated,Not explicitly annotated,Matching description after L/R prefix supports a candidate pair; not explicit animal ID
+RM_1,GSM8241356,RM13052022,R,MCT,1,13052022,Not explicitly annotated,Not explicitly annotated,Matching description after L/R prefix supports a candidate pair; not explicit animal ID
+RM_2,GSM8241357,RM18052022,R,MCT,2,18052022,Not explicitly annotated,Not explicitly annotated,Matching description after L/R prefix supports a candidate pair; not explicit animal ID

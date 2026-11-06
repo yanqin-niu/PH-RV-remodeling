@@ -1,0 +1,68 @@
+                              Model Genes Testable FDR05 Strict Strict_up
+SE15_Group               SE15_Group 25894    25888 10328   6620      6120
+SE15_Sex_Group       SE15_Sex_Group 25894    25382  7639   4734      4277
+PE25_Group               PE25_Group 20450     7366     0      0         0
+PE25_Sex_Group       PE25_Sex_Group 20450    15265     9      3         1
+Joint40_Batch_Sex Joint40_Batch_Sex 27090    20246  2084    855       804
+                  Strict_down
+SE15_Group                500
+SE15_Sex_Group            457
+PE25_Group                  0
+PE25_Sex_Group              2
+Joint40_Batch_Sex          51
+              Model Fixed_panel Covered Testable Direction_match FDR_concordant
+1        SE15_Group          35      34       34              27             25
+2    SE15_Sex_Group          35      34       34              28             24
+3        PE25_Group          35      32       12              21              0
+4    PE25_Sex_Group          35      32       26              23              0
+5 Joint40_Batch_Sex          35      34       33              27             11
+  Strict_concordant Strict_discordant
+1                23                 1
+2                22                 2
+3                 0                 0
+4                 0                 0
+5                 7                 2
+                                                 A                 B
+SE15_Group_vs_PE25_Group                SE15_Group        PE25_Group
+SE15_Sex_Group_vs_PE25_Sex_Group    SE15_Sex_Group    PE25_Sex_Group
+SE15_Sex_Group_vs_Joint40_Batch_Sex SE15_Sex_Group Joint40_Batch_Sex
+PE25_Sex_Group_vs_Joint40_Batch_Sex PE25_Sex_Group Joint40_Batch_Sex
+                                    Common_effects  Spearman
+SE15_Group_vs_PE25_Group                     19784 0.1730541
+SE15_Sex_Group_vs_PE25_Sex_Group             19784 0.1443862
+SE15_Sex_Group_vs_Joint40_Batch_Sex          25894 0.8566205
+PE25_Sex_Group_vs_Joint40_Batch_Sex          20450 0.6885083
+                                    Direction_agreement Both_strict
+SE15_Group_vs_PE25_Group                      0.5752628           0
+SE15_Sex_Group_vs_PE25_Sex_Group              0.5604023           2
+SE15_Sex_Group_vs_Joint40_Batch_Sex           0.8093767         757
+PE25_Sex_Group_vs_Joint40_Batch_Sex           0.8025428           1
+                                    Both_strict_same_direction
+SE15_Group_vs_PE25_Group                                     0
+SE15_Sex_Group_vs_PE25_Sex_Group                             1
+SE15_Sex_Group_vs_Joint40_Batch_Sex                        757
+PE25_Sex_Group_vs_Joint40_Batch_Sex                          1
+                                    Panel_common_effects Panel_direction_agree
+SE15_Group_vs_PE25_Group                              32                    24
+SE15_Sex_Group_vs_PE25_Sex_Group                      32                    21
+SE15_Sex_Group_vs_Joint40_Batch_Sex                   34                    31
+PE25_Sex_Group_vs_Joint40_Batch_Sex                   32                    24
+                                    Panel_both_expected_direction
+SE15_Group_vs_PE25_Group                                       19
+SE15_Sex_Group_vs_PE25_Sex_Group                               19
+SE15_Sex_Group_vs_Joint40_Batch_Sex                            26
+PE25_Sex_Group_vs_Joint40_Batch_Sex                            20
+                                    Panel_both_FDR_concordant
+SE15_Group_vs_PE25_Group                                    0
+SE15_Sex_Group_vs_PE25_Sex_Group                            0
+SE15_Sex_Group_vs_Joint40_Batch_Sex                        11
+PE25_Sex_Group_vs_Joint40_Batch_Sex                         0
+                                    Panel_both_strict_concordant
+SE15_Group_vs_PE25_Group                                       0
+SE15_Sex_Group_vs_PE25_Sex_Group                               0
+SE15_Sex_Group_vs_Joint40_Batch_Sex                            7
+PE25_Sex_Group_vs_Joint40_Batch_Sex                            0
+                                           Contrast Genes Testable FDR05
+1 (dRV-Ctrl)SE15 minus (dRV-Ctrl)PE25, sex adjusted 27090    19730  1021
+  Fixed_panel Panel_covered Panel_testable Panel_FDR05
+1          35            34             34           6

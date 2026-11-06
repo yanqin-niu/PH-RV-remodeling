@@ -1,0 +1,38 @@
+Warning messages:
+1: package 'dplyr' was built under R version 4.5.3 
+2: package 'tidyr' was built under R version 4.5.3 
+3: package 'stringr' was built under R version 4.5.1 
+4: package 'ggplot2' was built under R version 4.5.3 
+Using Figure 5 DEG pipeline: E:\百度云同步盘\右心生信分析\PH-RV-remodeling\PH-RV-remodeling_new\scripts\Fig5.R
+Dataset-level DEG audit at padj < 0.05 and |log2FC| >= 1:
+# A tibble: 8 × 6
+  Dataset                    n_genes_with_padj n_sig_total n_sig_up n_sig_down
+  <fct>                                  <int>       <int>    <int>      <int>
+1 GSE266139_RV (Rat_MCT)                 11660         160      134         26
+2 GSE133402_RV (Rat_Hyp)                 14727         595      386        209
+3 GSE198618 (Human)                      13529        3385     2005       1380
+4 GSE242014 (Rat_PAB)                    13623         917      703        214
+5 GSE240923_batch1 (Rat_MCT)             13933        1709     1083        626
+6 GSE240923_batch2 (Rat_MCT)             13914        1902     1448        454
+7 GSE186989 (Rat_SuHx)                   17129        2034     1026       1008
+8 GSE240921 (Human)                      15728         693      658         35
+# ℹ 1 more variable: median_abs_log2FC_sig <dbl>
+Genes passing >=6/8 same-direction support: 97
+  8/8: 2
+  7/8: 26
+  6/8: 69
+NPPA RV-wide audit (NPPA is never manually added):
+# A tibble: 8 × 11
+  Gene  log2FC     padj Dataset        Significant Direction consensus_direction
+  <chr>  <dbl>    <dbl> <chr>          <lgl>       <chr>     <chr>              
+1 NPPA    2.88 1.03e- 1 GSE266139_RV … FALSE       NS        Up                 
+2 NPPA    5.14 9.58e-81 GSE133402_RV … TRUE        Up        Up                 
+3 NPPA   10.4  1.68e-29 GSE198618 (Hu… TRUE        Up        Up                 
+4 NPPA    1.81 4.54e- 5 GSE242014 (Ra… TRUE        Up        Up                 
+5 NPPA    2.11 2.25e- 9 GSE240923_bat… TRUE        Up        Up                 
+6 NPPA    1.55 8.74e- 4 GSE240923_bat… TRUE        Up        Up                 
+7 NPPA    7.92 1.57e-46 GSE186989 (Ra… TRUE        Up        Up                 
+8 NPPA    3.75 1.33e- 2 GSE240921 (Hu… TRUE        Up        Up                 
+# ℹ 4 more variables: n_sig_up <int>, n_sig_down <int>, n_sig_same <int>,
+#   support_class <chr>
+Supplementary Figure S5 finished: E:\百度云同步盘\右心生信分析\PH-RV-remodeling\PH-RV-remodeling_new/outputs/FigS5_outputs

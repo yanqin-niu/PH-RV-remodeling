@@ -11,6 +11,8 @@ suppressPackageStartupMessages({
 })
 
 get_script_dir <- function() {
+  env_dir <- Sys.getenv("PH_RV_SCRIPT_DIR", "")
+  if (nzchar(env_dir) && dir.exists(env_dir)) return(env_dir)
   args <- commandArgs(trailingOnly = FALSE)
   hit <- grep("^--file=", args)
   if (length(hit)) return(dirname(normalizePath(sub("^--file=", "", args[hit[1]]))))
@@ -22,6 +24,8 @@ get_script_dir <- function() {
 }
 
 find_project_dir <- function(script_dir = get_script_dir()) {
+  env_root <- Sys.getenv("PH_RV_PROJECT_ROOT", "")
+  if (nzchar(env_root) && dir.exists(file.path(env_root, "data", "raw"))) return(env_root)
   candidates <- unique(normalizePath(
     c(file.path(script_dir, ".."), script_dir, file.path(script_dir, "../..")),
     mustWork = FALSE
@@ -52,7 +56,7 @@ direction_cols <- c("Up" = "red", "Down" = "blue")
 species_cols <- c("Human" = "#984EA3", "Rat" = "#4DAF4A")
 
 resolve_fig5_source <- function(project_dir) {
-  from_env <- Sys.getenv("FIG5_SOURCE_FILE", "")
+  from_env <- "" # Submission package resolves only its own Figure5 source workbook.
   candidates <- c(
     from_env,
     file.path(project_dir, "outputs", "Fig5_outputs", "Figure5_source_data.xlsx")
@@ -63,7 +67,9 @@ resolve_fig5_source <- function(project_dir) {
     "Cannot find final Figure5_source_data.xlsx. Run the final Figure 5 script first, ",
     "or set FIG5_SOURCE_FILE to its full path."
   )
-  normalizePath(hit[1])
+  # Preserve an explicitly supplied short/ASCII project path on Windows;
+  # normalizePath() may convert it back to a non-ASCII path that R cannot reopen.
+  if (nzchar(Sys.getenv("PH_RV_PROJECT_ROOT", ""))) hit[1] else normalizePath(hit[1])
 }
 
 read_fig1_sets <- function(project_dir) {
@@ -113,21 +119,26 @@ read_fig5_objects <- function(project_dir) {
     ) %>% dplyr::distinct(Gene, Dataset, .keep_all = TRUE)
   consensus <- openxlsx::read.xlsx(path, sheet = "Consensus_genes")
   consensus$Gene <- TOUP(consensus$Gene)
-  list(path = path, display = display, consensus = consensus)
+  native<-if('Native_results' %in% sheets)openxlsx::read.xlsx(path,sheet='Native_results') else display
+  list(path = path, display = display, native = native, consensus = consensus)
 }
 
 build_replication_grid <- function(fig1_sets, display, exclude_anchor = TRUE) {
-  d <- display
-  if (exclude_anchor) d <- d %>% dplyr::filter(!stringr::str_detect(Dataset, stringr::fixed("GSE266139")))
-  datasets <- unique(d$Dataset)
-  tidyr::expand_grid(fig1_sets, Dataset = datasets) %>%
-    dplyr::left_join(d %>% dplyr::select(Gene, Dataset, log2FC, padj, Significant, Direction, Species), by = c("Gene", "Dataset")) %>%
-    dplyr::mutate(
-      measured = !is.na(log2FC) | !is.na(padj),
-      same_direction = Significant & Direction == discovery_direction,
-      opposite_direction = Significant & Direction != "NS" & Direction != discovery_direction,
-      Species = dplyr::if_else(stringr::str_detect(Dataset, stringr::regex("Human", ignore_case = TRUE)), "Human", "Rat")
-    )
+ source(file.path(get_script_dir(),'11_orthology_helpers.R'))
+ project_dir<-find_project_dir(get_script_dir())
+ d<-display
+ if(exclude_anchor)d<-d[!grepl('GSE266139',d$Dataset),]
+ z<-tidyr::expand_grid(fig1_sets,Dataset=unique(d$Dataset))
+ mp<-rat_query(z$Gene,project_dir);h<-grepl('Human',z$Dataset)
+ z$Query<-ifelse(h,mp$Query,z$Gene);z$Mapping<-ifelse(h,mp$Mapping,'Same_species')
+ d$Query<-d$Gene;d$Gene<-NULL;d$Species<-NULL
+ z<-dplyr::left_join(z,d,by=c('Query','Dataset'))
+ z$measured<-is.finite(z$log2FC)&is.finite(z$padj)&z$padj>=0&z$padj<=1
+ z$same_direction<-z$measured & !is.na(z$Significant) & z$Significant & !is.na(z$Direction) & z$Direction==z$discovery_direction
+ z$opposite_direction<-z$measured & !is.na(z$Significant) & z$Significant & !is.na(z$Direction) & z$Direction!='NS' & z$Direction!=z$discovery_direction
+ z$Species<-ifelse(h,'Human','Rat')
+ z$Availability<-ifelse(h & z$Mapping!='One_to_one',z$Mapping,ifelse(!is.finite(z$log2FC),'No_estimable_effect_or_absent',ifelse(!z$measured,'Adjusted_P_unavailable',ifelse(z$same_direction,'Significant_concordant',ifelse(z$opposite_direction,'Significant_discordant','Tested_not_replicated')))))
+ z
 }
 
 wilson_ci <- function(x, n, conf = 0.95) {
@@ -200,7 +211,8 @@ read_cteph_data <- function(project_dir, signature_genes) {
   full <- tidyr::expand_grid(Gene = signature_genes, Contrast = spec$label) %>%
     dplyr::left_join(out, by = c("Gene", "Contrast")) %>%
     dplyr::left_join(spec %>% dplyr::select(Contrast = label, Contrast_group = group, Contrast_key = sheet) %>% dplyr::distinct(),
-              by = c("Contrast", "Contrast_group", "Contrast_key"))
+              by = "Contrast", suffix = c(".observed", "")) %>%
+    dplyr::select(-dplyr::ends_with(".observed"))
   list(data = out, full = full, spec = spec)
 }
 
@@ -211,8 +223,10 @@ signature_summary <- function(df) {
       mean_log2FC = mean(log2FC, na.rm = TRUE),
       median_log2FC = median(log2FC, na.rm = TRUE),
       q25 = quantile(log2FC, .25, na.rm = TRUE), q75 = quantile(log2FC, .75, na.rm = TRUE),
-      n_sig_up = sum(!is.na(padj) & padj < .05 & log2FC >= 1),
-      n_sig_down = sum(!is.na(padj) & padj < .05 & log2FC <= -1),
+      n_sig_up = sum(!is.na(padj) & padj < .05 & log2FC >= 1, na.rm = TRUE),
+      n_sig_down = sum(!is.na(padj) & padj < .05 & log2FC <= -1, na.rm = TRUE),
       .groups = "drop"
     )
 }
+
+source(file.path(get_script_dir(),'12_count_filter_helpers.R'))

@@ -1,0 +1,13 @@
+# Table S4: leave-external-source-out reselection/evaluation and CTEPH direction coverage.
+a<-commandArgs(FALSE);sd<-dirname(normalizePath(sub('^--file=','',a[grep('^--file=',a)][1])))
+source(file.path(sd,'00_common_helpers.R'));source(file.path(sd,'15_heldout_selection_helpers.R'));source(file.path(sd,'06_cteph_direction_helpers.R'))
+root<-find_project_dir(sd);out<-file.path(root,'outputs','TableS4_outputs');dir.create(out,recursive=TRUE,showWarnings=FALSE)
+z<-heldout_panel_assessment(root)
+p<-file.path(root,'outputs/Fig6_outputs/Figure6_source_data.xlsx');ct<-read.xlsx(p,sheet='Direction_gene_level');cb<-summarize_cteph_by_direction(ct)
+write.xlsx(c(z,list(CTEPH_by_expected=cb,CTEPH_gene_evidence=ct,Session=data.frame(Text=capture.output(sessionInfo())))),file.path(out,'TableS4_heldout_direction_assessment.xlsx'),overwrite=TRUE)
+write.csv(z$metrics,file.path(out,'Heldout_metrics.csv'),row.names=FALSE)
+write.csv(z$folds,file.path(out,'Fold_definitions.csv'),row.names=FALSE)
+write.csv(z$scheme_summary,file.path(out,'Scheme_summary.csv'),row.names=FALSE)
+write.csv(cb,file.path(out,'CTEPH_by_expected_direction.csv'),row.names=FALSE)
+writeLines(c(capture.output(z$scheme_summary),capture.output(z$folds[,c('Scheme','Heldout_unit','N_training','Required_support','N_selected')]),'CTEPH not used to select or tune panels; fixed35-gene descriptive assessment is separate.'),file.path(out,'RESULTS.txt'))
+message('Table S4 completed: ',out)

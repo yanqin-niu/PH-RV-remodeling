@@ -1,0 +1,5 @@
+{
+  "URL": "https://ftp.ncbi.nlm.nih.gov/geo/series/GSE266nnn/GSE266139/matrix/GSE266139_series_matrix.txt.gz",
+  "SHA256": "9acd19befbbae4e27ddfcb264836f2aa37a692fd9637dbefa8b606bb4d4c4d7a",
+  "Caution": "Description date strings are observed labels, not verified Sacrifice or Library covariates; do not assign them without confirmation."
+}

@@ -1,0 +1,82 @@
+"Fold","Scheme","Dataset","Expected_direction","N_selected","N_effect_available","N_test_available","N_unavailable","Coverage_effect","Coverage_test","N_direction_concordant","Direction_rate","N_FDR_concordant","FDR_rate","N_strict_concordant","Strict_rate","Median_aligned_log2FC"
+"Publication_no_normalized / Boucherat_39196250","Publication_no_normalized","GSE242014 (Rat_PAB)","All",40,37,37,3,0.925,0.925,37,1,32,0.864864864864865,24,0.648648648648649,1.35123087981908
+"Publication_no_normalized / Boucherat_39196250","Publication_no_normalized","GSE242014 (Rat_PAB)","Up",36,34,34,2,0.944444444444444,0.944444444444444,34,1,29,0.852941176470588,21,0.617647058823529,1.30530611228515
+"Publication_no_normalized / Boucherat_39196250","Publication_no_normalized","GSE242014 (Rat_PAB)","Down",4,3,3,1,0.75,0.75,3,1,3,1,3,1,1.7498222667365
+"Publication_no_normalized / Boucherat_39196250","Publication_no_normalized","GSE240923_batch1 (Rat_MCT)","All",40,37,37,3,0.925,0.925,37,1,37,1,29,0.783783783783784,1.75239850412772
+"Publication_no_normalized / Boucherat_39196250","Publication_no_normalized","GSE240923_batch1 (Rat_MCT)","Up",36,34,34,2,0.944444444444444,0.944444444444444,34,1,34,1,26,0.764705882352941,1.67451107540635
+"Publication_no_normalized / Boucherat_39196250","Publication_no_normalized","GSE240923_batch1 (Rat_MCT)","Down",4,3,3,1,0.75,0.75,3,1,3,1,3,1,1.96035008797188
+"Publication_no_normalized / Boucherat_39196250","Publication_no_normalized","GSE240923_batch2 (Rat_MCT)","All",40,37,37,3,0.925,0.925,37,1,37,1,31,0.837837837837838,1.75694763171984
+"Publication_no_normalized / Boucherat_39196250","Publication_no_normalized","GSE240923_batch2 (Rat_MCT)","Up",36,34,34,2,0.944444444444444,0.944444444444444,34,1,34,1,28,0.823529411764706,1.75060809335067
+"Publication_no_normalized / Boucherat_39196250","Publication_no_normalized","GSE240923_batch2 (Rat_MCT)","Down",4,3,3,1,0.75,0.75,3,1,3,1,3,1,1.86383185201447
+"Publication_no_normalized / Boucherat_39196250","Publication_no_normalized","GSE240921 (Human)","All",40,37,36,4,0.925,0.9,28,0.756756756756757,9,0.25,6,0.166666666666667,0.564875868263006
+"Publication_no_normalized / Boucherat_39196250","Publication_no_normalized","GSE240921 (Human)","Up",36,34,33,3,0.944444444444444,0.916666666666667,28,0.823529411764706,9,0.272727272727273,6,0.181818181818182,0.694488514623161
+"Publication_no_normalized / Boucherat_39196250","Publication_no_normalized","GSE240921 (Human)","Down",4,3,3,1,0.75,0.75,0,0,0,0,0,0,-0.416691519993897
+"Publication_no_normalized / GSE133402","Publication_no_normalized","GSE133402_RV (Rat_Hyp)","All",41,41,41,0,1,1,39,0.951219512195122,29,0.707317073170732,26,0.634146341463415,1.60984967168643
+"Publication_no_normalized / GSE133402","Publication_no_normalized","GSE133402_RV (Rat_Hyp)","Up",37,37,37,0,1,1,35,0.945945945945946,25,0.675675675675676,23,0.621621621621622,1.7024050907897
+"Publication_no_normalized / GSE133402","Publication_no_normalized","GSE133402_RV (Rat_Hyp)","Down",4,4,4,0,1,1,4,1,4,1,3,0.75,1.21642902133903
+"Publication_no_normalized / GSE186989","Publication_no_normalized","GSE186989 (Rat_SuHx)","All",28,28,28,0,1,1,28,1,28,1,28,1,2.88181543777813
+"Publication_no_normalized / GSE186989","Publication_no_normalized","GSE186989 (Rat_SuHx)","Up",25,25,25,0,1,1,25,1,25,1,25,1,2.87348822870252
+"Publication_no_normalized / GSE186989","Publication_no_normalized","GSE186989 (Rat_SuHx)","Down",3,3,3,0,1,1,3,1,3,1,3,1,3.03158195672567
+"Publication_block / Boucherat_39196250","Publication_block","GSE242014 (Rat_PAB)","All",57,51,51,6,0.894736842105263,0.894736842105263,51,1,45,0.882352941176471,30,0.588235294117647,1.28346050806384
+"Publication_block / Boucherat_39196250","Publication_block","GSE242014 (Rat_PAB)","Up",51,46,46,5,0.901960784313726,0.901960784313726,46,1,40,0.869565217391304,27,0.58695652173913,1.28308784438922
+"Publication_block / Boucherat_39196250","Publication_block","GSE242014 (Rat_PAB)","Down",6,5,5,1,0.833333333333333,0.833333333333333,5,1,5,1,3,0.6,1.35123087981908
+"Publication_block / Boucherat_39196250","Publication_block","GSE240923_batch1 (Rat_MCT)","All",57,51,51,6,0.894736842105263,0.894736842105263,51,1,51,1,36,0.705882352941177,1.59769865173362
+"Publication_block / Boucherat_39196250","Publication_block","GSE240923_batch1 (Rat_MCT)","Up",51,46,46,5,0.901960784313726,0.901960784313726,46,1,46,1,32,0.695652173913043,1.53605769784213
+"Publication_block / Boucherat_39196250","Publication_block","GSE240923_batch1 (Rat_MCT)","Down",6,5,5,1,0.833333333333333,0.833333333333333,5,1,5,1,4,0.8,1.77231032719009
+"Publication_block / Boucherat_39196250","Publication_block","GSE240923_batch2 (Rat_MCT)","All",57,51,51,6,0.894736842105263,0.894736842105263,51,1,51,1,39,0.764705882352941,1.67543962847204
+"Publication_block / Boucherat_39196250","Publication_block","GSE240923_batch2 (Rat_MCT)","Up",51,46,46,5,0.901960784313726,0.901960784313726,46,1,46,1,34,0.739130434782609,1.69004371479225
+"Publication_block / Boucherat_39196250","Publication_block","GSE240923_batch2 (Rat_MCT)","Down",6,5,5,1,0.833333333333333,0.833333333333333,5,1,5,1,5,1,1.67166632217189
+"Publication_block / Boucherat_39196250","Publication_block","GSE240921 (Human)","All",57,54,53,4,0.947368421052632,0.929824561403509,45,0.833333333333333,16,0.30188679245283,10,0.188679245283019,0.686920684669603
+"Publication_block / Boucherat_39196250","Publication_block","GSE240921 (Human)","Up",51,49,48,3,0.96078431372549,0.941176470588235,43,0.877551020408163,16,0.333333333333333,10,0.208333333333333,0.743538376485744
+"Publication_block / Boucherat_39196250","Publication_block","GSE240921 (Human)","Down",6,5,5,1,0.833333333333333,0.833333333333333,2,0.4,0,0,0,0,-0.156471164953548
+"Publication_block / GSE133402","Publication_block","GSE133402_RV (Rat_Hyp)","All",19,19,19,0,1,1,18,0.947368421052632,13,0.684210526315789,13,0.684210526315789,1.7024050907897
+"Publication_block / GSE133402","Publication_block","GSE133402_RV (Rat_Hyp)","Up",19,19,19,0,1,1,18,0.947368421052632,13,0.684210526315789,13,0.684210526315789,1.7024050907897
+"Publication_block / GSE133402","Publication_block","GSE133402_RV (Rat_Hyp)","Down",0,0,0,0,NA,NA,0,NA,0,NA,0,NA,NA
+"Publication_block / GSE186989","Publication_block","GSE186989 (Rat_SuHx)","All",14,14,14,0,1,1,14,1,14,1,14,1,2.88181543777813
+"Publication_block / GSE186989","Publication_block","GSE186989 (Rat_SuHx)","Up",14,14,14,0,1,1,14,1,14,1,14,1,2.88181543777813
+"Publication_block / GSE186989","Publication_block","GSE186989 (Rat_SuHx)","Down",0,0,0,0,NA,NA,0,NA,0,NA,0,NA,NA
+"Publication_block / GSE198618","Publication_block","GSE198618 (Human)","All",28,22,22,6,0.785714285714286,0.785714285714286,15,0.681818181818182,14,0.636363636363636,14,0.636363636363636,1.79685771072831
+"Publication_block / GSE198618","Publication_block","GSE198618 (Human)","Up",25,20,20,5,0.8,0.8,15,0.75,14,0.7,14,0.7,2.00269264822227
+"Publication_block / GSE198618","Publication_block","GSE198618 (Human)","Down",3,2,2,1,0.666666666666667,0.666666666666667,0,0,0,0,0,0,-1.73716192898747
+"Accession_block / GSE133402","Accession_block","GSE133402_RV (Rat_Hyp)","All",19,19,19,0,1,1,18,0.947368421052632,13,0.684210526315789,13,0.684210526315789,1.7024050907897
+"Accession_block / GSE133402","Accession_block","GSE133402_RV (Rat_Hyp)","Up",19,19,19,0,1,1,18,0.947368421052632,13,0.684210526315789,13,0.684210526315789,1.7024050907897
+"Accession_block / GSE133402","Accession_block","GSE133402_RV (Rat_Hyp)","Down",0,0,0,0,NA,NA,0,NA,0,NA,0,NA,NA
+"Accession_block / GSE186989","Accession_block","GSE186989 (Rat_SuHx)","All",14,14,14,0,1,1,14,1,14,1,14,1,2.88181543777813
+"Accession_block / GSE186989","Accession_block","GSE186989 (Rat_SuHx)","Up",14,14,14,0,1,1,14,1,14,1,14,1,2.88181543777813
+"Accession_block / GSE186989","Accession_block","GSE186989 (Rat_SuHx)","Down",0,0,0,0,NA,NA,0,NA,0,NA,0,NA,NA
+"Accession_block / GSE198618","Accession_block","GSE198618 (Human)","All",28,22,22,6,0.785714285714286,0.785714285714286,15,0.681818181818182,14,0.636363636363636,14,0.636363636363636,1.79685771072831
+"Accession_block / GSE198618","Accession_block","GSE198618 (Human)","Up",25,20,20,5,0.8,0.8,15,0.75,14,0.7,14,0.7,2.00269264822227
+"Accession_block / GSE198618","Accession_block","GSE198618 (Human)","Down",3,2,2,1,0.666666666666667,0.666666666666667,0,0,0,0,0,0,-1.73716192898747
+"Accession_block / GSE240921","Accession_block","GSE240921 (Human)","All",33,32,31,2,0.96969696969697,0.939393939393939,25,0.78125,9,0.290322580645161,5,0.161290322580645,0.764125664325376
+"Accession_block / GSE240921","Accession_block","GSE240921 (Human)","Up",30,30,29,1,1,0.966666666666667,25,0.833333333333333,9,0.310344827586207,5,0.172413793103448,0.816111145821806
+"Accession_block / GSE240921","Accession_block","GSE240921 (Human)","Down",3,2,2,1,0.666666666666667,0.666666666666667,0,0,0,0,0,0,-0.875066317876169
+"Accession_block / GSE240923","Accession_block","GSE240923_batch1 (Rat_MCT)","All",17,17,17,0,1,1,17,1,17,1,15,0.882352941176471,2.04451312700797
+"Accession_block / GSE240923","Accession_block","GSE240923_batch1 (Rat_MCT)","Up",17,17,17,0,1,1,17,1,17,1,15,0.882352941176471,2.04451312700797
+"Accession_block / GSE240923","Accession_block","GSE240923_batch1 (Rat_MCT)","Down",0,0,0,0,NA,NA,0,NA,0,NA,0,NA,NA
+"Accession_block / GSE240923","Accession_block","GSE240923_batch2 (Rat_MCT)","All",17,17,17,0,1,1,17,1,17,1,14,0.823529411764706,2.08577656725697
+"Accession_block / GSE240923","Accession_block","GSE240923_batch2 (Rat_MCT)","Up",17,17,17,0,1,1,17,1,17,1,14,0.823529411764706,2.08577656725697
+"Accession_block / GSE240923","Accession_block","GSE240923_batch2 (Rat_MCT)","Down",0,0,0,0,NA,NA,0,NA,0,NA,0,NA,NA
+"Accession_block / GSE242014","Accession_block","GSE242014 (Rat_PAB)","All",17,17,17,0,1,1,17,1,14,0.823529411764706,12,0.705882352941177,1.52169308173539
+"Accession_block / GSE242014","Accession_block","GSE242014 (Rat_PAB)","Up",17,17,17,0,1,1,17,1,14,0.823529411764706,12,0.705882352941177,1.52169308173539
+"Accession_block / GSE242014","Accession_block","GSE242014 (Rat_PAB)","Down",0,0,0,0,NA,NA,0,NA,0,NA,0,NA,NA
+"Cohort_secondary / GSE133402_RV (Rat_Hyp)","Cohort_secondary","GSE133402_RV (Rat_Hyp)","All",19,19,19,0,1,1,18,0.947368421052632,13,0.684210526315789,13,0.684210526315789,1.7024050907897
+"Cohort_secondary / GSE133402_RV (Rat_Hyp)","Cohort_secondary","GSE133402_RV (Rat_Hyp)","Up",19,19,19,0,1,1,18,0.947368421052632,13,0.684210526315789,13,0.684210526315789,1.7024050907897
+"Cohort_secondary / GSE133402_RV (Rat_Hyp)","Cohort_secondary","GSE133402_RV (Rat_Hyp)","Down",0,0,0,0,NA,NA,0,NA,0,NA,0,NA,NA
+"Cohort_secondary / GSE198618 (Human)","Cohort_secondary","GSE198618 (Human)","All",28,22,22,6,0.785714285714286,0.785714285714286,15,0.681818181818182,14,0.636363636363636,14,0.636363636363636,1.79685771072831
+"Cohort_secondary / GSE198618 (Human)","Cohort_secondary","GSE198618 (Human)","Up",25,20,20,5,0.8,0.8,15,0.75,14,0.7,14,0.7,2.00269264822227
+"Cohort_secondary / GSE198618 (Human)","Cohort_secondary","GSE198618 (Human)","Down",3,2,2,1,0.666666666666667,0.666666666666667,0,0,0,0,0,0,-1.73716192898747
+"Cohort_secondary / GSE242014 (Rat_PAB)","Cohort_secondary","GSE242014 (Rat_PAB)","All",17,17,17,0,1,1,17,1,14,0.823529411764706,12,0.705882352941177,1.52169308173539
+"Cohort_secondary / GSE242014 (Rat_PAB)","Cohort_secondary","GSE242014 (Rat_PAB)","Up",17,17,17,0,1,1,17,1,14,0.823529411764706,12,0.705882352941177,1.52169308173539
+"Cohort_secondary / GSE242014 (Rat_PAB)","Cohort_secondary","GSE242014 (Rat_PAB)","Down",0,0,0,0,NA,NA,0,NA,0,NA,0,NA,NA
+"Cohort_secondary / GSE240923_batch1 (Rat_MCT)","Cohort_secondary","GSE240923_batch1 (Rat_MCT)","All",14,14,14,0,1,1,14,1,14,1,14,1,2.15491034526555
+"Cohort_secondary / GSE240923_batch1 (Rat_MCT)","Cohort_secondary","GSE240923_batch1 (Rat_MCT)","Up",14,14,14,0,1,1,14,1,14,1,14,1,2.15491034526555
+"Cohort_secondary / GSE240923_batch1 (Rat_MCT)","Cohort_secondary","GSE240923_batch1 (Rat_MCT)","Down",0,0,0,0,NA,NA,0,NA,0,NA,0,NA,NA
+"Cohort_secondary / GSE240923_batch2 (Rat_MCT)","Cohort_secondary","GSE240923_batch2 (Rat_MCT)","All",15,15,15,0,1,1,15,1,15,1,14,0.933333333333333,2.22592285836735
+"Cohort_secondary / GSE240923_batch2 (Rat_MCT)","Cohort_secondary","GSE240923_batch2 (Rat_MCT)","Up",15,15,15,0,1,1,15,1,15,1,14,0.933333333333333,2.22592285836735
+"Cohort_secondary / GSE240923_batch2 (Rat_MCT)","Cohort_secondary","GSE240923_batch2 (Rat_MCT)","Down",0,0,0,0,NA,NA,0,NA,0,NA,0,NA,NA
+"Cohort_secondary / GSE186989 (Rat_SuHx)","Cohort_secondary","GSE186989 (Rat_SuHx)","All",14,14,14,0,1,1,14,1,14,1,14,1,2.88181543777813
+"Cohort_secondary / GSE186989 (Rat_SuHx)","Cohort_secondary","GSE186989 (Rat_SuHx)","Up",14,14,14,0,1,1,14,1,14,1,14,1,2.88181543777813
+"Cohort_secondary / GSE186989 (Rat_SuHx)","Cohort_secondary","GSE186989 (Rat_SuHx)","Down",0,0,0,0,NA,NA,0,NA,0,NA,0,NA,NA
+"Cohort_secondary / GSE240921 (Human)","Cohort_secondary","GSE240921 (Human)","All",33,32,31,2,0.96969696969697,0.939393939393939,25,0.78125,9,0.290322580645161,5,0.161290322580645,0.764125664325376
+"Cohort_secondary / GSE240921 (Human)","Cohort_secondary","GSE240921 (Human)","Up",30,30,29,1,1,0.966666666666667,25,0.833333333333333,9,0.310344827586207,5,0.172413793103448,0.816111145821806
+"Cohort_secondary / GSE240921 (Human)","Cohort_secondary","GSE240921 (Human)","Down",3,2,2,1,0.666666666666667,0.666666666666667,0,0,0,0,0,0,-0.875066317876169

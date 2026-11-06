@@ -1,657 +1,98 @@
-# ================================================================
-# Supplementary Figure S3 - formal single-panel version
-# Conserved right-ventricular remodeling genes across 8 datasets
-#
-# Selection rule:
-#   - all 8 RV transcriptomic datasets enter the denominator
-#   - adjusted P < 0.05 and absolute log2FC >= 1
-#   - at least 6 of 8 datasets must be significant in the SAME direction
-#   - retained genes are labelled as 6/8, 7/8, or 8/8
-#
-# Display rule:
-#   - only significant results in the consensus direction are plotted
-#   - red = concordant upregulation; blue = concordant downregulation
-#   - circle = transcript only
-#   - triangle = RV tissue protein + transcript
-#   - square = circulating Olink + transcript
-#   - diamond = protein + Olink + transcript
-#
-# Required upstream output:
-#   outputs/Fig5_outputs/Figure5_source_data.xlsx
-#     sheet: Display_df_8datasets
-#
-# Raw external-support files:
-#   data/raw/44161_2022_113_MOESM3_ESM.xlsx
-#   data/raw/44161_2022_113_MOESM4_ESM.xlsx
-#
-# Outputs:
-#   outputs/FigS3_outputs/
-#     FigureS3.pdf
-#     FigureS3.png
-#     FigureS3_source_data.xlsx
-# ================================================================
-
-suppressPackageStartupMessages({
-  library(openxlsx)
-  library(readxl)
-  library(dplyr)
-  library(tidyr)
-  library(stringr)
-  library(ggplot2)
-  library(tibble)
-})
-
-set.seed(1)
-
-# ------------------------------------------------
-# 0. Relative project paths
-# ------------------------------------------------
-get_script_dir <- function() {
-  args <- commandArgs(trailingOnly = FALSE)
-  idx <- grep("^--file=", args)
-
-  if (length(idx) > 0) {
-    path <- sub("^--file=", "", args[idx[1]])
-    return(dirname(normalizePath(path)))
-  }
-
-  if (requireNamespace("rstudioapi", quietly = TRUE)) {
-    ctx <- tryCatch(
-      rstudioapi::getActiveDocumentContext(),
-      error = function(e) NULL
-    )
-    if (!is.null(ctx) && nzchar(ctx$path)) {
-      return(dirname(normalizePath(ctx$path)))
-    }
-  }
-
-  normalizePath(getwd())
-}
-
-script_dir <- get_script_dir()
-project_dir <- normalizePath(file.path(script_dir, ".."))
-raw_dir <- file.path(project_dir, "data", "raw")
-output_root <- file.path(project_dir, "outputs")
-out_dir <- file.path(output_root, "FigS3_outputs")
-
-dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
-
-# One-click reproducibility: rerun Figure 5 from the eight raw datasets first.
-# This refreshes Figure5_source_data.xlsx using exactly the same DEG pipeline
-# before S1 applies its independent, non-anchored >=6/8 rule.
-#
-# The canonical repository filename is preferred. A uniquely named downloaded
-# copy such as "Figure5_corrected_Shared_consensus (5).R" is accepted so the
-# script also works immediately after downloading files from a browser.
-fig5_canonical <- file.path(script_dir, "Fig5.R")
-if (file.exists(fig5_canonical)) {
-  fig5_script <- fig5_canonical
-} else {
-  fig5_candidates <- list.files(
-    script_dir,
-    pattern = "^(Fig5|Figure5_corrected_Shared_consensus.*)\\.R$",
-    full.names = TRUE
-  )
-  if (length(fig5_candidates) != 1L) {
-    stop(
-      "Cannot identify exactly one Figure 5 pipeline in: ", script_dir,
-      "\nRename the final script to Fig5.R."
-    )
-  }
-  fig5_script <- fig5_candidates[[1]]
-}
-message("Using Figure 5 DEG pipeline: ", normalizePath(fig5_script))
-source(fig5_script, local = environment())
-
-# Restore S1-specific paths after the shared Figure 5 pipeline returns.
-script_dir <- get_script_dir()
-project_dir <- normalizePath(file.path(script_dir, ".."))
-raw_dir <- file.path(project_dir, "data", "raw")
-output_root <- file.path(project_dir, "outputs")
-out_dir <- file.path(output_root, "FigS3_outputs")
-dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
-
-# ------------------------------------------------
-# 1. Parameters
-# ------------------------------------------------
-alpha <- 0.05
-lfc_thr <- 1
-min_same_direction <- 6L
-
-dataset_order <- c(
-  "GSE266139_RV (Rat_MCT)",
-  "GSE133402_RV (Rat_Hyp)",
-  "GSE198618 (Human)",
-  "GSE242014 (Rat_PAB)",
-  "GSE240923_batch1 (Rat_MCT)",
-  "GSE240923_batch2 (Rat_MCT)",
-  "GSE186989 (Rat_SuHx)",
-  "GSE240921 (Human)"
-)
-
-fig5_source <- file.path(
-  output_root,
-  "Fig5_outputs",
-  "Figure5_source_data.xlsx"
-)
-file_prot <- file.path(raw_dir, "44161_2022_113_MOESM3_ESM.xlsx")
-file_olink <- file.path(raw_dir, "44161_2022_113_MOESM4_ESM.xlsx")
-
-required_files <- c(fig5_source, file_prot, file_olink)
-missing_files <- required_files[!file.exists(required_files)]
-if (length(missing_files) > 0) {
-  stop(
-    "Missing required file(s):\n",
-    paste0("  - ", missing_files, collapse = "\n")
-  )
-}
-
-# ------------------------------------------------
-# 2. Helpers
-# ------------------------------------------------
-TOUP <- function(x) toupper(trimws(as.character(x)))
-
-split_first <- function(x) {
-  vapply(
-    x,
-    function(xx) {
-      if (is.na(xx)) return(NA_character_)
-      parts <- trimws(unlist(strsplit(as.character(xx), "[;,]")))
-      parts <- parts[nzchar(parts)]
-      if (length(parts) == 0) NA_character_ else parts[1]
-    },
-    FUN.VALUE = character(1)
-  )
-}
-
-norm_name <- function(x) tolower(gsub("[^a-z0-9]+", "", x))
-
-pick_gene_col <- function(df, prefer_overlap = character(0)) {
-  cn <- colnames(df)
-  cnn <- norm_name(cn)
-  patt <- c("gene", "symbol", "genename", "assay", "protein", "name")
-  hit <- which(Reduce(`|`, lapply(patt, function(p) grepl(p, cnn))))
-  if (length(hit) > 0) return(cn[hit[1]])
-
-  if (length(prefer_overlap) > 0) {
-    score <- vapply(
-      seq_along(cn),
-      function(i) mean(TOUP(df[[i]]) %in% prefer_overlap, na.rm = TRUE),
-      numeric(1)
-    )
-    if (max(score, na.rm = TRUE) > 0.05) return(cn[which.max(score)])
-  }
-
-  cn[1]
-}
-
-theme_s1 <- function(base_size = 12) {
-  theme_bw(base_size = base_size) +
-    theme(
-      panel.grid = element_blank(),
-      axis.text = element_text(color = "black"),
-      axis.title = element_text(face = "bold", color = "black"),
-      plot.title = element_text(face = "bold", hjust = 0.5, color = "black"),
-      plot.subtitle = element_text(hjust = 0.5, color = "grey25"),
-      legend.title = element_text(face = "bold", color = "black"),
-      legend.text = element_text(color = "black"),
-      legend.key = element_blank(),
-      plot.margin = margin(8, 10, 8, 8)
-    )
-}
-
-# ------------------------------------------------
-# 3. Read complete DEG results for all 8 datasets
-# ------------------------------------------------
-available_sheets <- openxlsx::getSheetNames(fig5_source)
-source_sheet <- "Display_df_8datasets"
-
-if (!source_sheet %in% available_sheets) {
-  stop(
-    "Sheet '", source_sheet, "' was not found in ", fig5_source,
-    "\nAvailable sheets: ", paste(available_sheets, collapse = ", ")
-  )
-}
-
-all_rv <- openxlsx::read.xlsx(fig5_source, sheet = source_sheet) %>%
-  as_tibble() %>%
-  transmute(
-    Gene = TOUP(Gene),
-    log2FC = suppressWarnings(as.numeric(log2FC)),
-    padj = suppressWarnings(as.numeric(padj)),
-    Dataset = as.character(Dataset),
-    Significant = !is.na(padj) & padj < alpha &
-      !is.na(log2FC) & abs(log2FC) >= lfc_thr,
-    Direction = case_when(
-      Significant & log2FC > 0 ~ "Up",
-      Significant & log2FC < 0 ~ "Down",
-      TRUE ~ "NS"
-    )
-  ) %>%
-  filter(
-    !is.na(Gene),
-    Gene != "",
-    Dataset %in% dataset_order
-  ) %>%
-  arrange(Gene, Dataset, padj, desc(abs(log2FC))) %>%
-  distinct(Gene, Dataset, .keep_all = TRUE)
-
-missing_datasets <- setdiff(dataset_order, unique(all_rv$Dataset))
-if (length(missing_datasets) > 0) {
-  stop(
-    "Expected dataset(s) absent from Figure 5 source data: ",
-    paste(missing_datasets, collapse = ", ")
-  )
-}
-
-# ------------------------------------------------
-# 4. Dataset-level audit
-# Sparse DEG yield is not by itself a sequencing-quality metric, but this
-# table makes cross-dataset threshold behavior transparent.
-# ------------------------------------------------
-dataset_audit <- all_rv %>%
-  group_by(Dataset) %>%
-  summarise(
-    n_genes_with_padj = sum(!is.na(padj)),
-    n_sig_total = sum(Significant, na.rm = TRUE),
-    n_sig_up = sum(Significant & Direction == "Up", na.rm = TRUE),
-    n_sig_down = sum(Significant & Direction == "Down", na.rm = TRUE),
-    median_abs_log2FC_sig = if_else(
-      n_sig_total > 0,
-      median(abs(log2FC[Significant]), na.rm = TRUE),
-      NA_real_
-    ),
-    .groups = "drop"
-  ) %>%
-  mutate(Dataset = factor(Dataset, levels = dataset_order)) %>%
-  arrange(Dataset)
-
-message("Dataset-level DEG audit at padj < 0.05 and |log2FC| >= 1:")
-print(dataset_audit, n = Inf)
-
-# ------------------------------------------------
-# 5. TRUE same-direction consensus across all 8 datasets
-# ------------------------------------------------
-consensus_genes <- all_rv %>%
-  group_by(Gene) %>%
-  summarise(
-    n_tested = n_distinct(Dataset[!is.na(log2FC)]),
-    n_sig_up = sum(Significant & Direction == "Up", na.rm = TRUE),
-    n_sig_down = sum(Significant & Direction == "Down", na.rm = TRUE),
-    median_abs_log2FC_sig = if_else(
-      (n_sig_up + n_sig_down) > 0L,
-      median(abs(log2FC[Significant]), na.rm = TRUE),
-      NA_real_
-    ),
-    .groups = "drop"
-  ) %>%
-  mutate(
-    consensus_direction = case_when(
-      n_sig_up > n_sig_down ~ "Up",
-      n_sig_down > n_sig_up ~ "Down",
-      TRUE ~ NA_character_
-    ),
-    n_sig_same = pmax(n_sig_up, n_sig_down),
-    n_sig_opposite = pmin(n_sig_up, n_sig_down),
-    support_class = case_when(
-      n_sig_same == 8L ~ "8/8",
-      n_sig_same == 7L ~ "7/8",
-      n_sig_same == 6L ~ "6/8",
-      TRUE ~ "Below 6/8"
-    ),
-    support_label = paste0(Gene, " (", n_sig_same, "/8)")
-  ) %>%
-  filter(n_sig_same >= min_same_direction) %>%
-  arrange(desc(n_sig_same), desc(median_abs_log2FC_sig), Gene)
-
-if (nrow(consensus_genes) == 0) {
-  stop("No genes passed the prespecified >=6/8 same-direction rule.")
-}
-
-supporting_datasets <- all_rv %>%
-  inner_join(
-    consensus_genes %>% dplyr::select(Gene, consensus_direction),
-    by = "Gene"
-  ) %>%
-  filter(Significant, Direction == consensus_direction) %>%
-  group_by(Gene) %>%
-  summarise(
-    supporting_datasets = paste(Dataset, collapse = "; "),
-    .groups = "drop"
-  )
-
-consensus_genes <- consensus_genes %>%
-  left_join(supporting_datasets, by = "Gene")
-
-message("Genes passing >=6/8 same-direction support: ", nrow(consensus_genes))
-message("  8/8: ", sum(consensus_genes$n_sig_same == 8L))
-message("  7/8: ", sum(consensus_genes$n_sig_same == 7L))
-message("  6/8: ", sum(consensus_genes$n_sig_same == 6L))
-
-# Explicit audit for the canonical RV marker discussed in the manuscript.
-# NPPA is not forced into the figure; it appears only if it truly passes >=6/8.
-nppa_audit <- all_rv %>%
-  filter(Gene == "NPPA") %>%
-  arrange(factor(Dataset, levels = dataset_order)) %>%
-  left_join(
-    consensus_genes %>%
-      dplyr::select(
-        Gene,
-        consensus_direction,
-        n_sig_up,
-        n_sig_down,
-        n_sig_same,
-        support_class
-      ),
-    by = "Gene"
-  )
-
-message("NPPA S1 audit (NPPA is never manually added):")
-print(nppa_audit, n = Inf)
-
-# ------------------------------------------------
-# 6. Protein and Olink support
-# ------------------------------------------------
-protein_raw <- readxl::read_excel(
-  file_prot,
-  sheet = "dRV vs CTRL",
-  col_names = TRUE
-)
-
-protein_support <- protein_raw %>%
-  transmute(
-    Gene = TOUP(split_first(.data[["Gene.names"]])),
-    protein_status = tolower(
-      trimws(as.character(.data[["Sign_zscore_qval_Limma"]]))
-    )
-  ) %>%
-  filter(
-    !is.na(Gene),
-    Gene != "",
-    protein_status %in% c("up", "down")
-  ) %>%
-  mutate(
-    protein_direction = if_else(protein_status == "up", "Up", "Down")
-  ) %>%
-  distinct(Gene, .keep_all = TRUE)
-
-olink_sheets <- c("Olink CTRL vs PAH", "Olink CTRL vs dRV PAH")
-
-read_olink_one <- function(sheet_name) {
-  df <- readxl::read_excel(file_olink, sheet = sheet_name, col_names = TRUE)
-  gene_col <- pick_gene_col(df, prefer_overlap = consensus_genes$Gene)
-  status_col <- tail(colnames(df), 1)
-
-  df %>%
-    transmute(
-      Gene = TOUP(trimws(as.character(.data[[gene_col]]))),
-      status = TOUP(trimws(as.character(.data[[status_col]]))),
-      olink_sheet = sheet_name
-    ) %>%
-    filter(!is.na(Gene), Gene != "", status == "SIGNIFICANT") %>%
-    distinct(Gene, olink_sheet)
-}
-
-olink_support_long <- bind_rows(lapply(olink_sheets, read_olink_one))
-
-olink_support <- olink_support_long %>%
-  group_by(Gene) %>%
-  summarise(
-    olink_contrasts = paste(unique(olink_sheet), collapse = "; "),
-    .groups = "drop"
-  )
-
-consensus_genes <- consensus_genes %>%
-  left_join(
-    protein_support %>% dplyr::select(Gene, protein_direction),
-    by = "Gene"
-  ) %>%
-  left_join(olink_support, by = "Gene") %>%
-  mutate(
-    in_protein = !is.na(protein_direction),
-    in_olink = !is.na(olink_contrasts),
-    protein_same_as_consensus = in_protein &
-      protein_direction == consensus_direction,
-    support_category = case_when(
-      in_protein & in_olink ~ "Protein + Olink + transcript",
-      in_protein & !in_olink ~ "Protein + transcript",
-      !in_protein & in_olink ~ "Olink + transcript",
-      TRUE ~ "Transcript only"
-    )
-  )
-
-# ------------------------------------------------
-# 7. Complete plotting grid; display concordant significant points only
-# ------------------------------------------------
-plot_grid <- tidyr::expand_grid(
-  Gene = consensus_genes$Gene,
-  Dataset = dataset_order
-) %>%
-  left_join(
-    all_rv %>%
-      dplyr::select(Gene, Dataset, log2FC, padj, Significant, Direction),
-    by = c("Gene", "Dataset")
-  ) %>%
-  left_join(
-    consensus_genes %>%
-      dplyr::select(
-        Gene,
-        consensus_direction,
-        n_sig_same,
-        n_sig_opposite,
-        support_class,
-        support_label,
-        support_category,
-        in_protein,
-        in_olink,
-        protein_direction,
-        protein_same_as_consensus,
-        olink_contrasts
-      ),
-    by = "Gene"
-  ) %>%
-  mutate(
-    concordant_significant = Significant & Direction == consensus_direction,
-    plot_direction = if_else(
-      concordant_significant,
-      Direction,
-      NA_character_
-    ),
-    Dataset = factor(Dataset, levels = dataset_order)
-  )
-
-plot_points <- plot_grid %>%
-  filter(concordant_significant)
-
-# Order: 8/8 first, then 7/8, then 6/8; stronger effects first within class.
-gene_order <- consensus_genes %>%
-  arrange(desc(n_sig_same), desc(median_abs_log2FC_sig), Gene) %>%
-  pull(support_label)
-
-plot_points$support_label <- factor(
-  plot_points$support_label,
-  levels = rev(gene_order)
-)
-
-lfc_cap <- as.numeric(
-  quantile(abs(plot_points$log2FC), 0.90, na.rm = TRUE)
-)
-if (!is.finite(lfc_cap) || lfc_cap <= 0) lfc_cap <- lfc_thr
-
-plot_points <- plot_points %>%
-  mutate(plot_abs_log2FC = pmin(abs(log2FC), lfc_cap))
-
-shape_map <- c(
-  "Transcript only" = 16,
-  "Protein + transcript" = 17,
-  "Olink + transcript" = 15,
-  "Protein + Olink + transcript" = 18
-)
-
-# ------------------------------------------------
-# 8. Formal single-panel Supplementary Figure S3
-# ------------------------------------------------
-p_s1 <- ggplot(plot_points, aes(x = Dataset, y = support_label)) +
-  geom_point(
-    aes(
-      size = plot_abs_log2FC,
-      color = plot_direction,
-      shape = support_category
-    ),
-    alpha = 0.95,
-    stroke = 0
-  ) +
-  scale_color_manual(
-    values = c("Up" = "red", "Down" = "blue"),
-    drop = FALSE
-  ) +
-  scale_shape_manual(values = shape_map, drop = FALSE) +
-  scale_size_continuous(
-    name = "|log2FC|",
-    range = c(1.2, 3.8),
-    limits = c(lfc_thr, lfc_cap),
-    breaks = unique(round(seq(lfc_thr, lfc_cap, length.out = 3), 2))
-  ) +
-  labs(
-    x = NULL,
-    y = NULL,
-    color = "Direction",
-    shape = "External support",
-    title = "Conserved right-ventricular remodeling genes",
-    subtitle = paste0(
-      ">=6/8 datasets with concordant direction; padj < ",
-      alpha,
-      ", |log2FC| >= ",
-      lfc_thr
-    )
-  ) +
-  theme_s1(base_size = 12) +
-  theme(
-    axis.text.x = element_text(
-      angle = 60,
-      hjust = 1,
-      vjust = 1,
-      size = 10
-    ),
-    axis.text.y = element_text(size = 8),
-    plot.title = element_text(size = 15, face = "bold", hjust = 0.5),
-    plot.subtitle = element_text(size = 10.5, hjust = 0.5),
-    legend.title = element_text(size = 12, face = "bold"),
-    legend.text = element_text(size = 10.5),
-    legend.position = "right",
-    legend.box = "vertical"
-  )
-
-n_genes <- nrow(consensus_genes)
-# Old A-D figure style: a relatively narrow, tall bubble panel. Width is
-# expanded slightly from the old standalone A panel to accommodate the
-# external-support legend without compressing the matrix.
-figure_width <- 8.6
-figure_height <- max(8.5, min(17.0, 3.8 + 0.14 * n_genes))
-
-ggsave(
-  file.path(out_dir, "FigureS3.pdf"),
-  p_s1,
-  width = figure_width,
-  height = figure_height,
-  units = "in",
-  device = grDevices::cairo_pdf,
-  limitsize = FALSE
-)
-
-ggsave(
-  file.path(out_dir, "FigureS3.png"),
-  p_s1,
-  width = figure_width,
-  height = figure_height,
-  units = "in",
-  dpi = 300,
-  limitsize = FALSE
-)
-
-# S1 contains one panel; this alias is convenient for later assembly.
-ggsave(
-  file.path(out_dir, "FigS3A_consensus_bubble.pdf"),
-  p_s1,
-  width = figure_width,
-  height = figure_height,
-  units = "in",
-  device = grDevices::cairo_pdf,
-  limitsize = FALSE
-)
-
-# ------------------------------------------------
-# 9. Export source data and audit tables
-# ------------------------------------------------
-wb <- createWorkbook()
-
-addWorksheet(wb, "Consensus_6of8_same_dir")
-writeData(wb, "Consensus_6of8_same_dir", consensus_genes)
-
-addWorksheet(wb, "High_support_8of8")
-writeData(
-  wb,
-  "High_support_8of8",
-  consensus_genes %>% filter(n_sig_same == 8L)
-)
-
-addWorksheet(wb, "Dataset_DEG_audit")
-writeData(wb, "Dataset_DEG_audit", dataset_audit)
-
-addWorksheet(wb, "All_8_RV_DEG_results")
-writeData(wb, "All_8_RV_DEG_results", all_rv)
-
-addWorksheet(wb, "Plot_grid")
-writeData(wb, "Plot_grid", plot_grid)
-
-addWorksheet(wb, "Plot_points")
-writeData(wb, "Plot_points", plot_points)
-
-addWorksheet(wb, "NPPA_audit")
-writeData(wb, "NPPA_audit", nppa_audit)
-
-addWorksheet(wb, "Protein_support")
-writeData(wb, "Protein_support", protein_support)
-
-addWorksheet(wb, "Olink_support")
-writeData(wb, "Olink_support", olink_support_long)
-
-addWorksheet(wb, "Meta")
-writeData(
-  wb,
-  "Meta",
-  data.frame(
-    Parameter = c(
-      "dataset_count",
-      "upstream_Figure5_script",
-      "selection_rule",
-      "display_rule",
-      "adjusted_P_threshold",
-      "absolute_log2FC_threshold",
-      "figure_width_in",
-      "figure_height_in"
-    ),
-    Value = c(
-      length(dataset_order),
-      basename(fig5_script),
-      ">=6 of 8 RV datasets significant in the same direction",
-      "Only significant effects matching each gene's consensus direction are displayed",
-      alpha,
-      lfc_thr,
-      figure_width,
-      figure_height
-    ),
-    stringsAsFactors = FALSE
-  )
-)
-
-addWorksheet(wb, "sessionInfo")
-writeData(wb, "sessionInfo", capture.output(sessionInfo()))
-
-saveWorkbook(
-  wb,
-  file.path(out_dir, "FigureS3_source_data.xlsx"),
-  overwrite = TRUE
-)
-
-message("Supplementary Figure S3 finished: ", out_dir)
+# Supplementary analysis R2.1: fixed discovery-RV covariates, matched RV-only comparison,
+# and continuous LV directional support. Does not alter Fig4 or panel selection.
+suppressPackageStartupMessages({library(DESeq2);library(openxlsx);library(dplyr);library(ggplot2);library(patchwork);library(lme4)})
+a<-commandArgs(FALSE);sd<-dirname(normalizePath(sub('^--file=','',a[grep('^--file=',a)][1])))
+root<-normalizePath(file.path(sd,'..'));out<-file.path(root,'outputs','FigS3_outputs');dir.create(out,recursive=TRUE,showWarnings=FALSE)
+source(file.path(sd,'12_count_filter_helpers.R'))
+set.seed(20261102);B<-2000L
+raw<-read.xlsx(file.path(root,'data/raw/GSE266139_12967_2025_6792_MOESM2_ESM.xlsx'))
+cols<-grep('^(LP|LM|RP|RM)_\\d+$',names(raw),value=TRUE)
+m<-as.matrix(raw[,cols]);storage.mode(m)<-'numeric';keep<-rowSums(is.na(m))==0
+m<-round(m[keep,,drop=FALSE]);ann<-raw[keep,c('Gene.stable.ID','Gene.name')];rownames(m)<-ann$Gene.stable.ID
+keep<-rowSums(m)>=10;m<-prefilter_counts(m[keep,,drop=FALSE],"GSE266139 all20")
+fit_one<-function(a,b){s<-grepl(paste0('^(',a,'|',b,')_'),colnames(m));cd<-data.frame(condition=droplevels(factor(sub('_.*','',colnames(m)[s]),levels=c('LP','RP','LM','RM'))),row.names=colnames(m)[s]);dds<-DESeq(DESeqDataSetFromMatrix(m[,s],cd,~condition),quiet=TRUE);r<-as.data.frame(results(dds,contrast=c('condition',a,b)));r$Geneid<-rownames(r);r$dispersion<-dispersions(dds);r}
+rv<-fit_one('RM','RP');lv<-fit_one('LM','LP')
+old<-read.xlsx(file.path(root,'outputs/Fig1_outputs/Figure1_source_data.xlsx'),sheet='RMvsRP')
+ix<-match(old$Geneid,rv$Geneid);stopifnot(all(abs(old$log2FoldChange-rv$log2FoldChange[ix])<1e-5,na.rm=TRUE))
+v<-merge(rv,lv,by='Geneid',suffixes=c('_rv','_lv'));v$Gene<-toupper(ann$Gene.name[match(v$Geneid,ann$Gene.stable.ID)])
+sets<-read.xlsx(file.path(root,'outputs/Fig1_outputs/Figure1_source_data.xlsx'),sheet='LV_RV_merge')
+v$Set<-as.character(sets$set[match(v$Geneid,sets$Geneid)])
+v<-v[!is.na(v$Gene)&nzchar(v$Gene)&v$Set%in%c('Shared','RV-only')&is.finite(v$lfcSE_rv)&v$lfcSE_rv>0&is.finite(v$lfcSE_lv)&v$lfcSE_lv>0,]
+# Keep a deterministic representative stable ID for symbol-level external analyses.
+v<-v[order(v$Gene,v$padj_rv,-abs(v$log2FoldChange_rv),v$Geneid),];dup<-v[duplicated(v$Gene)|duplicated(v$Gene,fromLast=TRUE),];v<-v[!duplicated(v$Gene),]
+v$abs_RV<-abs(v$log2FoldChange_rv);v$log_SE<-log(v$lfcSE_rv);v$log_mean<-log2(v$baseMean_rv+1);v$RV_direction<-sign(v$log2FoldChange_rv)
+v$LV_support<-v$RV_direction*v$log2FoldChange_lv/v$lfcSE_lv
+# Frozen curated orthology reference, reciprocal-unique human queries only.
+o<-read.delim(file.path(root,'data/reference/ORTHOLOGS_RAT.txt'),comment.char='#',check.names=FALSE,quote='');pairs<-unique(data.frame(rat=toupper(o[[1]]),human=toupper(o[[5]])));pairs<-pairs[nzchar(pairs$rat)&nzchar(pairs$human),];nr<-table(pairs$rat);nh<-table(pairs$human);good<-pairs[nr[pairs$rat]==1&nh[pairs$human]==1,]
+x<-read.xlsx(file.path(root,'outputs/Fig5_outputs/Figure5_source_data.xlsx'),sheet='Native_results');ds<-setdiff(unique(x$Dataset),'GSE266139_RV (Rat_MCT)')
+grid<-do.call(rbind,lapply(ds,function(d){h<-grepl('Human',d);q<-if(h)good$human[match(v$Gene,good$rat)] else v$Gene;z<-x[x$Dataset==d,];if(anyDuplicated(z$Gene))z<-z[!duplicated(z$Gene),];r<-z[match(q,z$Gene),];data.frame(Gene=v$Gene,Dataset=d,Set=v$Set,measured=is.finite(r$log2FC)&is.finite(r$padj),replicate=is.finite(r$log2FC)&is.finite(r$padj)&r$padj<.05&abs(r$log2FC)>=1&sign(r$log2FC)==v$RV_direction)}))
+v$detectability<-vapply(v$Gene,function(g)mean(grid$measured[grid$Gene==g]),numeric(1))
+vars<-c('abs_RV','log_SE','log_mean');z<-scale(v[,vars]);rownames(z)<-v$Gene
+s<-which(v$Set=='Shared');c<-which(v$Set=='RV-only');matches<-list()
+# Fixed within-variable caliper: 0.5 pooled SD, exact RV direction.
+for(i in s){cand<-c[v$RV_direction[c]==v$RV_direction[i]];delta<-sweep(z[cand,,drop=FALSE],2,z[i,],'-');cand<-cand[apply(abs(delta)<=.5,1,all)];if(length(cand)){dist<-rowSums(sweep(z[cand,,drop=FALSE],2,z[i,],'-')^2);j<-cand[which.min(dist)];matches[[length(matches)+1L]]<-data.frame(Shared=v$Gene[i],Comparator=v$Gene[j],Distance=sqrt(min(dist)))}}
+if(!length(matches))stop('No common-support matches under prespecified caliper')
+matched<-do.call(rbind,matches);weights<-table(matched$Comparator)
+v$weight<-ifelse(v$Set=='Shared',as.numeric(v$Gene%in%matched$Shared),as.numeric(weights[v$Gene]));v$weight[is.na(v$weight)]<-0
+balance<-do.call(rbind,lapply(c(vars,'detectability'),function(k){a<-v[v$Set=='Shared',k];b<-v[v$Set=='RV-only',k];den<-sqrt((var(a)+var(b))/2);data.frame(Covariate=k,Before=(mean(a)-mean(b))/den,After=(weighted.mean(v[v$Set=='Shared',k],v$weight[v$Set=='Shared'])-weighted.mean(v[v$Set=='RV-only',k],v$weight[v$Set=='RV-only']))/den)}))
+grid<-merge(grid,v[,c('Gene','weight','abs_RV','log_SE','log_mean','LV_support','detectability')],by='Gene')
+# Poisson multiplier cluster bootstrap: one weight per unique gene, reused across
+# all datasets and every reuse of a matched comparator; fixed matching design.
+mult<-matrix(rpois(B*nrow(v),1),nrow=nrow(v));rownames(mult)<-v$Gene
+rates<-function(d){g<-grid[grid$Dataset==d,];available<-g$Gene[g$measured];mp<-matched[matched$Shared%in%available & matched$Comparator%in%available,,drop=FALSE];ww<-table(c(mp$Shared,mp$Comparator));r<-g[g$Gene%in%names(ww),];r$weight<-as.numeric(ww[r$Gene]);a<-r$Set=='Shared';b<-!a;if(!any(a)||!any(b))return(NULL);wa<-r$weight[a];wb<-r$weight[b];da<-weighted.mean(r$replicate[a],wa);db<-weighted.mean(r$replicate[b],wb);ma<-mult[r$Gene[a],,drop=FALSE]*wa;mb<-mult[r$Gene[b],,drop=FALSE]*wb;draw<-colSums(ma*r$replicate[a])/colSums(ma)-colSums(mb*r$replicate[b])/colSums(mb);list(row=data.frame(Dataset=d,N_Shared=sum(a),N_complete_pairs=nrow(mp),N_distinct_comparator=sum(b),Shared_rate=da,Comparator_rate=db,Difference=da-db,Lower=quantile(draw,.025,na.rm=TRUE),Upper=quantile(draw,.975,na.rm=TRUE)),draw=draw)}
+r<-lapply(ds,rates);r<-Filter(Negate(is.null),r);summary<-do.call(rbind,lapply(r,`[[`,'row'));draw<-rowMeans(do.call(cbind,lapply(r,`[[`,'draw')),na.rm=TRUE);pooled<-data.frame(Dataset='Equal-dataset mean',Difference=mean(summary$Difference),Lower=quantile(draw,.025,na.rm=TRUE),Upper=quantile(draw,.975,na.rm=TRUE))
+md<-grid[grid$measured,];for(k in c(vars,'LV_support','detectability'))md[[paste0('z_',k)]]<-as.numeric(scale(md[[k]]))
+# Continuous association among RV-selected genes, not a causal effect.
+fit<-glmer(replicate~z_LV_support+z_abs_RV+z_log_SE+z_log_mean+(1|Dataset)+(1|Gene),data=md,family=binomial(),control=glmerControl(optimizer='bobyqa'))
+cf<-fixef(fit);se<-sqrt(diag(vcov(fit)));or<-data.frame(Term=names(cf),OR=exp(cf),Lower=exp(cf-1.96*se),Upper=exp(cf+1.96*se))
+fit2<-update(fit,.~.+z_detectability);cf2<-fixef(fit2);se2<-sqrt(diag(vcov(fit2)));or2<-data.frame(Term=names(cf2),OR=exp(cf2),Lower=exp(cf2-1.96*se2),Upper=exp(cf2+1.96*se2))
+# Descriptive binned continuous association; model estimate is displayed separately.
+md$Bin<-cut(md$LV_support,unique(quantile(md$LV_support,seq(0,1,.2))),include.lowest=TRUE)
+continuous<-md%>%group_by(Bin)%>%summarise(LV_support=median(LV_support),Rate=mean(replicate),N=n(),.groups='drop')
+# Manuscript palette: Shared red, RV-only green, effect-size orange,
+# Human purple / Rat green. Colors encode diagnostics/species/summary,
+# rather than suggesting separate estimates for a single contrast.
+source(file.path(sd,"00_common_helpers.R"))
+balance_plot<-rbind(data.frame(Covariate=balance$Covariate,SMD=abs(balance$Before),Stage="Before matching"),
+                    data.frame(Covariate=balance$Covariate,SMD=abs(balance$After),Stage="After matching"))
+balance_plot$Covariate<-factor(balance_plot$Covariate,levels=c('abs_RV','log_mean','log_SE','detectability'),
+ labels=c('RV |log2FC|','RV expression abundance','RV standard error','External test availability'))
+balance_plot$Stage<-factor(balance_plot$Stage,levels=c('Before matching','After matching'))
+pA<-ggplot(balance_plot,aes(SMD,Covariate,color=Stage,shape=Stage))+
+ geom_vline(xintercept=.1,linetype=2,color='grey55',linewidth=.4)+
+ geom_point(size=2.8,stroke=.8)+
+ scale_color_manual(values=c('Before matching'='#E68613','After matching'='#1F78B4'))+
+ scale_shape_manual(values=c('Before matching'=1,'After matching'=16))+
+ labs(title='A. Covariate balance',x='Absolute standardized difference',y=NULL,
+ subtitle='Test availability audited, not matched',color=NULL,shape=NULL)+
+ theme_manuscript(10)+theme(legend.position='top',plot.title=element_text(hjust=0),plot.subtitle=element_text(size=9))
+plot_summary<-summary;plot_summary$Species<-ifelse(grepl('Human',plot_summary$Dataset),'Human','Rat')
+pB<-ggplot(plot_summary,aes(Difference,reorder(Dataset,Difference),color=Species))+
+ geom_vline(xintercept=0,linetype=2,color='grey55',linewidth=.4)+
+ geom_segment(aes(x=Lower,xend=Upper,yend=reorder(Dataset,Difference)),linewidth=.85,lineend='round')+
+ geom_point(size=2.8)+scale_color_manual(values=species_cols)+
+ labs(title='B. Matched replication difference',x='Shared minus RV-only',y=NULL,color=NULL)+
+ theme_manuscript(10)+theme(legend.position='top',plot.title=element_text(hjust=0))
+pC<-ggplot(pooled,aes(Difference,Dataset))+
+ geom_vline(xintercept=0,linetype=2,color='grey55',linewidth=.4)+
+ geom_segment(aes(x=Lower,xend=Upper,yend=Dataset),color=set_cols['Shared'],linewidth=1.15,lineend='round')+
+ geom_point(shape=21,size=4.2,fill=set_cols['Shared'],color='white',stroke=.8)+
+ labs(title='C. Equal-dataset average',x='Difference (gene-cluster bootstrap 95% CI)',y=NULL)+
+ theme_manuscript(10)+theme(plot.title=element_text(hjust=0))
+pD<-ggplot(continuous,aes(LV_support,Rate))+
+ geom_line(color='#E68613',linewidth=.85)+
+ geom_point(aes(size=N),shape=21,fill='#E68613',color='white',stroke=.65)+
+ scale_size_continuous(range=c(2.8,5),name='Gene–dataset\nobservations')+
+ labs(title='D. Continuous LV directional support',subtitle='Descriptive bins among RV-selected genes',
+ x='sign(RV effect) × LV Wald statistic',y='Observed replication rate')+
+ theme_manuscript(10)+theme(plot.title=element_text(hjust=0),plot.subtitle=element_text(size=9))
+figS3<-(pA|pB)/(pC|pD)
+ggsave(file.path(out,'FigureS3.pdf'),figS3,width=13,height=8)
+ggsave(file.path(out,'FigureS3.png'),figS3,width=13,height=8,dpi=300)
+for(panel in c('A','B','C','D')) ggsave(file.path(out,paste0('FigS3',panel,'.pdf')),get(paste0('p',panel)),width=6.5,height=4)
+meta<-data.frame(Item=c('Matching','Bootstrap','Scope','Continuous model','Model diagnostics','Caution'),Value=c('1:1 nearest neighbor with replacement; exact RV direction; 0.5 pooled SD caliper for all3 covariates; no tuning to external outcomes',paste(B,'Poisson gene-cluster multiplier draws; fixed matches; equal-dataset pooled average'),'Shared vs RV-only; common-support subset, not whole Shared set; curated human orthology; finite external estimate and padj required','sign(RV log2FC)*LV log2FC/LV lfcSE; adjusted for RV effect, SE, baseMean; detectability added as sensitivity',paste('Singular primary:',isSingular(fit),'Singular sensitivity:',isSingular(fit2)), 'Complete matched pairs required in each external dataset. Association only; matching uncertainty and generalization beyond observed datasets not quantified'))
+source(file.path(sd,'17_model_diagnostics_helpers.R'))
+diag_primary<-audit_glmm(fit,'Continuous LV support');diag_availability<-audit_glmm(fit2,'Availability sensitivity')
+write.xlsx(list(Model_diagnostics=rbind(diag_primary$Summary,diag_availability$Summary),Random_effects=rbind(diag_primary$Random_effects,diag_availability$Random_effects),Calibration=rbind(diag_primary$Calibration,diag_availability$Calibration),Discovery_RV=rv,Discovery_LV=lv,Candidate_genes=v,Matched_sample_sizes=data.frame(N_Shared_available=sum(v$Set=='Shared'),N_RV_only_available=sum(v$Set=='RV-only'),N_Shared_matched=nrow(matched),N_distinct_comparators=length(weights),Comparator_ESS=sum(weights)^2/sum(weights^2)),Duplicate_symbols=dup,Matched_pairs=matched,Balance=balance,Dataset_results=summary,Pooled=pooled,Continuous_OR=or,Detectability_OR=or2,Continuous_bins=continuous,Replication_grid=grid,Meta=meta,sessionInfo=data.frame(Text=capture.output(sessionInfo()))),file.path(out,'FigureS3_source_data.xlsx'),overwrite=TRUE)
+writeLines(c(capture.output(summary),capture.output(pooled),capture.output(balance),capture.output(or),capture.output(meta)),file.path(out,'RESULTS.txt'))
+message('Figure S3 finished: ',out)

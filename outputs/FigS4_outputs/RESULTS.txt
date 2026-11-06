@@ -1,0 +1,24 @@
+                                     Metric   N
+1                    Discovery Shared total 108
+2                 Present in external table 102
+3               Expression-eligible in both 102
+4      FDR evaluable in both among eligible  80
+5   Both direction match (no FDR threshold)  99
+6                            LV FDR support  20
+7                            RV FDR support  65
+8                          Both FDR support  19
+9      Both FDR support plus abs(log2FC)>=1  14
+10 FDR significant opposite direction in LV   0
+11 FDR significant opposite direction in RV   0
+   Chamber FDR05 FDR05_FC2 FDR05_noIF  P05 P_available FDR_available
+LV      LV   438       132        416 1579       15585         11359
+RV      RV  2023       594       1965 3707       15968         14417
+   Filtered_p_available Median_abs_LFC Median_SE Median_dispersion
+LV                 4226      0.1906972 0.2549597        0.03794928
+RV                 1551      0.2664413 0.2300768        0.02993979
+            Class  N
+1   Both chambers 19
+2         LV only  1
+3         RV only 39
+4 Neither chamber 21
+5 FDR unavailable 22

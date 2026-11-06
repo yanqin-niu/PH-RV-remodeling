@@ -1,0 +1,97 @@
+[
+  {
+    "Output": "Fig1_outputs",
+    "Source": "Regenerated from scripts within PH-RV-remodeling on 2026-11-04",
+    "Reason": "Current packaged workflow; GSE240921 primary model includes documented technical-layout batch and GEO sex. Separate-stratum sensitivity is Figure S8."
+  },
+  {
+    "Output": "Fig2_outputs",
+    "Source": "Regenerated from scripts within PH-RV-remodeling on 2026-11-04",
+    "Reason": "Current packaged workflow; GSE240921 primary model includes documented technical-layout batch and GEO sex. Separate-stratum sensitivity is Figure S8."
+  },
+  {
+    "Output": "Fig3_outputs",
+    "Source": "Regenerated from scripts within PH-RV-remodeling on 2026-11-04",
+    "Reason": "Current packaged workflow; GSE240921 primary model includes documented technical-layout batch and GEO sex. Separate-stratum sensitivity is Figure S8."
+  },
+  {
+    "Output": "Fig4_outputs",
+    "Source": "Regenerated from scripts within PH-RV-remodeling on 2026-11-04",
+    "Reason": "Current packaged workflow; GSE240921 primary model includes documented technical-layout batch and GEO sex. Separate-stratum sensitivity is Figure S8."
+  },
+  {
+    "Output": "Fig5_outputs",
+    "Source": "Regenerated from scripts within PH-RV-remodeling on 2026-11-04",
+    "Reason": "Current packaged workflow; GSE240921 primary model includes documented technical-layout batch and GEO sex. Separate-stratum sensitivity is Figure S8."
+  },
+  {
+    "Output": "Fig6_outputs",
+    "Source": "Regenerated from scripts within PH-RV-remodeling on 2026-11-04",
+    "Reason": "Current packaged workflow; GSE240921 primary model includes documented technical-layout batch and GEO sex. Separate-stratum sensitivity is Figure S8."
+  },
+  {
+    "Output": "FigS1_outputs",
+    "Source": "Regenerated from scripts within PH-RV-remodeling on 2026-11-04",
+    "Reason": "Current packaged workflow; GSE240921 primary model includes documented technical-layout batch and GEO sex. Separate-stratum sensitivity is Figure S8."
+  },
+  {
+    "Output": "FigS2_outputs",
+    "Source": "Regenerated from scripts within PH-RV-remodeling on 2026-11-04",
+    "Reason": "Current packaged workflow; GSE240921 primary model includes documented technical-layout batch and GEO sex. Separate-stratum sensitivity is Figure S8."
+  },
+  {
+    "Output": "FigS3_outputs",
+    "Source": "Regenerated from scripts within PH-RV-remodeling on 2026-11-04",
+    "Reason": "Current packaged workflow; GSE240921 primary model includes documented technical-layout batch and GEO sex. Separate-stratum sensitivity is Figure S8."
+  },
+  {
+    "Output": "FigS4_outputs",
+    "Source": "Regenerated from scripts within PH-RV-remodeling on 2026-11-04",
+    "Reason": "Current packaged workflow; GSE240921 primary model includes documented technical-layout batch and GEO sex. Separate-stratum sensitivity is Figure S8."
+  },
+  {
+    "Output": "FigS5_outputs",
+    "Source": "Regenerated from scripts within PH-RV-remodeling on 2026-11-04",
+    "Reason": "Current packaged workflow; GSE240921 primary model includes documented technical-layout batch and GEO sex. Separate-stratum sensitivity is Figure S8."
+  },
+  {
+    "Output": "FigS6_outputs",
+    "Source": "Regenerated from the packaged R scripts on 2026-11-05.",
+    "Reason": "R1.5 LODO review response: fixed 108-gene Shared candidate universe; explicit 6/7 omission rule; quantitative Jaccard and retention frequencies; threshold sensitivity and direction-aligned external-rat effect synthesis."
+  },
+  {
+    "Output": "FigS7_outputs",
+    "Source": "Regenerated from scripts within PH-RV-remodeling on 2026-11-04",
+    "Reason": "Current packaged workflow; GSE240921 primary model includes documented technical-layout batch and GEO sex. Separate-stratum sensitivity is Figure S8."
+  },
+  {
+    "Output": "FigS8_outputs",
+    "Source": "Regenerated from scripts within PH-RV-remodeling on 2026-11-04",
+    "Reason": "Current packaged workflow; GSE240921 primary model includes documented technical-layout batch and GEO sex. Separate-stratum sensitivity is Figure S8."
+  },
+  {
+    "Output": "software_versions",
+    "Source": "Regenerated from scripts within PH-RV-remodeling on 2026-11-04",
+    "Reason": "Current packaged workflow; GSE240921 primary model includes documented technical-layout batch and GEO sex. Separate-stratum sensitivity is Figure S8."
+  },
+  {
+    "Output": "TableS1_outputs",
+    "Source": "Regenerated from scripts within PH-RV-remodeling on 2026-11-04",
+    "Reason": "Current packaged workflow; GSE240921 primary model includes documented technical-layout batch and GEO sex. Separate-stratum sensitivity is Figure S8."
+  },
+  {
+    "Output": "TableS2_outputs",
+    "Source": "Regenerated from scripts within PH-RV-remodeling on 2026-11-04",
+    "Reason": "Current packaged workflow; GSE240921 primary model includes documented technical-layout batch and GEO sex. Separate-stratum sensitivity is Figure S8."
+  },
+  {
+    "Output": "TableS3_outputs",
+    "Source": "Regenerated from the packaged R scripts on 2026-11-05.",
+    "Reason": "R1.5 LODO review response: fixed 108-gene Shared candidate universe; explicit 6/7 omission rule; quantitative Jaccard and retention frequencies; threshold sensitivity and direction-aligned external-rat effect synthesis."
+  },
+  {
+    "Output": "TableS4_outputs",
+    "Source": "Regenerated from scripts within PH-RV-remodeling on 2026-11-04",
+    "Reason": "Current packaged workflow; GSE240921 primary model includes documented technical-layout batch and GEO sex. Separate-stratum sensitivity is Figure S8."
+  }
+]

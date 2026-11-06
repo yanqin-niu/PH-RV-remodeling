@@ -1,0 +1,11 @@
+﻿Dataset,Prefilter,Model_contrast,Limitations
+GSE266139,rowSums>=10 across20 cohort libraries before contrast subsets,"~condition; LM/LP,RM/RP,RP/LP,RM/LM",Sacrifice/Library not included; sample encodings unrecovered; direct chamber contrasts unpaired and exploratory
+GSE133402,rowSums>=10 after summation/rounding;12-library matrix and6-library chamber fit,~condition Hypoxia/Ctrl; supplementary joint ~Animal+RV+RVHyp,Estimated-count approximation; transcript-length offsets unavailable
+GSE198618,rowSums>=10 after summation/rounding across32,~condition;dRV/Ctrl,Not equivalent to raw-count DESeq2; appropriate-count analysis unresolved
+GSE242014,rowSums>=10 after summation/rounding across14,~condition;dRV/Ctrl,No additional clinical/technical covariates
+GSE240923 batch1,rowSums>=10 after summation/rounding across26,~condition;dRV/Ctrl,Analysed separately from batch2
+GSE240923 batch2,rowSums>=10 after summation/rounding across27,~Sex+Group;dRV/Ctrl,Sex from sample names;no pooled batch adjustment
+GSE186989,rowSums>=10 across8 after symbol sum,~condition;SuHx/Ctrl,EDGE effect columns not used
+GSE240921,rowSums(counts) >= 10 after symbol summation and rounding across all 40 libraries,~Batch + Sex + Group; dRV vs Ctrl,"All 40 retained; GEO sex and documented SE15/PE25 sequencing-layout strata included; no SVA/RUV or reliably linked age, ischemia, cause-of-death, or tissue-procurement covariates"
+CTEPH,Not applicable to summary results,No DESeq2 fit,Published differential-expression import
+Protein/Olink,Not applicable,No DESeq2 fit,Annotation only;not used for transcript selection

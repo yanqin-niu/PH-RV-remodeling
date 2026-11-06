@@ -1,0 +1,29 @@
+[
+  {
+    "Scenario": "Alternate_batch2",
+    "Estimable_candidates": 89,
+    "Primary_estimable": 35,
+    "Positive": 35,
+    "CI_lower_above_zero": 33,
+    "BH_FDR_below05": 30,
+    "Median_I2": 79.4770209716276
+  },
+  {
+    "Scenario": "Exclude_estimated_Hypoxia",
+    "Estimable_candidates": 89,
+    "Primary_estimable": 35,
+    "Positive": 35,
+    "CI_lower_above_zero": 20,
+    "BH_FDR_below05": 0,
+    "Median_I2": 76.778830978728
+  },
+  {
+    "Scenario": "Primary_batch1",
+    "Estimable_candidates": 89,
+    "Primary_estimable": 35,
+    "Positive": 35,
+    "CI_lower_above_zero": 34,
+    "BH_FDR_below05": 32,
+    "Median_I2": 74.075691538511
+  }
+]
