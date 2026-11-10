@@ -6,13 +6,13 @@
   },
   {
     "Output": "Fig2_outputs",
-    "Source": "Regenerated from scripts within PH-RV-remodeling on 2026-11-04",
-    "Reason": "Current packaged workflow; GSE240921 primary model includes documented technical-layout batch and GEO sex. Separate-stratum sensitivity is Figure S8."
+    "Source": "Regenerated from the packaged Fig2.R on 2026-11-10",
+    "Reason": "Updated the LV-only dotplot gene-count legend to 15-40 (observed counts span 17-37), included the Shared-panel count endpoints, and clarified dotplot and network-node color meanings in the manuscript legend. Enrichment outputs were regenerated from the packaged Figure 1 source data."
   },
   {
     "Output": "Fig3_outputs",
-    "Source": "Regenerated from scripts within PH-RV-remodeling on 2026-11-04",
-    "Reason": "Current packaged workflow; GSE240921 primary model includes documented technical-layout batch and GEO sex. Separate-stratum sensitivity is Figure S8."
+    "Source": "Regenerated from the packaged Fig3.R on 2026-11-10",
+    "Reason": "Changed group-level P-value annotations from e notation to scientific notation with a multiplication sign and superscript exponent; analysis inputs and statistical methods were unchanged."
   },
   {
     "Output": "Fig4_outputs",

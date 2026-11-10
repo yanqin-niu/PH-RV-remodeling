@@ -899,9 +899,9 @@ pA <- ggplot2::ggplot(plot_long, ggplot2::aes(x = Dataset, y = support_label)) +
   ggplot2::scale_size_continuous(
     name = "|log2FC|",
     range = c(1.1, 3.2),
-    limits = c(0, lfc_cap),
-    breaks = seq(0, lfc_cap, length.out = 3),
-    labels = scales::label_number(accuracy = 0.01)
+    limits = c(lfc_thr, lfc_cap),
+    breaks = seq(lfc_thr, lfc_cap, length.out = 4),
+    labels = c("1", "2", "3", "4")
   ) +
   ggplot2::labs(
     x = NULL,

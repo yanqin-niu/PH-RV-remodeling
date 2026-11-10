@@ -311,6 +311,10 @@ plot_scores_faceted <- function(df_scores, title, group_levels, outfile,
     if (nrow(dat) == 0) return(NULL)
     
     pval <- plot_tests$groups$P[plot_tests$groups$Set==set_i]
+    pval_sci <- sprintf("%.2e", pval)
+    pval_parts <- strsplit(pval_sci, "e", fixed = TRUE)[[1]]
+    pval_mantissa <- pval_parts[1]
+    pval_exponent <- as.integer(pval_parts[2])
     ys <- y_stats[y_stats$Set == set_i, ]
     n_pairs <- length(comps)
     y_pos <- ys$y_max + (n_pairs + 1) * 0.08 * ys$y_rng + 0.02 * ys$y_rng
@@ -319,7 +323,10 @@ plot_scores_faceted <- function(df_scores, title, group_levels, outfile,
       Set = set_i,
       x = anova_x,
       y.position = y_pos,
-      label = sprintf("Group p = %.2e", pval),
+      label = paste0(
+        "plain(Group)~plain(p)==", pval_mantissa,
+        " %*% 10^{", pval_exponent, "}"
+      ),
       stringsAsFactors = FALSE
     )
   }))
@@ -352,7 +359,8 @@ plot_scores_faceted <- function(df_scores, title, group_levels, outfile,
       inherit.aes = FALSE,
       hjust = 0,
       vjust = 0,
-      size = 4
+      size = 4,
+      parse = TRUE
     ) +
     coord_cartesian(
       ylim = c(y_min_global - 0.05 * y_rng_global, y_top_global),

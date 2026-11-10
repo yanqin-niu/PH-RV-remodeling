@@ -285,10 +285,32 @@ make_dot <- function(df, title, left_margin = 1) {
     )
   }
   
+  count_min <- min(df$Count, na.rm = TRUE)
+  count_max <- max(df$Count, na.rm = TRUE)
+  if (count_min >= 15 && count_max <= 40) {
+    count_limits <- c(15, 40)
+    count_breaks <- seq(15, 40, by = 5)
+  } else {
+    count_limits <- c(count_min, count_max)
+    count_breaks <- sort(unique(c(
+      count_min,
+      pretty(c(count_min, count_max), n = 4),
+      count_max
+    )))
+    count_breaks <- count_breaks[
+      count_breaks >= count_min & count_breaks <= count_max
+    ]
+  }
+
   ggplot(df, aes(x = GeneRatio, y = Description)) +
     geom_point(aes(size = Count, colour = neglogFDR)) +
     scale_color_gradientn(colors = pal4, name = "-log10(FDR)") +
-    scale_size_continuous(range = pt_range, name = "Gene count") +
+    scale_size_continuous(
+      range = pt_range,
+      limits = count_limits,
+      breaks = count_breaks,
+      name = "Gene count"
+    ) +
     scale_y_discrete(labels = function(x) stringr::str_wrap(x, width = y_wrap)) +
     labs(x = "Gene ratio", y = NULL, title = title) +
     theme_classic(base_size = base_size) +
